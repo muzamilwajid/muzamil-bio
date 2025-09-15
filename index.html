@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muzamil Wajid — Introduction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg1: #0f172a;
+            /* dark navy */
+            --bg2: #07203b;
+            /* deep teal */
+            --card: rgba(255, 255, 255, 0.06);
+            --glass: rgba(255, 255, 255, 0.06);
+            --accent: linear-gradient(135deg, #7c3aed, #06b6d4);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.12), transparent 10%),
+                radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.08), transparent 12%),
+                linear-gradient(180deg, var(--bg1), var(--bg2));
+            color: #e6eef8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 760px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(6px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .header {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 92px;
+            height: 92px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 28px;
+            color: #fff;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .title {
+            flex: 1;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 0.2px;
+            font-weight: 700;
+        }
+
+        p.meta {
+            margin: 6px 0 0 0;
+            opacity: 0.85;
+            font-size: 14px
+        }
+
+        .bio-heading {
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.3;
+            padding: 14px 16px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.07), rgba(6, 182, 212, 0.06));
+            color: #eaf6ff;
+            text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            white-space: pre-wrap;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .info .item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 14px;
+        }
+
+        .label {
+            opacity: 0.7;
+            font-size: 12px
+        }
+
+        .value {
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .cta {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            border: none;
+            cursor: pointer;
+            background: var(--accent);
+            box-shadow: 0 6px 18px rgba(12, 18, 40, 0.45);
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .muted {
+            opacity: 0.86;
+            font-size: 13px
+        }
+
+        footer {
+            margin-top: 22px;
+            text-align: center;
+            opacity: 0.65;
+            font-size: 13px
+        }
+
+        @media (max-width:560px) {
+            .info {
+                grid-template-columns: 1fr
+            }
+
+            .avatar {
+                width: 76px;
+                height: 76px;
+                font-size: 22px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card" role="main">
+        <div class="header">
+            <div class="avatar">MW</div>
+            <div class="title">
+                <h1>Muzamil Wajid</h1>
+                <p class="meta">Website Developer • Lahore</p>
+                <p class="meta">Born: 12 September 2005</p>
+            </div>
+        </div>
+
+        <div class="bio-heading">𝙄𝙎𝙃𝙌 𝘪𝘴 𝘢𝘯 𝘢𝘤𝘵 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱, 𝘈𝘯𝘥
+            𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘼𝙇𝙇𝘼𝙃</div>
+
+        <div class="info">
+            <div class="item">
+                <div class="label">Name</div>
+                <div class="value">Muzamil Wajid</div>
+            </div>
+            <div class="item">
+                <div class="label">Role</div>
+                <div class="value">Website Developer</div>
+            </div>
+
+            <div class="item">
+                <div class="label">Date of Birth</div>
+                <div class="value">12 September 2005</div>
+            </div>
+            <div class="item">
+                <div class="label">Location</div>
+                <div class="value">Lahore</div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Open Instagram</a>
+            <div class="muted">Share this page in your Instagram bio link — anyone opening it will see this profile.
+            </div>
+        </div>
+
+        <footer>Made with ❤ — Save this page and paste its URL into your Instagram bio.</footer>
+    </main>
+</body>
+
+</html>
