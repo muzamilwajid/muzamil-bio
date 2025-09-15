@@ -12,9 +12,7 @@
     <style>
         :root {
             --bg1: #0f172a;
-            /* dark navy */
             --bg2: #07203b;
-            /* deep teal */
             --card: rgba(255, 255, 255, 0.06);
             --glass: rgba(255, 255, 255, 0.06);
             --accent: linear-gradient(135deg, #7c3aed, #06b6d4);
@@ -65,15 +63,15 @@
             width: 92px;
             height: 92px;
             border-radius: 14px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 28px;
-            color: #fff;
-            flex-shrink: 0;
+            overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .title {
@@ -177,7 +175,6 @@
             .avatar {
                 width: 76px;
                 height: 76px;
-                font-size: 22px
             }
         }
     </style>
@@ -186,7 +183,9 @@
 <body>
     <main class="card" role="main">
         <div class="header">
-            <div class="avatar">MW</div>
+            <div class="avatar">
+                <img src="https://github.com/muzamilwajid/muzamil-bio/blob/main/WhatsApp%20Image%202025-09-15%20at%203.42.26%20PM.jpeg" alt="Profile Picture">
+            </div>
             <div class="title">
                 <h1>Muzamil Wajid</h1>
                 <p class="meta">Just a Name, Many stories</p>
