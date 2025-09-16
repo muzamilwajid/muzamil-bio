@@ -101,9 +101,10 @@
       width:100%; max-width:520px; background: #0f172a; /* fully opaque modal */
       border-radius:14px; padding:20px; color:var(--muted); border:1px solid rgba(255,255,255,0.04);
       box-shadow:0 18px 60px rgba(0,0,0,0.6);
+      text-align: center; /* center all modal content */
     }
     .modal h2{ margin:0 0 8px 0; font-size:18px; color:#fff }
-    .modal p{ margin:6px 0; line-height:1.45; color:var(--muted) }
+    .modal p{ margin:6px 0; line-height:1.7; color:var(--muted); text-align:center; font-size:16px }
     .modal .small{ font-size:13px; opacity:0.85 }
     .modal .close{
       display:inline-block; margin-top:12px; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.04);
@@ -296,7 +297,7 @@
     const bismillahEl = document.querySelector(".bismillah-container");
     bismillahEl.addEventListener("click", () => {
       const surahHtml = `
-        <p style="white-space:pre-line; line-height:1.5; font-size:16px;">
+        <p style="white-space:pre-line; line-height:1.7; font-size:18px; text-align:center;">
 بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
 الْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ
 الرَّحْمٰنِ الرَّحِيمِ
