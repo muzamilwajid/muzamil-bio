@@ -316,7 +316,6 @@
       </div>
     </div>
 
-
     <div class="bio-heading">𝙄𝙎𝙃𝙌 𝘪𝘴 𝘢𝘯 𝘢𝘤𝘵 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱, 𝘈𝘯𝘥
       𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘈𝙇𝙇𝘈𝙃</div>
 
@@ -341,7 +340,6 @@
         <div class="value">Lahore, Allama Iqbal Town</div>
       </div>
     </div>
-    
 
     <div class="cta">
       <a class="btn" href="https://www.instagram.com/muzamil_wajid" target="_blank" rel="noopener">Open Instagram</a>
@@ -362,7 +360,7 @@
   </div>
 
   <script>
-    // ----------- Clock & Date -----------
+    // ----------- Clock & Date -----------  
     function pad(num) { return num.toString().padStart(2, '0'); }
 
     function updateDateTime() {
@@ -370,14 +368,18 @@
       document.getElementById('timeDisplay').textContent =
         `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
-      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const months = ["January", "February", "March", "April", "May", "June", "July",
+                      "August", "September", "October", "November", "December"];
+      
+      // Full textual date with day of the week
       document.getElementById('dateDisplay').textContent =
-        `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     }
     setInterval(updateDateTime, 1000);
     updateDateTime();
 
-    // ----------- Modal & Info Logic -----------
+    // ----------- Modal & Info Logic -----------  
     const data = {
       age: {
         label: "Age",
@@ -398,7 +400,8 @@
     };
 
     function formatDateLocal(d) {
-      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August",
+                      "September", "October", "November", "December"];
       return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
 
