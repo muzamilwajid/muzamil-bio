@@ -249,7 +249,8 @@
 
     .modal .small {
       font-size: 13px;
-      opacity: 0.85
+      opacity: 0.85;
+      white-space: pre-line; /* allow line breaks in extra text */
     }
 
     .modal .close {
@@ -448,7 +449,7 @@
           const info = data.age;
           const parts = calculateAgeParts(info.dobIso);
           const ageText = `${parts.years} years, ${parts.months} months, ${parts.days} days`;
-          const extra = `Date of birth: ${info.dobPretty}\nCurrent date: ${formatDateLocal(parts.now)}\nExact age: ${ageText}`;
+          const extra = `Date of Birth: ${info.dobPretty}\nCurrent Date: ${formatDateLocal(parts.now)}\nExact Age: ${ageText}`;
           showModal(info.label, `<p>${info.extra}</p>`, extra);
         } else if (key === "name") {
           const bodyHtml = `<h2>Name</h2><p>Muzamil Wajid</p><h2>Full Name</h2><p>Wajid Ali</p>`;
