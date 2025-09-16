@@ -316,7 +316,7 @@
     </div>
 
     <div class="bio-heading">𝙄𝙎𝙃𝙌 𝘪𝘴 𝘢𝘯 𝘢𝘤𝘵 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱, 𝘈𝘯𝘥
-      𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘈𝙇𝙇𝘈𝙃</div>
+      𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘈𝙇𝙇𝘼𝙃</div>
 
     <div class="info">
       <div class="item" data-item="name" title="Click to view more">
@@ -364,13 +364,22 @@
 
     function updateDateTime() {
       const now = new Date();
+      let hours = now.getHours();
+      const minutes = pad(now.getMinutes());
+      const seconds = pad(now.getSeconds());
+
+      // AM/PM format
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 ko 12 bana do
+
       document.getElementById('timeDisplay').textContent =
-        `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+        `${pad(hours)}:${minutes}:${seconds} ${ampm}`;
 
       const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       const months = ["January", "February", "March", "April", "May", "June", "July",
-                      "August", "September", "October", "November", "December"];
-      
+        "August", "September", "October", "November", "December"];
+
       // Full textual date with day of the week
       document.getElementById('dateDisplay').textContent =
         `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
@@ -400,7 +409,7 @@
 
     function formatDateLocal(d) {
       const months = ["January", "February", "March", "April", "May", "June", "July", "August",
-                      "September", "October", "November", "December"];
+        "September", "October", "November", "December"];
       return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
 
@@ -459,36 +468,36 @@
       if (e.target === e.currentTarget) closeModal();
     });
 
-    // Age label update
-    (function updateAgeLabelOnLoad() {
-      const info = data.age;
-      const parts = calculateAgeParts(info.dobIso);
-      document.getElementById("ageValue").textContent = `${parts.years} Years`;
-    })();
-
-    // Image modal
+    // ----------- Profile Image Click -----------  
     const profileImg = document.getElementById("profileImage");
     profileImg.addEventListener("click", () => {
-      const imgSrc = profileImg.src;
-      showModal("Profile Picture", `<img src="${imgSrc}" alt="Profile Picture">`, "");
+      const imgHtml = `<img src="${profileImg.src}" alt="Profile Picture">`;
+      showModal("Profile Picture", imgHtml, "This is my display picture.");
     });
 
-    // Bismillah modal
-    const bismillahEl = document.querySelector(".bismillah-container");
-    bismillahEl.addEventListener("click", () => {
-      const surahHtml = `
-        <p style="white-space:pre-line; line-height:1.7; font-size:18px; text-align:center;">
-بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
-الْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ
-الرَّحْمٰنِ الرَّحِيمِ
-مَالِكِ يَوْمِ الدِّينِ
-إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-        </p>
-      `;
-      showModal("Surah Al-Fatiha", surahHtml, "");
+    // ----------- Bismillah Click -----------  
+    document.querySelector(".bismillah-container").addEventListener("click", () => {
+      showModal("Surah Al-Fatiha",
+        `<p style="font-size:18px;line-height:1.8;">
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+      الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>
+      الرَّحْمَٰنِ الرَّحِيمِ<br>
+      مَالِكِ يَوْمِ الدِّينِ<br>
+      إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>
+      اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>
+      صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ<br>
+      غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+      </p>`,
+        "Surah Al-Fatiha (The Opening)");
     });
+
+    // ----------- Age Auto Update -----------  
+    function updateAgeDisplay() {
+      const parts = calculateAgeParts(data.age.dobIso);
+      document.getElementById("ageValue").textContent = parts.years + " Years";
+    }
+    setInterval(updateAgeDisplay, 3600 * 1000);
+    updateAgeDisplay();
   </script>
 </body>
 
