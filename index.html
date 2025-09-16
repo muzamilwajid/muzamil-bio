@@ -58,6 +58,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 16px;
+      margin-top: 16px;
       font-weight: 600;
       font-size: 14px;
       color: var(--muted);
@@ -294,12 +295,6 @@
 <body>
   <main class="card" role="main">
 
-    <!-- Date & Time -->
-    <div class="datetime">
-      <div id="timeDisplay">--:--:--</div>
-      <div id="dateDisplay">-- -- ----</div>
-    </div>
-
     <!-- Bismillah Section -->
     <div class="bismillah-container" title="Click to read Surah Al-Fatiha">
       <p class="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
@@ -307,8 +302,7 @@
 
     <div class="header">
       <div class="avatar">
-        <img id="profileImage"
-          src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true"
+        <img id="profileImage" src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true"
           alt="Profile Picture">
       </div>
       <div class="title">
@@ -316,6 +310,7 @@
         <p class="meta">Just a Name, Many stories</p>
       </div>
     </div>
+
 
     <div class="bio-heading">𝙄𝙎𝙃𝙌 𝘪𝘴 𝘢𝘯 𝘢𝘤𝘵 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱, 𝘈𝘯𝘥
       𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘈𝙇𝙇𝘈𝙃</div>
@@ -340,6 +335,11 @@
         <div class="label">Location</div>
         <div class="value">Lahore, Allama Iqbal Town</div>
       </div>
+    </div>
+    <!-- Date & Time -->
+    <div class="datetime">
+      <div id="timeDisplay">--:--:--</div>
+      <div id="dateDisplay">-- -- ----</div>
     </div>
 
     <div class="cta">
@@ -369,7 +369,7 @@
       document.getElementById('timeDisplay').textContent =
         `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       document.getElementById('dateDisplay').textContent =
         `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     }
@@ -397,7 +397,7 @@
     };
 
     function formatDateLocal(d) {
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
 
@@ -488,4 +488,5 @@
     });
   </script>
 </body>
+
 </html>
