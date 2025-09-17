@@ -137,6 +137,16 @@
       white-space: pre-wrap;
     }
 
+    /* New Greeting message */
+    .greeting {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #f1f5f9;
+      text-align: center;
+      opacity: 0.9;
+    }
+
     .info {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -214,7 +224,6 @@
       align-items: center;
       justify-content: center;
       background: #020617;
-      /* fully opaque */
       z-index: 50;
       padding: 20px;
     }
@@ -223,14 +232,12 @@
       width: 100%;
       max-width: 520px;
       background: #0f172a;
-      /* fully opaque modal */
       border-radius: 14px;
       padding: 20px;
       color: var(--muted);
       border: 1px solid rgba(255, 255, 255, 0.04);
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
       text-align: center;
-      /* center all modal content */
     }
 
     .modal h2 {
@@ -250,7 +257,7 @@
     .modal .small {
       font-size: 13px;
       opacity: 0.85;
-      white-space: pre-line; /* allow line breaks in extra text */
+      white-space: pre-line;
     }
 
     .modal .close {
@@ -271,7 +278,6 @@
       margin: 0 auto;
       border-radius: 10px;
       background: #0f172a;
-      /* opaque background behind image */
       padding: 10px;
     }
 
@@ -318,6 +324,9 @@
 
     <div class="bio-heading">𝙄𝙎𝙃𝙌 𝘪𝘴 𝘢𝘯 𝘢𝘤𝘵 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱, 𝘈𝘯𝘥
       𝘵𝘩𝘦𝘳𝘦 𝘪𝘴 𝘯𝘰𝘯𝘦 𝘸𝘰𝘳𝘵𝘩𝘺 𝘰𝘧 𝘸𝘰𝘳𝘴𝘩𝘪𝘱 𝘦𝘹𝘤𝘦𝘱𝘵 𝘈𝙇𝙇𝘼𝙃</div>
+
+    <!-- New Greeting Div -->
+    <div class="greeting" id="greetingMessage"></div>
 
     <div class="info">
       <div class="item" data-item="name" title="Click to view more">
@@ -372,7 +381,7 @@
       // AM/PM format
       const ampm = hours >= 12 ? 'PM' : 'AM';
       hours = hours % 12;
-      hours = hours ? hours : 12; // 0 ko 12 bana do
+      hours = hours ? hours : 12;
 
       document.getElementById('timeDisplay').textContent =
         `${pad(hours)}:${minutes}:${seconds} ${ampm}`;
@@ -381,12 +390,25 @@
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July",
         "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-      // Full textual date with day of the week
       document.getElementById('dateDisplay').textContent =
         `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     }
     setInterval(updateDateTime, 1000);
     updateDateTime();
+
+    // ----------- Dynamic Greeting -----------  
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      let message = "";
+      if (hour >= 5 && hour < 12) message = "Good Morning 🌅";
+      else if (hour >= 12 && hour < 17) message = "Good Afternoon ☀️";
+      else if (hour >= 17 && hour < 20) message = "Good Evening 🌇";
+      else message = "Good Night 🌙";
+
+      document.getElementById("greetingMessage").textContent = message;
+    }
+    setInterval(updateGreeting, 1000); // Update every second
+    updateGreeting();
 
     // ----------- Modal & Info Logic -----------  
     const data = {
