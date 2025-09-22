@@ -35,12 +35,17 @@
         linear-gradient(180deg, var(--bg1), var(--bg2));
       color: #e6eef8;
       display: flex;
-      align-items: center;
       justify-content: center;
+      /* horizontally center */
+      align-items: flex-start;
+      /* top se start (Bismillah cut nahi hoga) */
       padding: 24px;
+      min-height: 100vh;
+      /* full height cover karega */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
 
     .card {
       width: 100%;
@@ -281,18 +286,68 @@
       padding: 10px;
     }
 
-    @media (max-width:560px) {
-      .info {
-        grid-template-columns: 1fr
+
+
+    /* ---------------- RESPONSIVE SECTION ---------------- */
+
+
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      .header {
+        flex-direction: row;
+        /* 👈 force row */
+        align-items: center;
+        /* vertically align */
+        text-align: left;
+        /* text left aligned */
+        gap: 12px;
+        /* thoda gap between image and text */
       }
 
       .avatar {
-        width: 76px;
-        height: 76px
+        width: 70px;
+        height: 70px;
       }
 
-      .modal {
-        padding: 16px
+      .title {
+        margin-top: 0;
+        /* 👈 remove top margin */
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      p.meta {
+        font-size: 13px;
+      }
+
+      .info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .item {
+        font-size: 13px;
+      }
+
+      .value {
+        font-size: 13px;
+      }
+
+      .cta {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
