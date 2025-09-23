@@ -210,6 +210,14 @@
       gap: 8px;
     }
 
+    .btn .icon {
+      width: 1em;
+      /* same size as text */
+      height: 1em;
+      flex-shrink: 0;
+      /* stops it from squishing */
+    }
+
     .muted {
       opacity: 0.86;
       font-size: 13px
@@ -408,13 +416,19 @@
 
     <div class="cta">
       <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=itsdilshad1354@gmail.com" target="_blank"
-        rel="noopener">
-        Contact Me
+        rel="noopener">Contact Me
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        
       </a>
       <div class="muted">
         <strong>Made By Muzamil Wajid<br>Now that you’re here, just follow too.</strong>
       </div>
     </div>
+
 
     <footer>Copyright © 2025 Muzamil Wajid. All Rights Reserved.</footer>
   </main>
