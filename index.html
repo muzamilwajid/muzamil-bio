@@ -805,7 +805,7 @@
       </div>
     </div>
 
-    <footer>Copyright © 2025 Muzamil Wajid.</footer>
+    <footer>Copyright © 2025 Muzamil Wajid. All Rights Reserved.</footer>
   </main>
 
   <!-- Modal -->
@@ -1010,7 +1010,7 @@
               <div id="rpsRound" style="font-weight:800">0 / 7</div>
             </div>
             <div style="text-align:right">
-              <div style="opacity:0.8;font-size:12px">CPU</div>
+              <div style="opacity:0.8;font-size:12px">Muzamil</div>
               <div id="rpsCpuScore" style="font-weight:800;font-size:20px">0</div>
             </div>
           </div>
@@ -1146,7 +1146,7 @@
         // animate CPU "thinking" and reveal move
         function revealCpuMove(cpu, callback) {
           // small animation: show quick cycle then reveal
-          msgEl.textContent = 'CPU is thinking...';
+          msgEl.textContent = 'Muzamil is thinking...';
           let cycle = 0;
           const flick = setInterval(() => {
             msgEl.textContent = ['✊', '✋', '✌️'][cycle % 3] + ' ';
@@ -1154,7 +1154,7 @@
             if (cycle > 6) {
               clearInterval(flick);
               // final reveal
-              msgEl.innerHTML = `CPU chose <strong>${emoji(cpu)} ${capitalize(cpu)}</strong>`;
+              msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${capitalize(cpu)}</strong>`;
               if (callback) callback();
             }
           }, 80);
@@ -1222,7 +1222,7 @@
             // update high wins
             if (playerScore > highWins) { highWins = playerScore; localStorage.setItem(HS_KEY, String(highWins)); highWinsEl.textContent = highWins; }
           } else if (cpuScore > playerScore) {
-            text = `😢 CPU won the match ${cpuScore}–${playerScore}.`;
+            text = `😢 Muzamil won the match ${cpuScore}–${playerScore}.`;
             streak = 0;
           } else {
             text = `🤝 Match tied ${playerScore}–${cpuScore}.`;
