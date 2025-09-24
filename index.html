@@ -38,16 +38,17 @@
       color: #e6eef8;
       display: flex;
       justify-content: center;
-      /* horizontally center */
       align-items: flex-start;
-      /* top se start (Bismillah cut nahi hoga) */
       padding: 24px;
       min-height: 100vh;
-      /* full height cover karega */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow: hidden;
+      /* ❌ yeh hatao: overflow: hidden; */
+      overflow-x: hidden;
+      overflow-y: auto;
+      /* ✅ scrolling enable */
     }
+
 
 
     .card {
@@ -792,7 +793,7 @@
     </div>
 
     <div class="cta">
-      <button class="btn" id="rpsOpenBtn">Play R•P•S — Advanced ✊✋✌️</button>
+      <button class="btn" id="rpsOpenBtn">Play R•P•S ✊✋✌️</button>
       <div class="muted">
         <strong>Made By Muzamil Wajid<br>Now that you’re here, just follow too.</strong>
       </div>
