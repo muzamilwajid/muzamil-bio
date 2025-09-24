@@ -557,6 +557,7 @@
       box-sizing: border-box;
       margin: 0 auto;
       padding: 10px;
+      color: white;
     }
 
     /* Arena scrollable if content is too tall */
@@ -578,10 +579,12 @@
     @media (max-width: 1024px) {
       #rpsGame {
         max-width: 90%;
+        color: white;
       }
 
       #rpsGame h2 {
         font-size: 22px;
+        color: white;
       }
     }
 
@@ -599,6 +602,7 @@
 
       #rpsGame h2 {
         font-size: 20px;
+        color: white;
       }
 
       #rpsDifficulty button {
@@ -628,6 +632,7 @@
     @media (max-width: 600px) {
       #rpsGame h2 {
         font-size: 19px;
+        color: white;
       }
 
       #rpsArena {
@@ -651,6 +656,7 @@
       #rpsGame h2 {
         font-size: 18px;
         margin-bottom: 10px;
+        color: white;
       }
 
       #rpsArena {
@@ -717,6 +723,7 @@
     @media (max-width: 360px) {
       #rpsGame h2 {
         font-size: 16px;
+        color: white;
       }
 
       #rpsDifficulty button,
@@ -861,7 +868,7 @@
         label: "Age",
         dobIso: "2005-09-12",
         dobPretty: "12 September 2005",
-        extra: "Click to see exact current age (years, months, days) and today's date."
+        extra: "Exact current age (years, months, days) and today's date."
       },
       role: {
         label: "Role",
@@ -940,7 +947,7 @@
     const profileImg = document.getElementById("profileImage");
     profileImg.addEventListener("click", () => {
       const imgHtml = `<img src="${profileImg.src}" alt="Profile Picture">`;
-      showModal("Profile Picture", imgHtml, "This is my display picture.");
+      showModal("Profile Picture", imgHtml, "This is my Profile picture.");
     });
 
     // ----------- Bismillah Click -----------  
