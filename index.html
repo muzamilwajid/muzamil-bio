@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
   <title>Muzamil Wajid — Introduction</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -44,7 +46,7 @@
       /* full height cover karega */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-
+      overflow: hidden;
     }
 
 
@@ -359,6 +361,381 @@
         justify-content: center;
       }
     }
+
+    /* ============ Base Setup ============ */
+    #rpsGame {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Title */
+    #rpsGame h2 {
+      font-size: 24px;
+      margin-bottom: 14px;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    /* ============ Arena Box ============ */
+    #rpsArena {
+      background: linear-gradient(160deg, #1f1c2c, #928dab);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    /* ============ Difficulty Buttons ============ */
+    #rpsDifficulty {
+      margin-bottom: 16px;
+    }
+
+    #rpsDifficulty button {
+      background: linear-gradient(135deg, #232526, #414345);
+      color: #f1f1f1;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 10px 18px;
+      margin: 6px;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    #rpsDifficulty button:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: linear-gradient(135deg, #3a3d40, #606163);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    #rpsDifficulty button:active {
+      transform: scale(0.95);
+    }
+
+    /* ============ Scoreboard ============ */
+    #rpsScore {
+      display: flex;
+      justify-content: space-around;
+      margin: 14px 0;
+      font-weight: 600;
+    }
+
+    #rpsScore span {
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Highlight special stats */
+    #rpsHighWins {
+      color: #ffd24a;
+    }
+
+    #rpsStreak {
+      color: #6ee7b7;
+      font-weight: 700;
+    }
+
+    /* ============ Move Buttons ============ */
+    #rpsMoves {
+      margin: 18px 0;
+    }
+
+    .rpsMoveBtn {
+      background: linear-gradient(145deg, #2c3e50, #34495e);
+      color: #fff;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px 16px;
+      margin: 8px;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      min-width: 80px;
+    }
+
+    .rpsMoveBtn:hover {
+      background: linear-gradient(145deg, #3e5369, #4a6077);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .rpsMoveBtn:active {
+      transform: scale(0.95);
+    }
+
+    /* ============ Message / Result ============ */
+    #rpsMessage {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      transition: background 0.3s ease;
+    }
+
+    /* ============ History Section ============ */
+    #rpsHistory {
+      text-align: left;
+      max-height: 140px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    #rpsHistory div {
+      border-left: 4px solid #ffd24a;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin: 6px 0;
+      font-size: 14px;
+      transition: background 0.2s ease;
+    }
+
+    #rpsHistory div:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ============ Reset & Close Buttons ============ */
+    #rpsControls {
+      margin-top: 14px;
+    }
+
+    #rpsResetBtn,
+    #rpsCloseBtn {
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      margin: 0 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #rpsResetBtn {
+      background: linear-gradient(90deg, #ff9a76, #ffd479);
+      color: #333;
+    }
+
+    #rpsResetBtn:hover {
+      background: linear-gradient(90deg, #ff8364, #ffbe76);
+      transform: translateY(-2px);
+    }
+
+    #rpsCloseBtn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #eee;
+    }
+
+    #rpsCloseBtn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    /* Ensure game always fits screen */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: auto;
+      overflow-x: hidden;
+    }
+
+    /* Game container full responsive */
+    #rpsGame {
+      max-width: 100%;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    /* Arena scrollable if content is too tall */
+    #rpsArena {
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* History section mobile scroll fix */
+    #rpsHistory {
+      overflow-y: auto;
+      word-wrap: break-word;
+    }
+
+    /* ---------------- RESPONSIVE SECTION ---------------- */
+
+    /* Large Tablets / Small Laptops */
+    @media (max-width: 1024px) {
+      #rpsGame {
+        max-width: 90%;
+      }
+
+      #rpsGame h2 {
+        font-size: 22px;
+      }
+    }
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      #rpsGame {
+        max-width: 95%;
+        padding: 0 10px;
+      }
+
+      #rpsArena {
+        padding: 16px;
+        border-radius: 16px;
+      }
+
+      #rpsGame h2 {
+        font-size: 20px;
+      }
+
+      #rpsDifficulty button {
+        padding: 8px 14px;
+        font-size: 14px;
+        margin: 4px;
+      }
+
+      .rpsMoveBtn {
+        min-width: 70px;
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 6px;
+      }
+
+      #rpsMessage {
+        font-size: 14px;
+      }
+
+      #rpsHistory {
+        max-height: 120px;
+        font-size: 13px;
+      }
+    }
+
+    /* Large Phones */
+    @media (max-width: 600px) {
+      #rpsGame h2 {
+        font-size: 19px;
+      }
+
+      #rpsArena {
+        padding: 14px;
+      }
+
+      .rpsMoveBtn {
+        font-size: 13px;
+        padding: 8px 10px;
+        min-width: 65px;
+      }
+
+      #rpsDifficulty button {
+        font-size: 13px;
+        padding: 7px 12px;
+      }
+    }
+
+    /* Normal Phones */
+    @media (max-width: 480px) {
+      #rpsGame h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      #rpsArena {
+        padding: 12px;
+        border-radius: 12px;
+      }
+
+      #rpsDifficulty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #rpsDifficulty button {
+        width: 100%;
+        max-width: 220px;
+        margin: 6px 0;
+        font-size: 13px;
+      }
+
+      .rpsMoveBtn {
+        width: 100%;
+        max-width: 220px;
+        margin: 6px auto;
+        display: block;
+      }
+
+      #rpsScore {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #rpsScore span {
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      #rpsMessage {
+        font-size: 13px;
+      }
+
+      #rpsHistory {
+        max-height: 100px;
+        font-size: 12px;
+      }
+
+      #rpsControls {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #rpsResetBtn,
+      #rpsCloseBtn {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+      }
+    }
+
+    /* Small Phones (like 360px width) */
+    @media (max-width: 360px) {
+      #rpsGame h2 {
+        font-size: 16px;
+      }
+
+      #rpsDifficulty button,
+      .rpsMoveBtn {
+        max-width: 180px;
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      #rpsScore span {
+        font-size: 12px;
+      }
+
+      #rpsMessage {
+        font-size: 12px;
+      }
+
+      #rpsHistory {
+        font-size: 11px;
+      }
+    }
   </style>
 </head>
 
@@ -415,20 +792,11 @@
     </div>
 
     <div class="cta">
-      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=itsdilshad1354@gmail.com" target="_blank"
-        rel="noopener">Contact Me
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-        
-      </a>
+      <button class="btn" id="rpsOpenBtn">Play R•P•S — Advanced ✊✋✌️</button>
       <div class="muted">
         <strong>Made By Muzamil Wajid<br>Now that you’re here, just follow too.</strong>
       </div>
     </div>
-
 
     <footer>Copyright © 2025 Muzamil Wajid. All Rights Reserved.</footer>
   </main>
@@ -596,6 +964,325 @@
     }
     setInterval(updateAgeDisplay, 3600 * 1000);
     updateAgeDisplay();
+
+    // ---------------- Advanced Rock-Paper-Scissors ----------------
+    (function () {
+      const openBtn = document.getElementById('rpsOpenBtn');
+      const HS_KEY = 'rps_high_wins_v1';
+
+      openBtn.addEventListener('click', () => {
+        openRPSModal();
+      });
+
+      function openRPSModal() {
+        const html = `
+      <div id="rpsGame" style="max-width:460px;margin:0 auto;text-align:center;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="text-align:left">
+            <div style="font-weight:700">Rock • Paper • Scissors</div>
+            <div style="font-size:12px;opacity:0.8">Best of <select id="rpsBestOf">
+              <option value="3">3</option><option value="5">5</option><option value="7" selected>7</option>
+            </select> • Mode:
+            <select id="rpsMode"><option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option></select>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:700">High Wins: <span id="rpsHighWins">0</span></div>
+            <div style="font-size:12px;opacity:0.7" id="rpsStreak">Streak: 0</div>
+          </div>
+        </div>
+
+        <div id="rpsArena" style="background:linear-gradient(180deg,#081225,#051327);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div>
+              <div style="opacity:0.8;font-size:12px">You</div>
+              <div id="rpsPlayerScore" style="font-weight:800;font-size:20px">0</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:12px;opacity:0.7">Round</div>
+              <div id="rpsRound" style="font-weight:800">0 / 7</div>
+            </div>
+            <div style="text-align:right">
+              <div style="opacity:0.8;font-size:12px">CPU</div>
+              <div id="rpsCpuScore" style="font-weight:800;font-size:20px">0</div>
+            </div>
+          </div>
+
+          <div id="rpsMessage" style="min-height:50px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#ffd24a">Choose your move</div>
+
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+            <button class="rpsMoveBtn" data-move="rock" style="flex:1;padding:12px;border-radius:10px;font-weight:800">✊ Rock</button>
+            <button class="rpsMoveBtn" data-move="paper" style="flex:1;padding:12px;border-radius:10px;font-weight:800">✋ Paper</button>
+            <button class="rpsMoveBtn" data-move="scissors" style="flex:1;padding:12px;border-radius:10px;font-weight:800">✌️ Scissors</button>
+          </div>
+
+          <div id="rpsHistory" style="margin-top:12px;font-size:13px;opacity:0.9;min-height:36px"></div>
+
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+            <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
+            <button id="rpsCloseBtn" class="close" style="background:rgba(255,255,255,0.04)">Close</button>
+          </div>
+        </div>
+      </div>
+    `;
+        showModal('Rock • Paper • Scissors — Advanced', html, 'Tap a move or press 1/2/3 • Use mode for difficulty');
+
+        // init after modal visible
+        setTimeout(initRPS, 80);
+      }
+
+      function initRPS() {
+        const bestOfSelect = document.getElementById('rpsBestOf');
+        const modeSelect = document.getElementById('rpsMode');
+        const playerScoreEl = document.getElementById('rpsPlayerScore');
+        const cpuScoreEl = document.getElementById('rpsCpuScore');
+        const roundEl = document.getElementById('rpsRound');
+        const msgEl = document.getElementById('rpsMessage');
+        const historyEl = document.getElementById('rpsHistory');
+        const highWinsEl = document.getElementById('rpsHighWins');
+        const streakEl = document.getElementById('rpsStreak');
+
+        const resetBtn = document.getElementById('rpsResetBtn');
+        const closeBtn = document.getElementById('rpsCloseBtn');
+
+        const moveButtons = Array.from(document.querySelectorAll('.rpsMoveBtn'));
+
+        // state
+        let playerScore = 0, cpuScore = 0, round = 0, maxRounds = parseInt(bestOfSelect.value);
+        let history = [];
+        let streak = 0;
+        let highWins = parseInt(localStorage.getItem(HS_KEY) || '0');
+
+        highWinsEl.textContent = highWins;
+        streakEl.textContent = 'Streak: ' + streak;
+
+        // tiny audio helper (beeps)
+        const audioCtx = window.AudioContext ? new AudioContext() : null;
+        function beep(freq = 440, duration = 0.06, vol = 0.05) {
+          if (!audioCtx) return;
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.value = freq;
+          g.gain.value = vol;
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start();
+          setTimeout(() => { o.stop(); }, duration * 1000);
+        }
+
+        function resetMatch() {
+          playerScore = 0; cpuScore = 0; round = 0; history = [];
+          maxRounds = parseInt(bestOfSelect.value);
+          playerScoreEl.textContent = playerScore;
+          cpuScoreEl.textContent = cpuScore;
+          roundEl.textContent = `${round} / ${maxRounds}`;
+          msgEl.textContent = 'Make your move';
+          historyEl.innerHTML = '';
+          streak = 0;
+          streakEl.textContent = 'Streak: ' + streak;
+          // enable buttons
+          moveButtons.forEach(b => b.disabled = false);
+        }
+
+        resetMatch();
+
+        // CPU move based on mode; on hard it "learns" slightly
+        function cpuMove(mode, previousHistory) {
+          // previousHistory: array of {p,c,result}
+          if (mode === 'easy') {
+            // biased to make mistakes: 60% random, 40% choose losing to player last (simulate goof)
+            if (Math.random() < 0.6) return pickRandom();
+            if (previousHistory.length) {
+              const last = previousHistory[previousHistory.length - 1].p;
+              // pick weak move
+              return weakAgainst(last);
+            }
+            return pickRandom();
+          } else if (mode === 'normal') {
+            // 85% random, 15% small bias to counter player's last
+            if (Math.random() < 0.85) return pickRandom();
+            if (previousHistory.length) {
+              const last = previousHistory[previousHistory.length - 1].p;
+              return strongAgainst(last);
+            }
+            return pickRandom();
+          } else { // hard
+            // hard: look at player's frequency and counter it (simple frequency analysis)
+            if (previousHistory.length >= 3 && Math.random() < 0.92) {
+              const freq = { rock: 0, paper: 0, scissors: 0 };
+              previousHistory.forEach(h => freq[h.p]++);
+              const most = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
+              // choose move that beats player's most used
+              return strongAgainst(most);
+            }
+            // otherwise random
+            return pickRandom();
+          }
+        }
+
+        function pickRandom() { return ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]; }
+        function strongAgainst(move) {
+          if (move === 'rock') return 'paper';
+          if (move === 'paper') return 'scissors';
+          return 'rock';
+        }
+        function weakAgainst(move) {
+          if (move === 'rock') return 'scissors';
+          if (move === 'paper') return 'rock';
+          return 'paper';
+        }
+
+        function decide(p, c) {
+          if (p === c) return 'draw';
+          if ((p === 'rock' && c === 'scissors') || (p === 'paper' && c === 'rock') || (p === 'scissors' && c === 'paper')) return 'win';
+          return 'lose';
+        }
+
+        // animate CPU "thinking" and reveal move
+        function revealCpuMove(cpu, callback) {
+          // small animation: show quick cycle then reveal
+          msgEl.textContent = 'CPU is thinking...';
+          let cycle = 0;
+          const flick = setInterval(() => {
+            msgEl.textContent = ['✊', '✋', '✌️'][cycle % 3] + ' ';
+            cycle++;
+            if (cycle > 6) {
+              clearInterval(flick);
+              // final reveal
+              msgEl.innerHTML = `CPU chose <strong>${emoji(cpu)} ${capitalize(cpu)}</strong>`;
+              if (callback) callback();
+            }
+          }, 80);
+        }
+
+        function emoji(move) {
+          if (move === 'rock') return '✊';
+          if (move === 'paper') return '✋';
+          return '✌️';
+        }
+        function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+        function playRound(playerMove) {
+          // get mode & max rounds fresh
+          const mode = modeSelect.value;
+          const max = parseInt(bestOfSelect.value);
+          const cpu = cpuMove(mode, history);
+
+          // disable buttons briefly
+          moveButtons.forEach(b => b.disabled = true);
+          // small sound
+          beep(880, 0.04, 0.03);
+
+          // reveal CPU with animation then decide
+          revealCpuMove(cpu, () => {
+            const res = decide(playerMove, cpu);
+            round++;
+            roundEl.textContent = `${round} / ${max}`;
+            // update state
+            if (res === 'win') { playerScore++; msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; beep(1100, 0.06, 0.04); streak++; }
+            else if (res === 'lose') { cpuScore++; msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; beep(220, 0.06, 0.05); streak = 0; }
+            else { msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; beep(660, 0.04, 0.02); }
+
+            playerScoreEl.textContent = playerScore;
+            cpuScoreEl.textContent = cpuScore;
+            history.unshift({ p: playerMove, c: cpu, result: res, round: round });
+            if (history.length > 6) history.pop();
+            renderHistory();
+
+            // check match end: first to greaterThanHalf(max)
+            const needed = Math.floor(max / 2) + 1;
+            if (playerScore >= needed || cpuScore >= needed || round >= max) {
+              // match ended
+              setTimeout(() => finalizeMatch(), 450);
+            } else {
+              // re-enable after short delay
+              setTimeout(() => moveButtons.forEach(b => b.disabled = false), 420);
+            }
+          });
+        }
+
+        function renderHistory() {
+          historyEl.innerHTML = history.map(h => {
+            const label = `${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}`;
+            return `<div style="padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px">${label}</div>`;
+          }).join('');
+        }
+
+        function finalizeMatch() {
+          const needed = Math.floor(parseInt(bestOfSelect.value) / 2) + 1;
+          let text = '';
+          if (playerScore > cpuScore) {
+            text = `🎉 You won the match ${playerScore}–${cpuScore}!`;
+            streak++;
+            // update high wins
+            if (playerScore > highWins) { highWins = playerScore; localStorage.setItem(HS_KEY, String(highWins)); highWinsEl.textContent = highWins; }
+          } else if (cpuScore > playerScore) {
+            text = `😢 CPU won the match ${cpuScore}–${playerScore}.`;
+            streak = 0;
+          } else {
+            text = `🤝 Match tied ${playerScore}–${cpuScore}.`;
+          }
+          msgEl.textContent = text;
+          streakEl.textContent = 'Streak: ' + streak;
+          // disable buttons until New Match
+          moveButtons.forEach(b => b.disabled = true);
+        }
+
+        // attach button handlers
+        moveButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            // enable audio on first user gesture for mobile
+            if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
+            playRound(btn.dataset.move);
+          });
+        });
+
+        // keyboard shortcuts: 1 rock, 2 paper, 3 scissors
+        function keyHandler(e) {
+          if (e.repeat) return;
+          if (e.key === '1' || e.key === 'ArrowLeft') { triggerMove('rock'); }
+          if (e.key === '2') { triggerMove('paper'); }
+          if (e.key === '3' || e.key === 'ArrowRight') { triggerMove('scissors'); }
+          if (e.key === 'r' || e.key === 'R') { resetMatch(); }
+          if (e.key === 'Escape') { closeModal(); }
+        }
+        function triggerMove(move) {
+          if (document.querySelector('.modal-backdrop').style.display !== 'flex') return;
+          const active = moveButtons.find(b => b.dataset.move === move);
+          if (active && !active.disabled) {
+            active.classList.add('active');
+            setTimeout(() => active.classList.remove('active'), 220);
+            active.click();
+          }
+        }
+        document.addEventListener('keydown', keyHandler);
+
+        resetBtn.addEventListener('click', resetMatch);
+        closeBtn.addEventListener('click', () => {
+          // cleanup listeners when closing
+          document.removeEventListener('keydown', keyHandler);
+          closeModal();
+        });
+
+        // small visual effect CSS injection for active press
+        const style = document.createElement('style');
+        style.innerHTML = `
+      .rpsMoveBtn:active, .rpsMoveBtn.active { transform: scale(0.98); box-shadow: 0 6px 18px rgba(0,0,0,0.6) inset; }
+      .rpsMoveBtn { transition: transform 120ms ease; font-size:16px; }
+    `;
+        document.head.appendChild(style);
+
+        // ensure accessibility values present
+        bestOfSelect.addEventListener('change', () => {
+          round = 0; playerScore = 0; cpuScore = 0;
+          roundEl.textContent = `${round} / ${bestOfSelect.value}`;
+          playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
+          history = []; renderHistory();
+          moveButtons.forEach(b => b.disabled = false);
+        });
+      } // end initRPS
+    })(); // end wrapper
+
+
   </script>
 </body>
 
