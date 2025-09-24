@@ -573,6 +573,10 @@
       word-wrap: break-word;
     }
 
+    option {
+      color: white;
+    }
+
     /* ---------------- RESPONSIVE SECTION ---------------- */
 
     /* Large Tablets / Small Laptops */
@@ -584,6 +588,10 @@
 
       #rpsGame h2 {
         font-size: 22px;
+        color: white;
+      }
+
+      option {
         color: white;
       }
     }
@@ -626,6 +634,10 @@
         max-height: 120px;
         font-size: 13px;
       }
+
+      option {
+        color: white;
+      }
     }
 
     /* Large Phones */
@@ -648,6 +660,10 @@
       #rpsDifficulty button {
         font-size: 13px;
         padding: 7px 12px;
+      }
+
+      option {
+        color: white;
       }
     }
 
@@ -717,6 +733,10 @@
         padding: 10px;
         font-size: 13px;
       }
+
+      option {
+        color: white;
+      }
     }
 
     /* Small Phones (like 360px width) */
@@ -743,6 +763,10 @@
 
       #rpsHistory {
         font-size: 11px;
+      }
+
+      option {
+        color: white;
       }
     }
   </style>
@@ -1033,7 +1057,7 @@
         </div>
       </div>
     `;
-        showModal('Rock • Paper • Scissor', html, 'Note: Please select the "Rounds" option first, then click "New Match" to choose your match.');
+        showModal('Rock • Paper • Scissor', html, '"Please select the "Rounds" option first, then click "New Match" to choose your match."');
 
         // init after modal visible
         setTimeout(initRPS, 80);
