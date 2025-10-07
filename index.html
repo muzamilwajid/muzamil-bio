@@ -542,95 +542,167 @@
       }
     });
 
-    // ================ Audio (WebAudio simple melodies) ================
+    // ================= Audio (WebAudio simple melodies) =================
     let audioCtx = null;
-    function ensureAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
     function playMelody(arr, gainVal = 0.05) {
       try {
         ensureAudio();
-        const g = audioCtx.createGain(); g.gain.value = gainVal; g.connect(audioCtx.destination);
+        const g = audioCtx.createGain();
+        g.gain.value = gainVal;
+        g.connect(audioCtx.destination);
         const now = audioCtx.currentTime;
         arr.forEach(n => {
           const o = audioCtx.createOscillator();
-          o.type = 'sine'; o.frequency.value = n.freq;
+          o.type = n.type || 'sine';
+          o.frequency.value = n.freq;
           o.connect(g);
           o.start(now + (n.offset || 0));
           o.stop(now + (n.offset || 0) + n.dur);
         });
       } catch (e) { /* ignored if audio blocked */ }
     }
-    function winSound() { playMelody([{ freq: 660, dur: 0.09, offset: 0 }, { freq: 784, dur: 0.12, offset: 0.09 }, { freq: 880, dur: 0.14, offset: 0.21 }, { freq: 1100, dur: 0.2, offset: 0.35 }], 0.045); }
-    function loseSound() { playMelody([{ freq: 330, dur: 0.12, offset: 0 }, { freq: 294, dur: 0.12, offset: 0.12 }, { freq: 262, dur: 0.18, offset: 0.24 }], 0.055); }
-    function drawSound() { playMelody([{ freq: 520, dur: 0.12, offset: 0 }], 0.035); }
 
-    // ================ Leaderboard localStorage ================
+    // ======= Sounds =======
+    function rightChoiceSound() {
+      playMelody([
+        { freq: 880, dur: 0.1 },
+        { freq: 990, dur: 0.12, offset: 0.1 }
+      ], 0.05);
+    }
+
+    function wrongChoiceSound() {
+      playMelody([
+        { freq: 220, dur: 0.12 },
+        { freq: 180, dur: 0.12, offset: 0.12 }
+      ], 0.05);
+    }
+
+    function drawChoiceSound() {
+      playMelody([{ freq: 520, dur: 0.12 }], 0.035);
+    }
+
+    function winGameSound() {
+      playMelody([
+        { freq: 440, dur: 0.25, offset: 0 },   // A4
+        { freq: 554, dur: 0.25, offset: 0.25 },// C#5
+        { freq: 659, dur: 0.25, offset: 0.5 }, // E5
+        { freq: 880, dur: 0.25, offset: 0.75 },// A5
+        { freq: 988, dur: 0.25, offset: 1.0 }, // B5
+        { freq: 1047, dur: 0.3, offset: 1.25 } // C6
+      ], 0.06);
+    }
+
+    function lostGameSound() {
+      playMelody([
+        { freq: 330, dur: 0.4, offset: 0 },
+        { freq: 294, dur: 0.4, offset: 0.4 },
+        { freq: 262, dur: 0.5, offset: 0.8 },
+        { freq: 220, dur: 0.5, offset: 1.3 },
+        { freq: 196, dur: 0.7, offset: 1.8 }
+      ], 0.05);
+    }
+
+    // ================= Leaderboard localStorage =================
     const LB_KEY = 'rps_lb_v1';
-    function getLB() { try { return JSON.parse(localStorage.getItem(LB_KEY) || '{"wins":0,"losses":0,"draws":0,"matches":0}'); } catch (e) { return { wins: 0, losses: 0, draws: 0, matches: 0 }; } }
-    function saveLB(o) { localStorage.setItem(LB_KEY, JSON.stringify(o)); }
-    function resetLB() { saveLB({ wins: 0, losses: 0, draws: 0, matches: 0 }); alert('Leaderboard reset'); }
+    const HS_KEY = 'rps_high_v1';
 
-    // ================ RPS Game ================
+    function getLB() {
+      try {
+        return JSON.parse(localStorage.getItem(LB_KEY) || '{"wins":0,"losses":0,"draws":0,"matches":0}');
+      } catch (e) {
+        return { wins: 0, losses: 0, draws: 0, matches: 0 };
+      }
+    }
+
+    function saveLB(o) { localStorage.setItem(LB_KEY, JSON.stringify(o)); }
+
+    function resetLB() {
+      saveLB({ wins: 0, losses: 0, draws: 0, matches: 0 });
+      alert('Leaderboard reset');
+    }
+
+    // ====================== RPS Game ======================
     (function () {
       const openBtn = document.getElementById('rpsOpenBtn');
-      const HS_KEY = 'rps_high_v1';
-      openBtn.addEventListener('click', () => openRPSModal());
+
+      openBtn.addEventListener('click', openRPSModal);
 
       function openRPSModal() {
         const lb = getLB();
         const high = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
+
         const html = `
-          <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
-              <div style="text-align:left">
-                <div style="font-weight:800">Rock • Paper • Scissor</div>
-                <div style="font-size:13px;opacity:0.85">Rounds:
-                  <select id="rpsBestOf"><option value="3" selected>3</option><option value="5">5</option><option value="7">7</option><option value="13">13</option><option value="19">19</option><option value="25">25</option></select>
-                  Mode:
-                  <select id="rpsMode"><option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option></select>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800">High Wins: <span id="rpsHighWins">${high}</span></div>
-                <div style="font-size:12px;opacity:0.8" id="rpsStreak">Streak: 0</div>
-              </div>
+      <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
+          <div style="text-align:left">
+            <div style="font-weight:800">Rock • Paper • Scissor</div>
+            <div style="font-size:13px;opacity:0.85">
+              Rounds:
+              <select id="rpsBestOf">
+                <option value="3" selected>3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="13">13</option>
+                <option value="19">19</option>
+                <option value="25">25</option>
+              </select>
+              Mode:
+              <select id="rpsMode">
+                <option value="easy">Easy</option>
+                <option value="normal" selected>Normal</option>
+                <option value="hard">Hard</option>
+              </select>
             </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800">High Wins: <span id="rpsHighWins">${high}</span></div>
+            <div style="font-size:12px;opacity:0.8" id="rpsStreak">Streak: 0</div>
+          </div>
+        </div>
 
-            <div id="rpsArena">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-                <div><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
-                <div style="text-align:center"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
-                <div style="text-align:right"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
-              </div>
+        <div id="rpsArena">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
+            <div style="text-align:center"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
+            <div style="text-align:right"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
+          </div>
 
-              <div id="rpsMessage">Choose your move</div>
+          <div id="rpsMessage">Choose your move</div>
 
-              <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap">
-                <button class="rpsMoveBtn" data-move="rock">✊ Rock</button>
-                <button class="rpsMoveBtn" data-move="paper">✋ Paper</button>
-                <button class="rpsMoveBtn" data-move="scissor">✌️ Scissor</button>
-              </div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap">
+            <button class="rpsMoveBtn" data-move="rock">✊ Rock</button>
+            <button class="rpsMoveBtn" data-move="paper">✋ Paper</button>
+            <button class="rpsMoveBtn" data-move="scissor">✌️ Scissor</button>
+          </div>
 
-              <div id="rpsHistory"></div>
+          <div id="rpsHistory" style="max-height:140px;overflow-y:auto;margin-top:8px;text-align:left"></div>
 
-              <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
-                <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
-                <button id="rpsShowBoardBtn" class="btn" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">Show Leaderboard</button>
-              </div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
+            <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
+            <button id="rpsShowBoardBtn" class="btn" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">Show Leaderboard</button>
+          </div>
 
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px">
-                <div class="stat-row">
-                  <div class="stat-pill">Wins: <span id="statWins">${lb.wins}</span></div>
-                  <div class="stat-pill">Losses: <span id="statLosses">${lb.losses}</span></div>
-                  <div class="stat-pill">Draws: <span id="statDraws">${lb.draws}</span></div>
-                </div>
-              </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px">
+            <div class="stat-row">
+              <div class="stat-pill">Wins: <span id="statWins">${lb.wins}</span></div>
+              <div class="stat-pill">Losses: <span id="statLosses">${lb.losses}</span></div>
+              <div class="stat-pill">Draws: <span id="statDraws">${lb.draws}</span></div>
+              <div class="stat-pill">Matches: <span id="statMatches">${lb.matches}</span></div>
             </div>
-          </div>`;
+          </div>
+        </div>
+      </div>
+    `;
         showModal('Rock • Paper • Scissor', html, 'Keyboard: 1=Rock, 2=Paper, 3=Scissor, R=Reset, Esc=Close');
-        setTimeout(init, 80);
+
+        setTimeout(initRPS, 100); // wait until modal DOM is ready
       }
 
-      function init() {
+      function initRPS() {
         const bestOf = document.getElementById('rpsBestOf');
         const modeEl = document.getElementById('rpsMode');
         const playerScoreEl = document.getElementById('rpsPlayerScore');
@@ -646,13 +718,13 @@
 
         let playerScore = 0, cpuScore = 0, round = 0, max = parseInt(bestOf.value);
         let history = [], streak = 0;
-        let highWins = parseInt(localStorage.getItem('rps_high_v1') || '0', 10);
+        let highWins = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
 
         highWinsEl.textContent = highWins;
         streakEl.textContent = 'Streak: ' + streak;
 
         function resetMatch() {
-          playerScore = 0; cpuScore = 0; round = 0; history = []; max = parseInt(bestOf.value);
+          playerScore = 0; cpuScore = 0; round = 0; max = parseInt(bestOf.value); history = [];
           playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
           roundEl.textContent = `${round} / ${max}`; msgEl.textContent = 'Make your move';
           historyEl.innerHTML = ''; streak = 0; streakEl.textContent = 'Streak: ' + streak;
@@ -663,10 +735,10 @@
         function pickRandom() { return ['rock', 'paper', 'scissor'][Math.floor(Math.random() * 3)]; }
         function strongAgainst(m) { if (m === 'rock') return 'paper'; if (m === 'paper') return 'scissor'; return 'rock'; }
         function weakAgainst(m) { if (m === 'rock') return 'scissor'; if (m === 'paper') return 'rock'; return 'paper'; }
+
         function cpuMove(mode, prev) {
           if (mode === 'easy') { if (Math.random() < 0.6) return pickRandom(); if (prev.length) return weakAgainst(prev[prev.length - 1].p); return pickRandom(); }
           if (mode === 'normal') { if (Math.random() < 0.85) return pickRandom(); if (prev.length) return strongAgainst(prev[prev.length - 1].p); return pickRandom(); }
-          // hard
           if (prev.length >= 3 && Math.random() < 0.92) {
             const freq = { rock: 0, paper: 0, scissor: 0 }; prev.forEach(h => freq[h.p]++);
             const most = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
@@ -674,131 +746,80 @@
           }
           return pickRandom();
         }
-        function decide(p, c) { if (p === c) return 'draw'; if ((p === 'rock' && c === 'scissor') || (p === 'paper' && c === 'rock') || (p === 'scissor' && c === 'paper')) return 'win'; return 'lose'; }
+
+        function decide(p, c) {
+          if (p === c) return 'draw';
+          if ((p === 'rock' && c === 'scissor') || (p === 'paper' && c === 'rock') || (p === 'scissor' && c === 'paper')) return 'win';
+          return 'lose';
+        }
 
         function emoji(m) { if (m === 'rock') return '✊'; if (m === 'paper') return '✋'; return '✌️'; }
+
         function revealCpu(cpu, cb) {
           msgEl.textContent = 'Muzamil thinking...';
           let i = 0;
           const t = setInterval(() => {
             msgEl.textContent = ['✊', '✋', '✌️'][i % 3];
             i++;
-            if (i > 6) {
-              clearInterval(t);
-              msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`;
-              cb();
-            }
+            if (i > 6) { clearInterval(t); msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`; cb(); }
           }, 80);
         }
 
         function playRound(playerMove) {
           const mode = modeEl.value; const cpu = cpuMove(mode, history);
           moveBtns.forEach(b => b.disabled = true);
-          // enable audio on user gesture (some browsers require interaction)
-          try { if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); } catch (e) { }
           revealCpu(cpu, () => {
             const res = decide(playerMove, cpu);
             round++; roundEl.textContent = `${round} / ${max}`;
-            if (res === 'win') {
-              playerScore++;
-              msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`;
-              // play pleasant win sound
-              winSound();
-              streak++;
-              msgEl.style.boxShadow = '0 8px 30px rgba(16,185,129,0.08)';
-              setTimeout(() => msgEl.style.boxShadow = '', 700);
-            } else if (res === 'lose') {
-              cpuScore++;
-              msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`;
-              loseSound();
-              streak = 0;
-              msgEl.style.boxShadow = '0 8px 30px rgba(239,68,68,0.08)';
-              setTimeout(() => msgEl.style.boxShadow = '', 700);
-            } else {
-              msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`;
-              drawSound();
-            }
+            if (res === 'win') { playerScore++; streak++; msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; rightChoiceSound(); }
+            else if (res === 'lose') { cpuScore++; streak = 0; msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; wrongChoiceSound(); }
+            else { msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; drawChoiceSound(); }
 
             playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
             history.unshift({ p: playerMove, c: cpu, result: res, round: round }); if (history.length > 8) history.pop();
             renderHist();
 
             const need = Math.floor(max / 2) + 1;
-            if (playerScore >= need || cpuScore >= need || round >= max) { setTimeout(finalize, 420); }
-            else { setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420); }
+            if (playerScore >= need || cpuScore >= need || round >= max) setTimeout(finalize, 420);
+            else setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420);
           });
         }
 
         function renderHist() {
           historyEl.innerHTML = history.map(h => `<div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px">${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}</div>`).join('');
-          const s = getLB(); document.getElementById('statWins').textContent = s.wins; document.getElementById('statLosses').textContent = s.losses; document.getElementById('statDraws').textContent = s.draws; document.getElementById('statMatches').textContent = s.matches;
+          const s = getLB();
+          document.getElementById('statWins').textContent = s.wins;
+          document.getElementById('statLosses').textContent = s.losses;
+          document.getElementById('statDraws').textContent = s.draws;
+          document.getElementById('statMatches').textContent = s.matches;
         }
 
         function finalize() {
           const lb = getLB();
-          let text = '';
-          if (playerScore > cpuScore) {
-            text = `🎉 You won ${playerScore}–${cpuScore}!`;
-            streak++;
-            lb.wins++;
-            if (playerScore > highWins) {
-              highWins = playerScore;
-              localStorage.setItem('rps_high_v1', String(highWins));
-              document.getElementById('rpsHighWins').textContent = highWins;
-            }
-            // subtle success effect (already played win sound earlier on win round)
-          } else if (cpuScore > playerScore) {
-            text = `😢 Muzamil won ${cpuScore}–${playerScore}.`;
-            streak = 0;
-            lb.losses++;
-          } else {
-            text = `🤝 Match tied ${playerScore}–${cpuScore}.`;
-            lb.draws++;
-          }
-          lb.matches++; saveLB(lb);
-          msgEl.textContent = text; streakEl.textContent = 'Streak: ' + streak;
-          moveBtns.forEach(b => b.disabled = true); renderHist();
+          let msg = '';
+          if (playerScore > cpuScore) { msg = '🎉 You won the match!'; lb.wins++; if (playerScore > highWins) { localStorage.setItem(HS_KEY, playerScore); highWinsEl.textContent = playerScore; } winGameSound(); }
+          else if (cpuScore > playerScore) { msg = '💀 You lost the match!'; lb.losses++; lostGameSound(); }
+          else { msg = '🤝 Draw match!'; lb.draws++; drawChoiceSound(); }
+          lb.matches++; saveLB(lb); renderHist(); msgEl.textContent = msg; streakEl.textContent = 'Streak: ' + streak; moveBtns.forEach(b => b.disabled = true);
         }
-
-        // attach events
-        moveBtns.forEach(b => {
-          b.addEventListener('click', () => { playRound(b.dataset.move); });
-        });
-
-        function keyHandler(e) {
-          if (e.repeat) return;
-          if (e.key === '1' || e.key === 'ArrowLeft') trigger('rock');
-          if (e.key === '2') trigger('paper');
-          if (e.key === '3' || e.key === 'ArrowRight') trigger('scissor');
-          if (e.key.toLowerCase() === 'r') resetMatch();
-          if (e.key === 'Escape') { document.removeEventListener('keydown', keyHandler); closeModal(); }
-        }
-        function trigger(move) {
-          const btn = moveBtns.find(x => x.dataset.move === move);
-          if (btn && !btn.disabled) { btn.classList.add('active'); setTimeout(() => btn.classList.remove('active'), 180); btn.click(); }
-        }
-        document.addEventListener('keydown', keyHandler);
 
         resetBtn.addEventListener('click', resetMatch);
+        showBoardBtn.addEventListener('click', () => { alert(JSON.stringify(getLB(), null, 2)); });
 
-        showBoardBtn.addEventListener('click', () => {
-          const lb = getLB();
-          const html = `<div style="text-align:left"><h3>Leaderboard</h3>
-            <div style="margin-top:8px"><div style="padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:6px">Wins: ${lb.wins}</div>
-            <div style="padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:6px">Losses: ${lb.losses}</div>
-            <div style="padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:6px">Draws: ${lb.draws}</div>
-            <div style="padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);margin-bottom:6px">Matches: ${lb.matches}</div>
-            <div style="margin-top:8px;display:flex;gap:8px"><button id="lbReset" class="btn" style="background:linear-gradient(135deg,#f97316,#fb923c)">Reset LB</button></div></div></div>`;
-          showModal('Leaderboard', html, '');
-          setTimeout(() => {
-            document.getElementById('lbReset').addEventListener('click', () => { if (confirm('Reset leaderboard?')) { resetLB(); closeModal(); } });
-            document.getElementById('lbClose').addEventListener('click', () => closeModal());
-          }, 80);
+        moveBtns.forEach(b => b.addEventListener('click', () => playRound(b.dataset.move)));
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === '1') playRound('rock');
+          if (e.key === '2') playRound('paper');
+          if (e.key === '3') playRound('scissor');
+          if (e.key.toLowerCase() === 'r') resetMatch();
+          if (e.key === 'Escape') closeModal();
         });
-
-        bestOf.addEventListener('change', () => resetMatch());
-      } // init
+      }
     })();
+
+
+
 
     // convenience: allow manual reset via console
     window.__resetLB = function () { resetLB(); };
