@@ -486,7 +486,17 @@
       // ensure modal colors reflect theme variables (in case inline HTML used)
       // handled via CSS variables already
     }
-    function closeModal() { modalBackdrop.style.display = 'none'; modalBackdrop.setAttribute('aria-hidden', 'true'); }
+    function closeModal() {
+      modalBackdrop.style.display = 'none';
+      modalBackdrop.setAttribute('aria-hidden', 'true');
+
+      // Clean up RPS keyboard handler (prevents duplicates when reopening)
+      if (window.__rpsKeyHandler) {
+        document.removeEventListener('keydown', window.__rpsKeyHandler);
+        window.__rpsKeyHandler = null;
+      }
+    }
+
     document.getElementById('closeModal').addEventListener('click', closeModal);
     modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
 
@@ -820,17 +830,32 @@
         }
 
         resetBtn.addEventListener('click', resetMatch);
-        showBoardBtn.addEventListener('click', () => { alert(JSON.stringify(getLB(), null, 2)); });
 
+        // Leaderboard button was removed from the UI — guard its handler so it won't break the script
+        const showBoardBtn = document.getElementById('rpsShowBoardBtn');
+        if (showBoardBtn) {
+          showBoardBtn.addEventListener('click', () => { alert(JSON.stringify(getLB(), null, 2)); });
+        }
+
+        // attach move button handlers
         moveBtns.forEach(b => b.addEventListener('click', () => playRound(b.dataset.move)));
 
-        document.addEventListener('keydown', (e) => {
+        // keyboard handler — ensure only one handler exists at a time
+        if (window.__rpsKeyHandler) document.removeEventListener('keydown', window.__rpsKeyHandler);
+        window.__rpsKeyHandler = function (e) {
           if (e.key === '1') playRound('rock');
           if (e.key === '2') playRound('paper');
           if (e.key === '3') playRound('scissor');
           if (e.key.toLowerCase() === 'r') resetMatch();
-          if (e.key === 'Escape') closeModal();
-        });
+          if (e.key === 'Escape') {
+            // remove handler and close modal
+            document.removeEventListener('keydown', window.__rpsKeyHandler);
+            window.__rpsKeyHandler = null;
+            closeModal();
+          }
+        };
+        document.addEventListener('keydown', window.__rpsKeyHandler);
+
       }
     })();
 
