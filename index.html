@@ -361,6 +361,23 @@
         max-width: 90%;
       }
     }
+
+    /* RPS stats 2x2 layout on mobile */
+    @media (max-width: 480px) {
+      .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .stat-pill {
+        flex: 0 0 48%;
+        /* 2 per row with small gap */
+        text-align: center;
+        font-size: 13px;
+        padding: 6px 0;
+      }
+    }
   </style>
 </head>
 
