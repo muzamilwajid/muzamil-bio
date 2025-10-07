@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="SFfZZVjAofYr43OENCOecr9JHYyGSr62OQtnPucuJ58" />
   <title>Muzamil Wajid Introductive Site</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -326,9 +327,18 @@
 
     .stat-row {
       display: flex;
-      gap: 8px;
+      justify-content: center;
+      /* horizontally center */
       align-items: center;
+      /* vertically center (if height fixed) */
+      flex-wrap: wrap;
+      text-align: center;
+      /* text bhi center ho */
+      gap: 15px;
+      /* thoda gap between boxes */
+      margin: 15px 0;
     }
+
 
     .stat-pill {
       padding: 6px 10px;
@@ -713,7 +723,7 @@
             <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
           </div>
 
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px">
+          <div style="display:flex;justify-content:center;align-items:center;margin-top:10px;gap:8px">
             <div class="stat-row">
               <div class="stat-pill">Wins: <span id="statWins">${lb.wins}</span></div>
               <div class="stat-pill">Losses: <span id="statLosses">${lb.losses}</span></div>
