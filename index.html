@@ -701,7 +701,6 @@
 
           <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
             <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
-            <button id="rpsShowBoardBtn" class="btn" style="background:linear-gradient(135deg,#60a5fa,#3b82f6)">Show Leaderboard</button>
           </div>
 
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px">
@@ -731,7 +730,6 @@
         const highWinsEl = document.getElementById('rpsHighWins');
         const streakEl = document.getElementById('rpsStreak');
         const resetBtn = document.getElementById('rpsResetBtn');
-        const showBoardBtn = document.getElementById('rpsShowBoardBtn');
         const moveBtns = Array.from(document.querySelectorAll('.rpsMoveBtn'));
 
         let playerScore = 0, cpuScore = 0, round = 0, max = parseInt(bestOf.value);
