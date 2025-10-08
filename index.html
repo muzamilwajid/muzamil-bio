@@ -359,6 +359,157 @@
       font-weight: 700;
     }
 
+    #openCalc {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f7b733, #06b6d4);
+      color: white;
+    }
+
+    #openCalc:hover {
+      transform: scale(1.05);
+      background: #f59e0b;
+    }
+
+    /* ============= Calculator Modal ============= */
+    .calculator {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+      visibility: hidden;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      width: 320px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      color: #e6eef8;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .calculator.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .calc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .close-btn {
+      border: none;
+      background: transparent;
+      color: #e6eef8;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #f87171;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 44px;
+      height: 22px;
+      background: #475569;
+      border-radius: 25px;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="checkbox"]::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: 0.3s;
+    }
+
+    input[type="checkbox"]:checked {
+      background: #f7b733;
+    }
+
+    input[type="checkbox"]:checked::before {
+      transform: translateX(22px);
+    }
+
+    .display {
+      text-align: right;
+      padding: 20px;
+      font-size: 1.8rem;
+      background: transparent;
+      min-height: 80px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 15px;
+    }
+
+    button {
+      padding: 18px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .dark-theme button {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e6eef8;
+    }
+
+    .light-theme button {
+      background: #f8dcb0;
+      color: #000;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .equal {
+      background: #f7b733 !important;
+      color: #fff !important;
+      font-weight: bold;
+    }
+
+    /* ============= Light Theme ============= */
+    .light-theme {
+      background: #fef6e4;
+      color: #000;
+      border: 1px solid #f8dcb0;
+    }
+
     /* small screens */
     @media (max-width: 768px) {
       .info {
@@ -452,6 +603,42 @@
 
     <div class="cta">
       <button class="btn" id="rpsOpenBtn">Play R•P•S ✊✋✌️</button>
+      <button id="openCalc">🧮 Open Calculator</button>
+
+      <div class="calculator dark-theme" id="calc">
+        <div class="calc-top">
+          <div class="theme-toggle">
+            <label for="themeSwitch">Dark Mode</label>
+            <input type="checkbox" id="themeSwitch" />
+          </div>
+          <button class="close-btn" id="closeCalc">&times;</button>
+        </div>
+
+        <div class="display" id="display">0</div>
+
+        <div class="buttons">
+          <button>(</button>
+          <button>)</button>
+          <button>C</button>
+          <button>/</button>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>*</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>-</button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>+</button>
+          <button>+/-</button>
+          <button>0</button>
+          <button>.</button>
+          <button class="equal">=</button>
+        </div>
+      </div>
       <!-- front reset removed (kept only inside game) -->
       <div class="muted" style="margin-left:6px"><strong>Made By Muzamil Wajid</strong></div>
     </div>
@@ -885,7 +1072,58 @@
 
     // convenience: allow manual reset via console
     window.__resetLB = function () { resetLB(); };
+    const openBtn = document.getElementById("openCalc");
+    const calc = document.getElementById("calc");
+    const closeBtn = document.getElementById("closeCalc");
+    const display = document.getElementById("display");
+    const buttons = calc.querySelectorAll(".buttons button");
+    const themeSwitch = document.getElementById("themeSwitch");
+    const label = document.querySelector(".theme-toggle label");
 
+    let currentInput = "";
+    let darkMode = true;
+
+    openBtn.addEventListener("click", () => {
+      calc.classList.add("show");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      calc.classList.remove("show");
+    });
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = btn.textContent;
+        if (val === "C") {
+          currentInput = "";
+          display.textContent = "0";
+        } else if (val === "=") {
+          try {
+            currentInput = eval(currentInput).toString();
+            display.textContent = currentInput;
+          } catch {
+            display.textContent = "Error";
+          }
+        } else if (val === "+/-") {
+          if (currentInput) {
+            currentInput = currentInput.startsWith("-")
+              ? currentInput.slice(1)
+              : "-" + currentInput;
+            display.textContent = currentInput;
+          }
+        } else {
+          currentInput += val;
+          display.textContent = currentInput;
+        }
+      });
+    });
+
+    themeSwitch.addEventListener("change", () => {
+      darkMode = !darkMode;
+      calc.classList.toggle("dark-theme", darkMode);
+      calc.classList.toggle("light-theme", !darkMode);
+      label.textContent = darkMode ? "Light Mode" : "Light Mode";
+    });
   </script>
 </body>
 
