@@ -608,7 +608,7 @@
       <div class="calculator dark-theme" id="calc">
         <div class="calc-top">
           <div class="theme-toggle">
-            <label for="themeSwitch">Dark Mode</label>
+            <label for="themeSwitch">Light Mode</label>
             <input type="checkbox" id="themeSwitch" />
           </div>
           <button class="close-btn" id="closeCalc">&times;</button>
@@ -1122,7 +1122,7 @@
       darkMode = !darkMode;
       calc.classList.toggle("dark-theme", darkMode);
       calc.classList.toggle("light-theme", !darkMode);
-      label.textContent = darkMode ? "Light Mode" : "Light Mode";
+      label.textContent = darkMode ? "Light Mode" : "Dark Mode";
     });
   </script>
 </body>
