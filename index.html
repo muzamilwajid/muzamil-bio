@@ -223,7 +223,7 @@
       font-weight: 700;
       border: none;
       cursor: pointer;
-      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      background: linear-gradient(135deg, red, blue);
       color: white;
     }
 
@@ -365,13 +365,8 @@
       font-weight: 700;
       border: none;
       cursor: pointer;
-      background: linear-gradient(135deg, #f7b733, #06b6d4);
+      background: linear-gradient(135deg, green, yellow);
       color: white;
-    }
-
-    #openCalc:hover {
-      transform: scale(1.05);
-      background: #f59e0b;
     }
 
     /* ============= Calculator Modal ============= */
@@ -382,7 +377,7 @@
       transform: translate(-50%, -50%) scale(0.8);
       opacity: 0;
       visibility: hidden;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgb(15, 23, 42);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       width: 320px;
@@ -529,6 +524,10 @@
         width: 100%;
       }
 
+      #openCalc {
+        width: 100%;
+      }
+
       .modal img {
         max-width: 90%;
       }
@@ -608,7 +607,7 @@
       <div class="calculator dark-theme" id="calc">
         <div class="calc-top">
           <div class="theme-toggle">
-            <label for="themeSwitch">Light Mode</label>
+            <label for="themeSwitch">Dark Mode</label>
             <input type="checkbox" id="themeSwitch" />
           </div>
           <button class="close-btn" id="closeCalc">&times;</button>
@@ -1122,7 +1121,7 @@
       darkMode = !darkMode;
       calc.classList.toggle("dark-theme", darkMode);
       calc.classList.toggle("light-theme", !darkMode);
-      label.textContent = darkMode ? "Light Mode" : "Dark Mode";
+      label.textContent = darkMode ? "Dark Mode" : "Light Mode";
     });
   </script>
 </body>
