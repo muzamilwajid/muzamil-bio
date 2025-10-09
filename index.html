@@ -505,6 +505,85 @@
       border: 1px solid #f8dcb0;
     }
 
+    .Contactbtn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, orange, purple);
+      color: white;
+    }
+
+    /* Popup Form */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff;
+      width: 350px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: 0.3s ease-in-out;
+      z-index: 10;
+    }
+
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .popup input,
+    .popup textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .popup button {
+      width: 100%;
+      background: #667eea;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .popup button:hover {
+      background: #5563c1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 5;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
     /* small screens */
     @media (max-width: 768px) {
       .info {
@@ -525,6 +604,10 @@
       }
 
       #openCalc {
+        width: 100%;
+      }
+
+      .Contactbtn {
         width: 100%;
       }
 
@@ -637,6 +720,25 @@
           <button>.</button>
           <button class="equal">=</button>
         </div>
+      </div>
+      <button class="Contactbtn" id="contact-button">Contact to me</button>
+
+      <div class="overlay" id="overlay"></div>
+
+      <div class="popup" id="popup">
+        <h2>Contact Form</h2>
+        <form action="https://formsubmit.co/itsdilshad1354@gmail.com" method="POST">
+          <input type="text" name="Full Name" placeholder="Full Name" required>
+          <input type="email" name="Email" placeholder="Email" required>
+          <input type="text" name="City" placeholder="City" required>
+          <textarea name="Message" placeholder="Your Message..." rows="4" required></textarea>
+
+          <!-- Hidden fields for security -->
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <button type="submit">Send Message</button>
+        </form>
       </div>
       <!-- front reset removed (kept only inside game) -->
       <div class="muted" style="margin-left:6px"><strong>Made By Muzamil Wajid</strong></div>
@@ -1122,6 +1224,20 @@
       calc.classList.toggle("dark-theme", darkMode);
       calc.classList.toggle("light-theme", !darkMode);
       label.textContent = darkMode ? "Dark Mode" : "Light Mode";
+      3
+    });
+    const contactBtn = document.getElementById("contact-button");
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+
+    contactBtn.addEventListener("click", () => {
+      popup.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      popup.classList.remove("active");
+      overlay.classList.remove("active");
     });
   </script>
 </body>
