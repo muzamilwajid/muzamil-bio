@@ -718,11 +718,25 @@
       showModal('Surah Al-Fatiha', `<p style="line-height:1.8;font-size:17px;color:var(--text-color)">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ</p>`, 'Surah Al-Fatiha');
     });
 
-    const data = {
-      age: { label: 'Age', dobIso: '2005-09-12', dobPretty: '12 September 2005', extra: "Exact current age (years, months, days)." },
-      role: { label: 'Role', value: 'Website Developer', extra: 'I build clean, responsive websites using HTML/CSS/JS and WordPress.' },
-      location: { label: 'Location', value: 'Lahore, Allama Iqbal Town', extra: 'Current city & neighbourhood.' }
-    };
+   const data = {
+  age: { 
+    label: 'Age', 
+    dobIso: '2005-09-12', 
+    dobPretty: '12 September 2005', 
+    extra: "Exact current age (years, months, days)." 
+  },
+  role: { 
+    label: 'Role', 
+    value: 'Website Developer & Odoo Developer', 
+    extra: 'I build clean, responsive websites using HTML/CSS/JS, WordPress, and also develop custom modules in Odoo.' 
+  },
+  location: { 
+    label: 'Location', 
+    value: 'Lahore, Allama Iqbal Town', 
+    extra: 'Current city & neighbourhood.' 
+  }
+};
+
 
     function calcAgeParts(dobIso) {
       const dob = new Date(dobIso + 'T00:00:00'); const now = new Date();
@@ -1125,5 +1139,6 @@
     });
   </script>
 </body>
+
 
 </html>
