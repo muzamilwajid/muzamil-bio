@@ -1137,8 +1137,44 @@
       calc.classList.toggle("light-theme", !darkMode);
       label.textContent = darkMode ? "Dark Mode" : "Light Mode";
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+  // ========== Simple Birthday Test ==========
+  const now = new Date();
+
+  // TEST MODE = show now
+  const showBirthday = (now.getMonth() === 8 && now.getDate() === 12); // true = show now for testing
+
+  if (showBirthday) {
+    // 1️⃣ Name ke neeche pink birthday text
+    const headerDiv = document.querySelector('.header div:nth-child(2)');
+    if (headerDiv) {
+      const bdayText = document.createElement('p');
+      bdayText.textContent = '🎂 It\'s my birthday!';
+      bdayText.style.fontSize = '14px';
+      bdayText.style.fontWeight = '500';
+      bdayText.style.marginTop = '4px';
+      bdayText.style.color = '#ff69b4';
+      headerDiv.appendChild(bdayText);
+    }
+
+    // 2️⃣ Auto popup on page load
+    if (typeof showModal === 'function') {
+      showModal(
+        '🎉 Today is my Birthday! 🎉',
+        `<p style="color:var(--text-color);font-weight:600;line-height:1.5">
+           Hey everyone! 🥳<br>
+           Wishing myself a fantastic day full of joy, cake 🍰, and smiles!<br>
+           Let\'s celebrate 🎈
+        </p>`,
+      );
+    }
+  }
+});
+
   </script>
 </body>
 
 
 </html>
+
