@@ -9,33 +9,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* color system (use variables so theme can invert safely) */
-      --bg1: #0f172a;
-      --bg2: #07203b;
-      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
-      --glass-border: rgba(255, 255, 255, 0.04);
-      --text-color: #e6eef8;
-      --muted: rgba(230, 238, 248, 0.9);
+      --bg1: #1d1025;
+      --bg2: #2b1638;
+      --bg3: #44204f;
+      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-color: #fff8fb;
+      --muted: rgba(255, 248, 251, 0.8);
       --modal-title: #ffffff;
-      --modal-close: #eaf6ff;
-      --rps-bg: linear-gradient(160deg, #1f1c2c, #928dab);
-    }
-
-    /* light theme overrides */
-    .light {
-      --bg1: #f6f8fb;
-      --bg2: #e9eef6;
-      --card-bg: linear-gradient(180deg, rgba(8, 10, 20, 0.03), rgba(255, 255, 255, 0.6));
-      --glass-border: rgba(12, 18, 40, 0.06);
-      --text-color: #0b1220;
-      --muted: rgba(12, 18, 40, 0.85);
-      --modal-title: #0b1220;
-      --modal-close: #0b1220;
-      --rps-bg: linear-gradient(160deg, #e6eef6, #dbeaf8);
+      --modal-close: #ffffff;
+      --rps-bg: linear-gradient(160deg, #4d1f4d, #7a306c);
+      --nav-bg: rgba(29, 16, 37, 0.82);
+      --accent1: #ff7aa2;
+      --accent2: #ffb86b;
+      --accent3: #d946ef;
+      --accent4: #f59e0b;
+      --btn-main: linear-gradient(135deg, #ff7aa2, #ffb86b);
+      --btn-calc: linear-gradient(135deg, #d946ef, #a855f7);
+      --btn-cal: linear-gradient(135deg, #f59e0b, #fb7185);
+      --btn-nav: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      --section-gap: 18px;
+      --shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     html,
@@ -46,86 +48,152 @@
     }
 
     body {
-      background: radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.12), transparent 10%),
-        radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.08), transparent 12%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+      background:
+        radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent1) 20%, transparent), transparent 24%),
+        radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent3) 18%, transparent), transparent 24%),
+        linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg3));
       color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 24px;
-      min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
-
-      /* 🔒 Disable text selection */
+      transition: background 0.8s ease, color 0.8s ease;
       -webkit-user-select: none;
-      /* Safari */
       -moz-user-select: none;
-      /* Firefox */
       -ms-user-select: none;
-      /* IE10+/Edge */
       user-select: none;
-      /* Standard */
     }
 
-
-    .card {
+    .page-wrap {
       width: 100%;
-      max-width: 760px;
-      border-radius: 18px;
-      padding: 22px;
-      background: var(--card-bg);
-      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(6px) saturate(120%);
-      transition: all .25s;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
     }
 
-    .top-row {
+    .site-nav {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border-radius: 18px;
+      background: var(--nav-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px) saturate(130%);
+      box-shadow: var(--shadow);
+      transition: 0.8s ease;
+    }
+
+    .nav-brand {
+      font-weight: 800;
+      font-size: 18px;
+      min-width: 0;
+      word-break: break-word;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .theme-toggle button {
+      padding: 9px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--btn-nav);
+      color: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.25s ease;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--btn-nav);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text-color);
+      margin: 3px 0;
+      border-radius: 999px;
+    }
+
+    .card,
+    .section-card {
+      width: 100%;
+      border-radius: 22px;
+      padding: 24px;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px) saturate(130%);
+      transition: 0.8s ease;
+    }
+
+    .section-card {
+      margin-top: var(--section-gap);
+      scroll-margin-top: 90px;
+    }
+
+    .top-row,
+    .datetime,
+    .header,
+    .weather-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .theme-toggle button {
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px solid var(--glass-border);
-      background: transparent;
-      color: inherit;
-      cursor: pointer;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .datetime {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-weight: 600;
+      margin-bottom: 12px;
+      font-weight: 700;
       font-size: 14px;
       color: var(--muted);
     }
 
     .header {
-      display: flex;
-      gap: 14px;
       align-items: center;
     }
 
-    /* avatar box */
     .avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 12px;
+      width: 96px;
+      height: 96px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--glass-border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
-      display: inline-block;
-      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      flex-shrink: 0;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
     }
 
-    /* small hover zoom only, not huge popup */
     .avatar img {
       width: 100%;
       height: 100%;
@@ -133,112 +201,193 @@
       display: block;
       cursor: pointer;
       transition: transform 200ms ease;
-      transform-origin: center;
     }
 
     .avatar img:hover {
       transform: scale(1.06);
-      /* very subtle zoom */
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      word-break: break-word;
     }
 
     h1 {
-      margin: 0;
-      font-size: 20px;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    h2.section-title {
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
     p.meta {
       margin: 6px 0 0 0;
-      opacity: 0.85;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--muted);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent1) 22%, transparent), color-mix(in srgb, var(--accent3) 22%, transparent));
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-color);
     }
 
     .bismillah-container {
       margin-top: 5px;
+      margin-bottom: 12px;
       text-align: center;
       cursor: pointer;
     }
 
     .bismillah-text {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 22px;
+      font-weight: 700;
       color: transparent;
-      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
+      background: linear-gradient(90deg, var(--accent2), var(--accent1), var(--accent3));
       -webkit-background-clip: text;
       background-clip: text;
+      word-break: break-word;
     }
 
     .greeting {
-      margin-top: 12px;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--muted);
-      text-align: center;
-      opacity: 0.95;
-    }
-
-    .info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
       margin-top: 14px;
-    }
-
-    .item {
-      background: rgba(255, 255, 255, 0.02);
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--glass-border);
-      font-size: 14px;
-      cursor: pointer;
-      color: var(--text-color);
-    }
-
-    .label {
-      opacity: 0.7;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .value {
-      margin-top: 6px;
+      font-size: 21px;
       font-weight: 700;
       color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      text-align: center;
     }
 
-    .cta {
-      margin-top: 14px;
+    .hero-actions {
+      margin-top: 16px;
       display: flex;
       gap: 12px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .btn {
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 700;
+    .btn,
+    #openCalc,
+    #openCalendar {
+      padding: 11px 18px;
+      border-radius: 13px;
+      font-weight: 800;
       border: none;
       cursor: pointer;
-      background: linear-gradient(135deg, red, blue);
       color: white;
+      transition: 0.25s ease;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .btn {
+      background: var(--btn-main);
+    }
+
+    #openCalc {
+      background: var(--btn-calc);
+    }
+
+    #openCalendar {
+      background: var(--btn-cal);
     }
 
     .muted {
-      opacity: 0.86;
-      font-size: 13px;
+      font-size: 14px;
+      color: var(--muted);
+      word-break: break-word;
+    }
+
+    .section-grid-2,
+    .weather-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-box,
+    .weather-box,
+    .counter-box,
+    .skill-box,
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      color: var(--text-color);
+      transition: 0.8s ease;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+
+    .about-list,
+    .skills-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-card .label {
+      opacity: 0.7;
+      font-size: 12px;
       color: var(--muted);
     }
 
+    .info-card .value {
+      margin-top: 6px;
+      font-weight: 800;
+      color: var(--text-color);
+      word-break: break-word;
+    }
+
+    .clickable-age {
+      cursor: pointer;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
+      margin-top: 8px;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+    }
+
+    .counter-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .weather-temp {
+      font-size: 30px;
+      font-weight: 900;
+    }
+
     footer {
-      margin-top: 14px;
+      margin-top: 18px;
       text-align: center;
-      opacity: 0.65;
+      opacity: 0.78;
       font-size: 13px;
       color: var(--muted);
+      padding-bottom: 10px;
     }
 
     .modal-backdrop {
@@ -248,16 +397,17 @@
       align-items: center;
       justify-content: center;
       background: rgba(2, 6, 23, 0.9);
-      z-index: 50;
+      z-index: 60;
       padding: 20px;
     }
 
-    /* modal should adapt to theme: use variables for colors */
     .modal {
       width: 100%;
-      max-width: 720px;
+      max-width: 760px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
       background: var(--bg1);
-      border-radius: 14px;
+      border-radius: 18px;
       padding: 18px;
       color: var(--muted);
       border: 1px solid var(--glass-border);
@@ -265,43 +415,27 @@
       text-align: center;
     }
 
-    .modal h2 {
-      margin: 0 0 8px 0;
-      font-size: 18px;
-      color: var(--modal-title);
-    }
-
     .modal .close {
       display: inline-block;
       margin-top: 12px;
-      padding: 8px 12px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
+      padding: 9px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
       color: var(--modal-close);
       border: 1px solid var(--glass-border);
       cursor: pointer;
     }
 
-    /* ensure images inside modal are constrained and responsive */
-    .modal img {
-      max-width: 320px;
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 10px auto 0;
-      border-radius: 8px;
-    }
-
     #rpsArena {
       background: var(--rps-bg);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px;
       margin-top: 12px;
       color: var(--text-color);
     }
 
     .rpsMoveBtn {
-      background: linear-gradient(145deg, #2c3e50, #34495e);
+      background: linear-gradient(145deg, color-mix(in srgb, var(--accent3) 70%, #111), color-mix(in srgb, var(--accent1) 70%, #111));
       color: #fff;
       border-radius: 12px;
       font-size: 15px;
@@ -313,20 +447,17 @@
       min-width: 95px;
     }
 
-    .rpsMoveBtn:active {
-      transform: scale(.98);
-    }
-
     #rpsMessage {
       font-weight: 800;
       margin: 12px 0;
       padding: 10px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
 
     #rpsHistory {
@@ -336,40 +467,56 @@
       text-align: left;
     }
 
-    .stat-row {
-      display: flex;
-      justify-content: center;
-      /* horizontally center */
-      align-items: center;
-      /* vertically center (if height fixed) */
-      flex-wrap: wrap;
-      text-align: center;
-      /* text bhi center ho */
-      gap: 15px;
-      /* thoda gap between boxes */
-      margin: 15px 0;
-    }
-
-
-    .stat-pill {
-      padding: 6px 10px;
-      border-radius: 10px;
+    .calendar-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--glass-border);
-      font-weight: 700;
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 12px;
+      text-align: left;
+      color: var(--text-color);
     }
 
-    #openCalc {
-      padding: 10px 16px;
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .calendar-day-name,
+    .calendar-day {
+      text-align: center;
+      padding: 8px 4px;
       border-radius: 10px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, green, yellow);
-      color: white;
+      font-size: 13px;
     }
 
-    /* ============= Calculator Modal ============= */
+    .calendar-day-name {
+      font-weight: 700;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .calendar-day {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-day.empty {
+      opacity: 0.25;
+    }
+
+    .calendar-day.today {
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      color: #fff;
+      font-weight: 800;
+    }
+
     .calculator {
       position: fixed;
       top: 50%;
@@ -377,14 +524,15 @@
       transform: translate(-50%, -50%) scale(0.8);
       opacity: 0;
       visibility: hidden;
-      background: rgb(15, 23, 42);
+      background: #171323;
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      width: 320px;
-      border-radius: 20px;
+      width: min(390px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
+      border-radius: 22px;
       overflow: hidden;
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-      color: #e6eef8;
+      color: #f8f1ff;
       transition: all 0.3s ease;
       z-index: 1000;
     }
@@ -399,27 +547,34 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 20px;
-      font-size: 0.9rem;
+      padding: 14px 18px;
+      gap: 8px;
     }
 
-    .theme-toggle {
+    .calc-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .calc-mode-btn {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
     }
 
     .close-btn {
       border: none;
       background: transparent;
-      color: #e6eef8;
+      color: #f8f1ff;
       font-size: 1.3rem;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .close-btn:hover {
-      color: #f87171;
     }
 
     input[type="checkbox"] {
@@ -447,7 +602,7 @@
     }
 
     input[type="checkbox"]:checked {
-      background: #f7b733;
+      background: var(--accent2);
     }
 
     input[type="checkbox"]:checked::before {
@@ -456,221 +611,479 @@
 
     .display {
       text-align: right;
-      padding: 20px;
+      padding: 18px;
       font-size: 1.8rem;
-      background: transparent;
-      min-height: 80px;
+      min-height: 82px;
+      word-break: break-all;
     }
 
-    .buttons {
+    .buttons,
+    .sci-buttons {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       padding: 15px;
     }
 
+    .sci-buttons {
+      display: none;
+      padding-top: 0;
+    }
+
+    .sci-buttons.show {
+      display: grid;
+    }
+
     button {
-      padding: 18px;
-      font-size: 1.1rem;
+      padding: 16px 8px;
+      font-size: 1rem;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      transition: 0.2s;
+      min-width: 0;
     }
 
     .dark-theme button {
-      background: rgba(255, 255, 255, 0.06);
-      color: #e6eef8;
-    }
-
-    .light-theme button {
-      background: #f8dcb0;
-      color: #000;
-    }
-
-    button:hover {
-      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.07);
+      color: #f8f1ff;
     }
 
     .equal {
-      background: #f7b733 !important;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
       color: #fff !important;
       font-weight: bold;
     }
 
-    /* ============= Light Theme ============= */
-    .light-theme {
-      background: #fef6e4;
-      color: #000;
-      border: 1px solid #f8dcb0;
-    }
+    @media (max-width: 900px) {
 
-    /* small screens */
-    @media (max-width: 768px) {
-      .info {
+      .section-grid-2,
+      .counter-wrap,
+      .about-grid,
+      .weather-meta {
         grid-template-columns: 1fr;
       }
+    }
 
-      .avatar {
-        width: 64px;
-        height: 64px;
+    @media (max-width: 768px) {
+      .page-wrap {
+        padding: 12px;
       }
 
-      .cta {
+      .card,
+      .section-card {
+        padding: 18px;
+      }
+
+      .hero-actions {
         flex-direction: column;
+        align-items: stretch;
       }
 
-      .btn {
+      .btn,
+      #openCalc,
+      #openCalendar {
         width: 100%;
       }
+    }
 
-      #openCalc {
-        width: 100%;
+    @media (max-width: 640px) {
+      .menu-toggle {
+        display: inline-flex;
       }
 
-      .modal img {
-        max-width: 90%;
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px;
+        border-radius: 16px;
+        background: var(--nav-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a,
+      .nav-links .theme-toggle,
+      .nav-links .theme-toggle button {
+        width: 100%;
+        text-align: center;
       }
     }
 
     @media (max-width: 480px) {
-      .stat-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        justify-content: space-between;
-        /* evenly space 2 per row */
+
+      .top-row,
+      .datetime,
+      .header,
+      .weather-head,
+      .calc-top {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .stat-pill {
-        flex: 0 0 calc(50% - 3px);
-        /* 50% minus half of gap */
-        text-align: center;
-        font-size: 13px;
-        padding: 6px 0;
+      .card,
+      .section-card {
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      .calculator {
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+      }
+
+      .buttons,
+      .sci-buttons {
+        gap: 8px;
+        padding: 12px;
+      }
+
+      button {
+        padding: 14px 8px;
+        font-size: 0.95rem;
+      }
+
+      .calendar-day-name,
+      .calendar-day {
+        font-size: 11px;
+        min-height: 34px;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="card" role="main" id="mainCard">
-    <div class="top-row">
-      <div style="font-weight:700">Muzamil Wajid<br>Introductive Site</div>
-      <div class="theme-toggle"><button id="themeToggleBtn">🌙 Dark</button></div>
-    </div>
+  <div class="page-wrap">
+    <nav class="site-nav">
+      <div class="nav-brand">Muzamil Wajid</div>
 
-
-    <div class="bismillah-container" title="Click to read Surah Al-Fatiha">
-      <p class="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-    </div>
-
-    <div class="datetime">
-      <div id="timeDisplay">--:--:--</div>
-      <div id="dateDisplay">-- -- ----</div>
-    </div>
-
-    <div class="header">
-      <div class="avatar"><img id="profileImage"
-          src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true" alt="Profile"></div>
-      <div>
-        <h1>Muzamil Wajid</h1>
-        <p class="meta">Just a Name, Many stories</p>
-      </div>
-    </div>
-
-    <div class="greeting" id="greetingMessage"></div>
-
-    <div class="info">
-      <div class="item" data-item="name">
-        <div class="label">Name</div>
-        <div class="value">Muzamil Wajid</div>
-      </div>
-      <div class="item" data-item="age">
-        <div class="label">Age</div>
-        <div class="value" id="ageValue">— Years</div>
-      </div>
-      <div class="item" data-item="role">
-        <div class="label">Role</div>
-        <div class="value">Website Developer</div>
-      </div>
-      <div class="item" data-item="location">
-        <div class="label">Location</div>
-        <div class="value">Lahore, Allama Iqbal Town</div>
-      </div>
-    </div>
-
-    <div class="cta">
-      <button class="btn" id="rpsOpenBtn">Play R•P•S ✊✋✌️</button>
-      <button id="openCalc">🧮 Open Calculator</button>
-
-      <div class="calculator dark-theme" id="calc">
-        <div class="calc-top">
-          <div class="theme-toggle">
-            <label for="themeSwitch">Dark Mode</label>
-            <input type="checkbox" id="themeSwitch" />
+      <div class="nav-right">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open Menu" aria-expanded="false">
+          <div>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
-          <button class="close-btn" id="closeCalc">&times;</button>
-        </div>
+        </button>
+      </div>
 
-        <div class="display" id="display">0</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#weather">Weather</a>
+        <a href="#views">Views</a>
+        <a href="#contact">Contact</a>
+        <div class="theme-toggle"><button id="themeToggleBtn">🎨 Auto Color</button></div>
+      </div>
+    </nav>
 
-        <div class="buttons">
-          <button>(</button>
-          <button>)</button>
-          <button>C</button>
-          <button>/</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>*</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>-</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>+</button>
-          <button>+/-</button>
-          <button>0</button>
-          <button>.</button>
-          <button class="equal">=</button>
+    <main class="card" role="main" id="home">
+      <div class="top-row">
+        <div style="font-weight:800;font-size:18px">Muzamil Wajid<br>Introductive Site</div>
+      </div>
+
+      <div class="bismillah-container" title="Click to read Surah Al-Fatiha">
+        <p class="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+      </div>
+
+      <div class="datetime">
+        <div id="timeDisplay">--:--:--</div>
+        <div id="dateDisplay">-- -- ----</div>
+      </div>
+
+      <div class="header">
+        <div class="avatar"><img id="profileImage"
+            src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true" alt="Profile"></div>
+        <div>
+          <h1>Muzamil Wajid</h1>
+          <p class="meta">Just a Name, Many stories</p>
+          <div class="hero-badge">Website Developer • Odoo Developer • WordPress</div>
         </div>
       </div>
-      <!-- front reset removed (kept only inside game) -->
-      <div class="muted" style="margin-left:6px"><strong>Made By Muzamil Wajid</strong></div>
-    </div>
+
+      <div class="greeting" id="greetingMessage"></div>
+
+      <div class="hero-actions">
+        <button class="btn" id="rpsOpenBtn">Play R•P•S ✊✋✌️</button>
+        <button id="openCalc">🧮 Open Calculator</button>
+        <button id="openCalendar">📅 Open Calendar</button>
+      </div>
+    </main>
+
+    <section class="section-card" id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div>
+          <div class="mini-box">
+            <strong>About Me</strong>
+            <div class="muted">I am Muzamil Wajid, a website developer and Odoo developer who enjoys building clean, responsive and useful web experiences. I also work with WordPress and create smooth websites with modern layouts and user friendly designs.</div>
+          </div>
+
+          <div class="skills-grid">
+            <div class="skill-box">
+              <strong>HTML / CSS / JS</strong>
+              <div class="muted">Frontend development and responsive UI building.</div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:92%"></div>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <strong>WordPress</strong>
+              <div class="muted">Theme customization, page building and complete website setup.</div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:88%"></div>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <strong>Odoo Development</strong>
+              <div class="muted">Custom modules, workflows and business solutions.</div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:84%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-list">
+          <div class="info-card">
+            <div class="label">Name</div>
+            <div class="value">Muzamil Wajid</div>
+          </div>
+          <div class="info-card clickable-age" id="ageCard">
+            <div class="label">Age</div>
+            <div class="value" id="ageValue">— Years</div>
+          </div>
+          <div class="info-card">
+            <div class="label">Role</div>
+            <div class="value">Website Developer • Odoo Developer • WordPress Developer</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="weather">
+      <h2 class="section-title">Lahore Weather</h2>
+      <div class="weather-box">
+        <div class="weather-head">
+          <div>
+            <strong>Current Weather</strong>
+            <div class="muted" id="weatherStatus">Lahore weather</div>
+          </div>
+          <div class="weather-temp" id="weatherTemp">32°C</div>
+        </div>
+        <div class="weather-meta">
+          <div class="mini-box"><strong>Condition: </strong><span id="weatherCondition">Clear</span></div>
+          <div class="mini-box"><strong>Wind: </strong><span id="weatherWind">12 km/h</span></div>
+          <div class="mini-box"><strong>Humidity: </strong><span id="weatherHumidity">48%</span></div>
+          <div class="mini-box"><strong>Location: </strong><span id="weatherLocation">Lahore</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="views">
+      <h2 class="section-title">Visitor Counter</h2>
+      <div class="counter-wrap">
+        <div class="counter-box">
+          <strong>Total Profile Views</strong>
+          <div id="totalViews" style="font-size:28px;font-weight:900;color:var(--text-color)">1</div>
+        </div>
+        <div class="counter-box">
+          <strong>This Device Visits</strong>
+          <div id="deviceVisits" style="font-size:28px;font-weight:900;color:var(--text-color)">1</div>
+        </div>
+        <div class="counter-box">
+          <strong>Last Visit</strong>
+          <div id="lastVisit" class="muted">First time visit</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-grid-2">
+        <div class="mini-box">
+          <strong>Email</strong>
+          <div class="muted">muzammil.ibees@gmail.com</div>
+        </div>
+        <div class="mini-box">
+          <strong>Location</strong>
+          <div class="muted">Lahore, Allama Iqbal Town</div>
+        </div>
+      </div>
+    </section>
 
     <footer>Copyright © 2025 Muzamil Wajid.</footer>
-  </main>
+  </div>
 
-  <!-- Modal -->
   <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h2 id="modalTitle">Title</h2>
       <div id="modalBody"></div>
-      <p id="modalExtra" style="font-size:13px;color:var(--muted);margin-top:8px"></p>
+      <p id="modalExtra" style="font-size:13px;color:var(--muted);margin-top:8px;word-break:break-word"></p>
       <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
         <button id="closeModal" class="close">Close</button>
       </div>
     </div>
   </div>
 
+  <div class="calculator dark-theme" id="calc">
+    <div class="calc-top">
+      <div class="calc-controls">
+        <div class="theme-toggle">
+          <label for="themeSwitch">Dark Mode</label>
+          <input type="checkbox" id="themeSwitch" />
+        </div>
+        <button class="calc-mode-btn" id="toggleScientific">Scientific</button>
+      </div>
+      <button class="close-btn" id="closeCalc">&times;</button>
+    </div>
+
+    <div class="display" id="display">0</div>
+
+    <div class="sci-buttons" id="sciButtons">
+      <button data-fn="sin(">sin</button>
+      <button data-fn="cos(">cos</button>
+      <button data-fn="tan(">tan</button>
+      <button data-fn="sqrt(">√</button>
+      <button data-fn="log10(">log</button>
+      <button data-fn="ln(">ln</button>
+      <button data-fn="pow(">xʸ</button>
+      <button data-fn="PI">π</button>
+      <button data-fn="E">e</button>
+      <button data-fn="fact(">n!</button>
+      <button data-fn="percent(">%</button>
+      <button data-fn="exp(">exp</button>
+    </div>
+
+    <div class="buttons">
+      <button>(</button>
+      <button>)</button>
+      <button>C</button>
+      <button>/</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>*</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>-</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+      <button>+/-</button>
+      <button>0</button>
+      <button>.</button>
+      <button class="equal">=</button>
+    </div>
+  </div>
 
   <script>
-    // ================ Helpers: clock, greeting, modal ================
+    const palettes = [
+      {
+        bg1: '#1d1025', bg2: '#2b1638', bg3: '#44204f',
+        text: '#fff8fb', muted: 'rgba(255,248,251,0.8)',
+        nav: 'rgba(29,16,37,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
+        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#4d1f4d,#7a306c)',
+        a1: '#ff7aa2', a2: '#ffb86b', a3: '#d946ef', a4: '#f59e0b'
+      },
+      {
+        bg1: '#13261a', bg2: '#1b3a27', bg3: '#285238',
+        text: '#f7fff8', muted: 'rgba(247,255,248,0.8)',
+        nav: 'rgba(19,38,26,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03))',
+        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#264d36,#3f7a57)',
+        a1: '#34d399', a2: '#fbbf24', a3: '#10b981', a4: '#86efac'
+      },
+      {
+        bg1: '#2a140c', bg2: '#4a2412', bg3: '#6b3518',
+        text: '#fffaf5', muted: 'rgba(255,250,245,0.8)',
+        nav: 'rgba(42,20,12,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
+        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#5a2616,#914224)',
+        a1: '#fb923c', a2: '#facc15', a3: '#f97316', a4: '#fdba74'
+      },
+      {
+        bg1: '#101826', bg2: '#17233a', bg3: '#243a61',
+        text: '#f8fbff', muted: 'rgba(248,251,255,0.8)',
+        nav: 'rgba(16,24,38,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
+        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#22345a,#37578f)',
+        a1: '#60a5fa', a2: '#f472b6', a3: '#818cf8', a4: '#38bdf8'
+      },
+      {
+        bg1: '#24131f', bg2: '#3a1e31', bg3: '#5b2b4c',
+        text: '#fff7fb', muted: 'rgba(255,247,251,0.8)',
+        nav: 'rgba(36,19,31,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
+        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#4d2740,#7b4163)',
+        a1: '#f472b6', a2: '#fb7185', a3: '#c084fc', a4: '#f9a8d4'
+      }
+    ];
+
+    let paletteIndex = 0;
+    function applyPalette(p) {
+      const root = document.documentElement;
+      root.style.setProperty('--bg1', p.bg1);
+      root.style.setProperty('--bg2', p.bg2);
+      root.style.setProperty('--bg3', p.bg3);
+      root.style.setProperty('--text-color', p.text);
+      root.style.setProperty('--muted', p.muted);
+      root.style.setProperty('--nav-bg', p.nav);
+      root.style.setProperty('--card-bg', p.card);
+      root.style.setProperty('--glass-border', p.border);
+      root.style.setProperty('--rps-bg', p.rps);
+      root.style.setProperty('--accent1', p.a1);
+      root.style.setProperty('--accent2', p.a2);
+      root.style.setProperty('--accent3', p.a3);
+      root.style.setProperty('--accent4', p.a4);
+      root.style.setProperty('--btn-main', `linear-gradient(135deg, ${p.a1}, ${p.a2})`);
+      root.style.setProperty('--btn-calc', `linear-gradient(135deg, ${p.a3}, ${p.a1})`);
+      root.style.setProperty('--btn-cal', `linear-gradient(135deg, ${p.a2}, ${p.a3})`);
+    }
+    applyPalette(palettes[0]);
+    setInterval(() => {
+      paletteIndex = (paletteIndex + 1) % palettes.length;
+      applyPalette(palettes[paletteIndex]);
+    }, 5000);
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('show') ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 640) {
+          navLinks.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
     function pad(n) { return String(n).padStart(2, '0'); }
+
     function updateDateTime() {
       const now = new Date();
       let h = now.getHours(), m = pad(now.getMinutes()), s = pad(now.getSeconds());
       const ampm = h >= 12 ? 'PM' : 'AM';
       h = h % 12; h = h ? h : 12;
       document.getElementById('timeDisplay').textContent = `${pad(h)}:${m}:${s} ${ampm}`;
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
       document.getElementById('dateDisplay').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     }
-    setInterval(updateDateTime, 1000); updateDateTime();
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
 
     function updateGreeting() {
       const hr = new Date().getHours();
@@ -681,122 +1094,148 @@
       else msg = 'Good Night 🌙';
       document.getElementById('greetingMessage').textContent = msg;
     }
-    setInterval(updateGreeting, 1000); updateGreeting();
+    setInterval(updateGreeting, 1000);
+    updateGreeting();
 
     const modalBackdrop = document.getElementById('modalBackdrop');
     function showModal(title, bodyHtml, extra) {
       document.getElementById('modalTitle').textContent = title || '';
       document.getElementById('modalBody').innerHTML = bodyHtml || '';
-      // convert newlines to <br> so DOB/Today/Age show on separate lines
       document.getElementById('modalExtra').innerHTML = extra ? String(extra).replace(/\n/g, '<br>') : '';
-      modalBackdrop.style.display = 'flex'; modalBackdrop.setAttribute('aria-hidden', 'false');
-      // ensure modal colors reflect theme variables (in case inline HTML used)
-      // handled via CSS variables already
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden', 'false');
     }
     function closeModal() {
       modalBackdrop.style.display = 'none';
       modalBackdrop.setAttribute('aria-hidden', 'true');
-
-      // Clean up RPS keyboard handler (prevents duplicates when reopening)
       if (window.__rpsKeyHandler) {
         document.removeEventListener('keydown', window.__rpsKeyHandler);
         window.__rpsKeyHandler = null;
       }
     }
-
     document.getElementById('closeModal').addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
-
-    // profile + bismillah + items
-    document.getElementById('profileImage').addEventListener('click', () => {
-      // show a balanced, not-too-large image in modal (responsive)
-      const src = document.getElementById('profileImage').src;
-      const imgHtml = `<img src="${src}" alt="Profile" style="max-width:320px;width:100%;height:auto;border-radius:8px;display:block;margin:0 auto">`;
-      showModal('Profile Picture', imgHtml, 'This is my profile picture.');
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
     });
+
+    document.getElementById('profileImage').addEventListener('click', () => {
+      const src = document.getElementById('profileImage').src;
+      showModal('Profile Picture', `<img src="${src}" alt="Profile" style="max-width:320px;width:100%;height:auto;border-radius:12px;display:block;margin:0 auto">`, 'This is my profile picture.');
+    });
+
     document.querySelector('.bismillah-container').addEventListener('click', () => {
       showModal('Surah Al-Fatiha', `<p style="line-height:1.8;font-size:17px;color:var(--text-color)">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ</p>`, 'Surah Al-Fatiha');
     });
 
-   const data = {
-  age: { 
-    label: 'Age', 
-    dobIso: '2005-09-12', 
-    dobPretty: '12 September 2005', 
-    extra: "Exact current age (years, months, days)." 
-  },
-  role: { 
-    label: 'Role', 
-    value: 'Website Developer & Odoo Developer', 
-    extra: 'I build clean, responsive websites using HTML/CSS/JS, WordPress, and also develop custom modules in Odoo.' 
-  },
-  location: { 
-    label: 'Location', 
-    value: 'Lahore, Allama Iqbal Town', 
-    extra: 'Current city & neighbourhood.' 
-  }
-};
-
-
     function calcAgeParts(dobIso) {
-      const dob = new Date(dobIso + 'T00:00:00'); const now = new Date();
+      const dob = new Date(dobIso + 'T00:00:00');
+      const now = new Date();
       let years = now.getFullYear() - dob.getFullYear();
       let months = now.getMonth() - dob.getMonth();
       let days = now.getDate() - dob.getDate();
-      if (days < 0) { months -= 1; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-      if (months < 0) { years -= 1; months += 12; }
+      if (days < 0) {
+        months -= 1;
+        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
       return { years, months, days, now };
     }
 
-    document.querySelectorAll('.item').forEach(el => {
-      el.addEventListener('click', () => {
-        const key = el.getAttribute('data-item');
-        if (!key) return;
-        if (key === 'age') {
-          const p = calcAgeParts(data.age.dobIso);
-          const ageTxt = `${p.years} years, ${p.months} months, ${p.days} days`;
-          // use newline characters; showModal will convert to <br>
-          const extra = `DOB: ${data.age.dobPretty}\nToday: ${p.now.toDateString()}\nAge: ${ageTxt}`;
-          showModal('Age', `<p style="color:var(--text-color)">${data.age.extra}</p>`, extra);
-        } else if (key === 'name') {
-          showModal('Name', `<p style="color:var(--text-color)">Muzamil Wajid</p><p style="color:var(--text-color)">Full: Wajid Ali</p>`, '');
-        } else if (key === 'role') {
-          showModal(data.role.label, `<p style="color:var(--text-color)">${data.role.value}</p>`, data.role.extra);
-        } else if (key === 'location') {
-          showModal(data.location.label, `<p style="color:var(--text-color)">${data.location.value}</p>`, data.location.extra);
-        }
-      });
-    });
-
-    function updateAgeDisplay() { const p = calcAgeParts(data.age.dobIso); document.getElementById('ageValue').textContent = p.years + ' Years'; }
-    setInterval(updateAgeDisplay, 3600 * 1000); updateAgeDisplay();
-
-    // ================ Theme Toggle ================
-    const themeBtn = document.getElementById('themeToggleBtn');
-    // restore saved preference
-    if (localStorage.getItem('site_theme') === 'light') {
-      document.documentElement.classList.add('light'); themeBtn.textContent = '☀️ Light';
-    } else {
-      // keep default dark label
-      themeBtn.textContent = localStorage.getItem('site_theme') === 'light' ? '☀️ Light' : '🌙 Theme';
+    function getNextBirthdayInfo() {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      let nextBirthday = new Date(currentYear, 8, 12);
+      if (today > nextBirthday) nextBirthday = new Date(currentYear + 1, 8, 12);
+      const oneDay = 1000 * 60 * 60 * 24;
+      const startToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const startBirthday = new Date(nextBirthday.getFullYear(), nextBirthday.getMonth(), nextBirthday.getDate());
+      const diffDays = Math.round((startBirthday - startToday) / oneDay);
+      return { nextBirthday, diffDays };
     }
 
-    themeBtn.addEventListener('click', () => {
-      if (document.documentElement.classList.contains('light')) {
-        document.documentElement.classList.remove('light');
-        localStorage.setItem('site_theme', 'dark'); themeBtn.textContent = '🌙 Theme';
-      } else {
-        document.documentElement.classList.add('light');
-        localStorage.setItem('site_theme', 'light'); themeBtn.textContent = '☀️ Light';
-      }
+    function updateAgeDisplay() {
+      const p = calcAgeParts('2005-09-12');
+      document.getElementById('ageValue').textContent = p.years + ' Years';
+    }
+    setInterval(updateAgeDisplay, 3600 * 1000);
+    updateAgeDisplay();
+
+    document.getElementById('ageCard').addEventListener('click', () => {
+      const age = calcAgeParts('2005-09-12');
+      const next = getNextBirthdayInfo();
+      showModal(
+        'Age Details',
+        `<div style="text-align:left;color:var(--text-color);line-height:1.8">
+          <strong>Date of Birth:</strong> 12 September 2005<br>
+          <strong>Current Age:</strong> ${age.years} years, ${age.months} months, ${age.days} days<br>
+          <strong>Next Birthday:</strong> ${next.nextBirthday.toDateString()}<br>
+          <strong>Days Remaining:</strong> ${next.diffDays} day${next.diffDays !== 1 ? 's' : ''}
+        </div>`,
+        'Birthday information'
+      );
     });
 
-    // ================= Audio (WebAudio simple melodies) =================
+    function initVisitorCounter() {
+      const totalKey = 'site_total_views_v1';
+      const deviceKey = 'site_device_visits_v1';
+      const lastVisitKey = 'site_last_visit_v1';
+      let totalViews = parseInt(localStorage.getItem(totalKey) || '0', 10);
+      let deviceVisits = parseInt(localStorage.getItem(deviceKey) || '0', 10);
+      const lastVisit = localStorage.getItem(lastVisitKey);
+      totalViews += 1;
+      deviceVisits += 1;
+      localStorage.setItem(totalKey, totalViews);
+      localStorage.setItem(deviceKey, deviceVisits);
+      localStorage.setItem(lastVisitKey, new Date().toLocaleString());
+      document.getElementById('totalViews').textContent = totalViews || 1;
+      document.getElementById('deviceVisits').textContent = deviceVisits || 1;
+      document.getElementById('lastVisit').textContent = lastVisit || 'First time visit';
+    }
+    initVisitorCounter();
+
+    async function loadWeather() {
+      const weatherStatus = document.getElementById('weatherStatus');
+      const fallbackWeather = { temp: '32', condition: 'Clear', wind: '12 km/h', humidity: '48%', location: 'Lahore' };
+
+      function applyWeather(data) {
+        document.getElementById('weatherTemp').textContent = `${data.temp}°C`;
+        document.getElementById('weatherCondition').textContent = data.condition;
+        document.getElementById('weatherWind').textContent = data.wind;
+        document.getElementById('weatherHumidity').textContent = data.humidity;
+        document.getElementById('weatherLocation').textContent = data.location;
+      }
+
+      try {
+        const res = await fetch('https://wttr.in/Lahore?format=j1');
+        const data = await res.json();
+        const current = data.current_condition && data.current_condition[0];
+        if (current) {
+          applyWeather({
+            temp: current.temp_C || fallbackWeather.temp,
+            condition: current.weatherDesc?.[0]?.value || fallbackWeather.condition,
+            wind: (current.windspeedKmph || '12') + ' km/h',
+            humidity: (current.humidity || '48') + '%',
+            location: 'Lahore'
+          });
+          weatherStatus.textContent = 'Live Lahore weather';
+        } else {
+          applyWeather(fallbackWeather);
+          weatherStatus.textContent = 'Lahore weather';
+        }
+      } catch {
+        applyWeather(fallbackWeather);
+        weatherStatus.textContent = 'Lahore weather';
+      }
+    }
+    loadWeather();
+
     let audioCtx = null;
     function ensureAudio() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-
     function playMelody(arr, gainVal = 0.05) {
       try {
         ensureAudio();
@@ -812,142 +1251,102 @@
           o.start(now + (n.offset || 0));
           o.stop(now + (n.offset || 0) + n.dur);
         });
-      } catch (e) { /* ignored if audio blocked */ }
+      } catch (e) { }
     }
-
-    // ======= Sounds =======
-    function rightChoiceSound() {
-      playMelody([
-        { freq: 880, dur: 0.1 },
-        { freq: 990, dur: 0.12, offset: 0.1 }
-      ], 0.05);
-    }
-
-    function wrongChoiceSound() {
-      playMelody([
-        { freq: 220, dur: 0.12 },
-        { freq: 180, dur: 0.12, offset: 0.12 }
-      ], 0.05);
-    }
-
-    function drawChoiceSound() {
-      playMelody([{ freq: 520, dur: 0.12 }], 0.035);
-    }
-
+    function rightChoiceSound() { playMelody([{ freq: 880, dur: 0.1 }, { freq: 990, dur: 0.12, offset: 0.1 }], 0.05); }
+    function wrongChoiceSound() { playMelody([{ freq: 220, dur: 0.12 }, { freq: 180, dur: 0.12, offset: 0.12 }], 0.05); }
+    function drawChoiceSound() { playMelody([{ freq: 520, dur: 0.12 }], 0.035); }
     function winGameSound() {
       playMelody([
-        { freq: 440, dur: 0.25, offset: 0 },   // A4
-        { freq: 554, dur: 0.25, offset: 0.25 },// C#5
-        { freq: 659, dur: 0.25, offset: 0.5 }, // E5
-        { freq: 880, dur: 0.25, offset: 0.75 },// A5
-        { freq: 988, dur: 0.25, offset: 1.0 }, // B5
-        { freq: 1047, dur: 0.3, offset: 1.25 } // C6
+        { freq: 440, dur: 0.25, offset: 0 }, { freq: 554, dur: 0.25, offset: 0.25 }, { freq: 659, dur: 0.25, offset: 0.5 },
+        { freq: 880, dur: 0.25, offset: 0.75 }, { freq: 988, dur: 0.25, offset: 1.0 }, { freq: 1047, dur: 0.3, offset: 1.25 }
       ], 0.06);
     }
-
     function lostGameSound() {
       playMelody([
-        { freq: 330, dur: 0.4, offset: 0 },
-        { freq: 294, dur: 0.4, offset: 0.4 },
-        { freq: 262, dur: 0.5, offset: 0.8 },
-        { freq: 220, dur: 0.5, offset: 1.3 },
-        { freq: 196, dur: 0.7, offset: 1.8 }
+        { freq: 330, dur: 0.4, offset: 0 }, { freq: 294, dur: 0.4, offset: 0.4 }, { freq: 262, dur: 0.5, offset: 0.8 },
+        { freq: 220, dur: 0.5, offset: 1.3 }, { freq: 196, dur: 0.7, offset: 1.8 }
       ], 0.05);
     }
 
-    // ================= Leaderboard localStorage =================
     const LB_KEY = 'rps_lb_v1';
     const HS_KEY = 'rps_high_v1';
-
     function getLB() {
       try {
         return JSON.parse(localStorage.getItem(LB_KEY) || '{"wins":0,"losses":0,"draws":0,"matches":0}');
-      } catch (e) {
+      } catch {
         return { wins: 0, losses: 0, draws: 0, matches: 0 };
       }
     }
-
     function saveLB(o) { localStorage.setItem(LB_KEY, JSON.stringify(o)); }
 
-    function resetLB() {
-      saveLB({ wins: 0, losses: 0, draws: 0, matches: 0 });
-      alert('Leaderboard reset');
-    }
-
-    // ====================== RPS Game ======================
     (function () {
-      const openBtn = document.getElementById('rpsOpenBtn');
-
-      openBtn.addEventListener('click', openRPSModal);
+      document.getElementById('rpsOpenBtn').addEventListener('click', openRPSModal);
 
       function openRPSModal() {
         const lb = getLB();
         const high = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
-
         const html = `
-      <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
-          <div style="text-align:left">
-            
-            <div style="font-size:13px;opacity:0.85">
-              Rounds:
-              <select id="rpsBestOf">
-                <option value="3" selected>3</option>
-                <option value="5">5</option>
-                <option value="7">7</option>
-                <option value="13">13</option>
-                <option value="19">19</option>
-                <option value="25">25</option>
-              </select>
-              Mode:
-              <select id="rpsMode">
-                <option value="easy">Easy</option>
-                <option value="normal" selected>Normal</option>
-                <option value="hard">Hard</option>
-              </select>
+        <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center;width:100%">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
+            <div style="text-align:left;flex:1 1 240px">
+              <div style="font-size:13px;opacity:0.85;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                <span>Rounds:</span>
+                <select id="rpsBestOf">
+                  <option value="3" selected>3</option>
+                  <option value="5">5</option>
+                  <option value="7">7</option>
+                  <option value="13">13</option>
+                  <option value="19">19</option>
+                  <option value="25">25</option>
+                </select>
+                <span>Mode:</span>
+                <select id="rpsMode">
+                  <option value="easy">Easy</option>
+                  <option value="normal" selected>Normal</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+            </div>
+            <div style="text-align:right;flex:1 1 140px">
+              <div style="font-weight:800">High Wins: <span id="rpsHighWins">${high}</span></div>
+              <div style="font-size:12px;opacity:0.8" id="rpsStreak">Streak: 0</div>
             </div>
           </div>
-          <div style="text-align:right">
-            <div style="font-weight:800">High Wins: <span id="rpsHighWins">${high}</span></div>
-            <div style="font-size:12px;opacity:0.8" id="rpsStreak">Streak: 0</div>
-          </div>
-        </div>
 
-        <div id="rpsArena">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
-            <div style="text-align:center"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
-            <div style="text-align:right"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
-          </div>
+          <div id="rpsArena">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
+              <div style="flex:1 1 80px"><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
+              <div style="text-align:center;flex:1 1 100px"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
+              <div style="text-align:right;flex:1 1 80px"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
+            </div>
 
-          <div id="rpsMessage">Choose your move</div>
+            <div id="rpsMessage">Choose your move</div>
 
-          <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap">
-            <button class="rpsMoveBtn" data-move="rock">✊ Rock</button>
-            <button class="rpsMoveBtn" data-move="paper">✋ Paper</button>
-            <button class="rpsMoveBtn" data-move="scissor">✌️ Scissor</button>
-          </div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap">
+              <button class="rpsMoveBtn" data-move="rock">✊ Rock</button>
+              <button class="rpsMoveBtn" data-move="paper">✋ Paper</button>
+              <button class="rpsMoveBtn" data-move="scissor">✌️ Scissor</button>
+            </div>
 
-          <div id="rpsHistory" style="max-height:140px;overflow-y:auto;margin-top:8px;text-align:left"></div>
+            <div id="rpsHistory"></div>
 
-          <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
-            <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
-          </div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
+              <button id="rpsResetBtn" class="btn">New Match</button>
+            </div>
 
-          <div style="display:flex;justify-content:center;align-items:center;margin-top:10px;gap:8px">
-            <div class="stat-row">
-              <div class="stat-pill">Matches: <span id="statMatches">${lb.matches}</span></div>
-              <div class="stat-pill">Wins: <span id="statWins">${lb.wins}</span></div>
-              <div class="stat-pill">Losses: <span id="statLosses">${lb.losses}</span></div>
-              <div class="stat-pill">Draws: <span id="statDraws">${lb.draws}</span></div>
+            <div style="display:flex;justify-content:center;align-items:center;margin-top:10px">
+              <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+                <div>Matches: <span id="statMatches">${lb.matches}</span></div>
+                <div>Wins: <span id="statWins">${lb.wins}</span></div>
+                <div>Losses: <span id="statLosses">${lb.losses}</span></div>
+                <div>Draws: <span id="statDraws">${lb.draws}</span></div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    `;
+        </div>`;
         showModal('Rock • Paper • Scissor', html, 'Keyboard: 1=Rock, 2=Paper, 3=Scissor, R=Reset, Esc=Close');
-
-        setTimeout(initRPS, 100); // wait until modal DOM is ready
+        setTimeout(initRPS, 100);
       }
 
       function initRPS() {
@@ -968,13 +1367,12 @@
         let highWins = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
 
         highWinsEl.textContent = highWins;
-        streakEl.textContent = 'Streak: ' + streak;
 
         function resetMatch() {
-          playerScore = 0; cpuScore = 0; round = 0; max = parseInt(bestOf.value); history = [];
+          playerScore = 0; cpuScore = 0; round = 0; max = parseInt(bestOf.value); history = []; streak = 0;
           playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
           roundEl.textContent = `${round} / ${max}`; msgEl.textContent = 'Make your move';
-          historyEl.innerHTML = ''; streak = 0; streakEl.textContent = 'Streak: ' + streak;
+          historyEl.innerHTML = ''; streakEl.textContent = 'Streak: ' + streak;
           moveBtns.forEach(b => b.disabled = false);
         }
         resetMatch();
@@ -982,25 +1380,23 @@
         function pickRandom() { return ['rock', 'paper', 'scissor'][Math.floor(Math.random() * 3)]; }
         function strongAgainst(m) { if (m === 'rock') return 'paper'; if (m === 'paper') return 'scissor'; return 'rock'; }
         function weakAgainst(m) { if (m === 'rock') return 'scissor'; if (m === 'paper') return 'rock'; return 'paper'; }
-
         function cpuMove(mode, prev) {
-          if (mode === 'easy') { if (Math.random() < 0.6) return pickRandom(); if (prev.length) return weakAgainst(prev[prev.length - 1].p); return pickRandom(); }
-          if (mode === 'normal') { if (Math.random() < 0.85) return pickRandom(); if (prev.length) return strongAgainst(prev[prev.length - 1].p); return pickRandom(); }
+          if (mode === 'easy') return Math.random() < 0.6 ? pickRandom() : (prev.length ? weakAgainst(prev[prev.length - 1].p) : pickRandom());
+          if (mode === 'normal') return Math.random() < 0.85 ? pickRandom() : (prev.length ? strongAgainst(prev[prev.length - 1].p) : pickRandom());
           if (prev.length >= 3 && Math.random() < 0.92) {
-            const freq = { rock: 0, paper: 0, scissor: 0 }; prev.forEach(h => freq[h.p]++);
+            const freq = { rock: 0, paper: 0, scissor: 0 };
+            prev.forEach(h => freq[h.p]++);
             const most = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
             return strongAgainst(most);
           }
           return pickRandom();
         }
-
         function decide(p, c) {
           if (p === c) return 'draw';
           if ((p === 'rock' && c === 'scissor') || (p === 'paper' && c === 'rock') || (p === 'scissor' && c === 'paper')) return 'win';
           return 'lose';
         }
-
-        function emoji(m) { if (m === 'rock') return '✊'; if (m === 'paper') return '✋'; return '✌️'; }
+        function emoji(m) { return m === 'rock' ? '✊' : m === 'paper' ? '✋' : '✌️'; }
 
         function revealCpu(cpu, cb) {
           msgEl.textContent = 'Muzamil thinking...';
@@ -1008,32 +1404,16 @@
           const t = setInterval(() => {
             msgEl.textContent = ['✊', '✋', '✌️'][i % 3];
             i++;
-            if (i > 6) { clearInterval(t); msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`; cb(); }
+            if (i > 6) {
+              clearInterval(t);
+              msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`;
+              cb();
+            }
           }, 80);
         }
 
-        function playRound(playerMove) {
-          const mode = modeEl.value; const cpu = cpuMove(mode, history);
-          moveBtns.forEach(b => b.disabled = true);
-          revealCpu(cpu, () => {
-            const res = decide(playerMove, cpu);
-            round++; roundEl.textContent = `${round} / ${max}`;
-            if (res === 'win') { playerScore++; streak++; msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; rightChoiceSound(); }
-            else if (res === 'lose') { cpuScore++; streak = 0; msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; wrongChoiceSound(); }
-            else { msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; drawChoiceSound(); }
-
-            playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
-            history.unshift({ p: playerMove, c: cpu, result: res, round: round }); if (history.length > 8) history.pop();
-            renderHist();
-
-            const need = Math.floor(max / 2) + 1;
-            if (playerScore >= need || cpuScore >= need || round >= max) setTimeout(finalize, 420);
-            else setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420);
-          });
-        }
-
         function renderHist() {
-          historyEl.innerHTML = history.map(h => `<div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px">${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}</div>`).join('');
+          historyEl.innerHTML = history.map(h => `<div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.03);margin-bottom:6px">${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}</div>`).join('');
           const s = getLB();
           document.getElementById('statWins').textContent = s.wins;
           document.getElementById('statLosses').textContent = s.losses;
@@ -1044,65 +1424,108 @@
         function finalize() {
           const lb = getLB();
           let msg = '';
-          if (playerScore > cpuScore) { msg = '🎉 You won the match!'; lb.wins++; if (playerScore > highWins) { localStorage.setItem(HS_KEY, playerScore); highWinsEl.textContent = playerScore; } winGameSound(); }
-          else if (cpuScore > playerScore) { msg = '💀 You lost the match!'; lb.losses++; lostGameSound(); }
-          else { msg = '🤝 Draw match!'; lb.draws++; drawChoiceSound(); }
-          lb.matches++; saveLB(lb); renderHist(); msgEl.textContent = msg; streakEl.textContent = 'Streak: ' + streak; moveBtns.forEach(b => b.disabled = true);
+          if (playerScore > cpuScore) {
+            msg = '🎉 You won the match!';
+            lb.wins++;
+            if (playerScore > highWins) {
+              localStorage.setItem(HS_KEY, playerScore);
+              highWinsEl.textContent = playerScore;
+            }
+            winGameSound();
+          } else if (cpuScore > playerScore) {
+            msg = '💀 You lost the match!';
+            lb.losses++;
+            lostGameSound();
+          } else {
+            msg = '🤝 Draw match!';
+            lb.draws++;
+            drawChoiceSound();
+          }
+          lb.matches++;
+          saveLB(lb);
+          renderHist();
+          msgEl.textContent = msg;
+          streakEl.textContent = 'Streak: ' + streak;
+          moveBtns.forEach(b => b.disabled = true);
+        }
+
+        function playRound(playerMove) {
+          const cpu = cpuMove(modeEl.value, history);
+          moveBtns.forEach(b => b.disabled = true);
+          revealCpu(cpu, () => {
+            const res = decide(playerMove, cpu);
+            round++;
+            roundEl.textContent = `${round} / ${max}`;
+            if (res === 'win') {
+              playerScore++; streak++; msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; rightChoiceSound();
+            } else if (res === 'lose') {
+              cpuScore++; streak = 0; msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; wrongChoiceSound();
+            } else {
+              msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; drawChoiceSound();
+            }
+            playerScoreEl.textContent = playerScore;
+            cpuScoreEl.textContent = cpuScore;
+            history.unshift({ p: playerMove, c: cpu, result: res, round: round });
+            if (history.length > 8) history.pop();
+            renderHist();
+            const need = Math.floor(max / 2) + 1;
+            if (playerScore >= need || cpuScore >= need || round >= max) setTimeout(finalize, 420);
+            else setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420);
+          });
         }
 
         resetBtn.addEventListener('click', resetMatch);
-
-        // Leaderboard button was removed from the UI — guard its handler so it won't break the script
-        const showBoardBtn = document.getElementById('rpsShowBoardBtn');
-        if (showBoardBtn) {
-          showBoardBtn.addEventListener('click', () => { alert(JSON.stringify(getLB(), null, 2)); });
-        }
-
-        // attach move button handlers
         moveBtns.forEach(b => b.addEventListener('click', () => playRound(b.dataset.move)));
-
-        // keyboard handler — ensure only one handler exists at a time
-        if (window.__rpsKeyHandler) document.removeEventListener('keydown', window.__rpsKeyHandler);
-        window.__rpsKeyHandler = function (e) {
-          if (e.key === '1') playRound('rock');
-          if (e.key === '2') playRound('paper');
-          if (e.key === '3') playRound('scissor');
-          if (e.key.toLowerCase() === 'r') resetMatch();
-          if (e.key === 'Escape') {
-            // remove handler and close modal
-            document.removeEventListener('keydown', window.__rpsKeyHandler);
-            window.__rpsKeyHandler = null;
-            closeModal();
-          }
-        };
-        document.addEventListener('keydown', window.__rpsKeyHandler);
-
       }
     })();
 
-
-
-
-    // convenience: allow manual reset via console
-    window.__resetLB = function () { resetLB(); };
     const openBtn = document.getElementById("openCalc");
     const calc = document.getElementById("calc");
     const closeBtn = document.getElementById("closeCalc");
     const display = document.getElementById("display");
     const buttons = calc.querySelectorAll(".buttons button");
+    const sciButtons = document.getElementById("sciButtons");
+    const sciBtnList = sciButtons.querySelectorAll("button");
     const themeSwitch = document.getElementById("themeSwitch");
-    const label = document.querySelector(".theme-toggle label");
+    const label = document.querySelector(".calculator .theme-toggle label");
+    const toggleScientific = document.getElementById("toggleScientific");
 
     let currentInput = "";
-    let darkMode = true;
+    let scientificVisible = false;
 
-    openBtn.addEventListener("click", () => {
-      calc.classList.add("show");
+    openBtn.addEventListener("click", () => calc.classList.add("show"));
+    closeBtn.addEventListener("click", () => calc.classList.remove("show"));
+
+    toggleScientific.addEventListener("click", () => {
+      scientificVisible = !scientificVisible;
+      sciButtons.classList.toggle("show", scientificVisible);
+      toggleScientific.textContent = scientificVisible ? "Basic" : "Scientific";
     });
 
-    closeBtn.addEventListener("click", () => {
-      calc.classList.remove("show");
-    });
+    function fact(n) {
+      n = Math.floor(n);
+      if (n < 0) throw new Error("Invalid factorial");
+      if (n === 0 || n === 1) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) result *= i;
+      return result;
+    }
+    function log10(x) { return Math.log10(x); }
+    function ln(x) { return Math.log(x); }
+    function sqrt(x) { return Math.sqrt(x); }
+    function sin(x) { return Math.sin(x * Math.PI / 180); }
+    function cos(x) { return Math.cos(x * Math.PI / 180); }
+    function tan(x) { return Math.tan(x * Math.PI / 180); }
+    function pow(a, b) { return Math.pow(a, b); }
+    function exp(x) { return Math.exp(x); }
+    function percent(x) { return x / 100; }
+
+    function safeEvaluate(expression) {
+      const sanitized = expression.replace(/÷/g, '/').replace(/×/g, '*');
+      return Function("fact", "log10", "ln", "sqrt", "sin", "cos", "tan", "pow", "exp", "percent", "PI", "E", `return ${sanitized}`)(
+        fact, log10, ln, sqrt, sin, cos, tan, pow, exp, percent, Math.PI, Math.E
+      );
+    }
 
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1112,16 +1535,15 @@
           display.textContent = "0";
         } else if (val === "=") {
           try {
-            currentInput = eval(currentInput).toString();
+            currentInput = String(safeEvaluate(currentInput));
             display.textContent = currentInput;
           } catch {
+            currentInput = "";
             display.textContent = "Error";
           }
         } else if (val === "+/-") {
           if (currentInput) {
-            currentInput = currentInput.startsWith("-")
-              ? currentInput.slice(1)
-              : "-" + currentInput;
+            currentInput = currentInput.startsWith("-") ? currentInput.slice(1) : "-" + currentInput;
             display.textContent = currentInput;
           }
         } else {
@@ -1131,50 +1553,115 @@
       });
     });
 
-    themeSwitch.addEventListener("change", () => {
-      darkMode = !darkMode;
-      calc.classList.toggle("dark-theme", darkMode);
-      calc.classList.toggle("light-theme", !darkMode);
-      label.textContent = darkMode ? "Dark Mode" : "Light Mode";
+    sciBtnList.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const fn = btn.getAttribute("data-fn");
+        currentInput += fn;
+        display.textContent = currentInput || "0";
+      });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-  // ========== Simple Birthday Test ==========
-  const now = new Date();
+    themeSwitch.addEventListener("change", () => {
+      calc.classList.toggle("dark-theme");
+      label.textContent = calc.classList.contains("dark-theme") ? "Dark Mode" : "Light Mode";
+    });
 
-  // TEST MODE = show now
-  const showBirthday = (now.getMonth() === 8 && now.getDate() === 12); // true = show now for testing
+    const openCalendarBtn = document.getElementById('openCalendar');
+    const publicEvents = {
+      '1-1': ['New Year\'s Day'],
+      '2-5': ['Kashmir Day'],
+      '3-23': ['Pakistan Day'],
+      '5-1': ['Labour Day'],
+      '8-14': ['Independence Day'],
+      '9-6': ['Defence Day'],
+      '12-25': ['Quaid-e-Azam Day', 'Christmas Day']
+    };
+    const islamicEvents = {
+      '1-1': 'Islamic New Year',
+      '1-10': 'Ashura',
+      '3-12': 'Eid Milad-un-Nabi',
+      '7-27': 'Shab-e-Miraj',
+      '8-15': 'Shab-e-Barat',
+      '9-1': 'Start of Ramadan',
+      '9-27': 'Laylat al-Qadr',
+      '10-1': 'Eid ul-Fitr',
+      '12-9': 'Day of Arafah',
+      '12-10': 'Eid ul-Adha'
+    };
 
-  if (showBirthday) {
-    // 1️⃣ Name ke neeche pink birthday text
-    const headerDiv = document.querySelector('.header div:nth-child(2)');
-    if (headerDiv) {
-      const bdayText = document.createElement('p');
-      bdayText.textContent = '🎂 It\'s my birthday!';
-      bdayText.style.fontSize = '14px';
-      bdayText.style.fontWeight = '500';
-      bdayText.style.marginTop = '4px';
-      bdayText.style.color = '#ff69b4';
-      headerDiv.appendChild(bdayText);
+    function getIslamicDateParts(dateObj) {
+      try {
+        const formatter = new Intl.DateTimeFormat('en-TN-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
+        const parts = formatter.formatToParts(dateObj);
+        const day = parts.find(p => p.type === 'day')?.value || '1';
+        const month = parts.find(p => p.type === 'month')?.value || 'Muharram';
+        const year = parts.find(p => p.type === 'year')?.value || '1447';
+        return { day, month, year, formatted: `${day} ${month} ${year} AH` };
+      } catch {
+        return { day: '1', month: 'Muharram', year: '1447', formatted: '1 Muharram 1447 AH' };
+      }
     }
 
-    // 2️⃣ Auto popup on page load
-    if (typeof showModal === 'function') {
-      showModal(
-        '🎉 Today is my Birthday! 🎉',
-        `<p style="color:var(--text-color);font-weight:600;line-height:1.5">
-           Hey everyone! 🥳<br>
-           Wishing myself a fantastic day full of joy, cake 🍰, and smiles!<br>
-           Let\'s celebrate 🎈
-        </p>`,
-      );
+    function getIslamicMonthNumber(monthName) {
+      const months = {
+        'Muharram': 1, 'Safar': 2, 'Rabiʻ I': 3, 'Rabiʻ II': 4, 'Jumada I': 5, 'Jumada II': 6,
+        'Rajab': 7, 'Shaʻban': 8, 'Ramadan': 9, 'Shawwal': 10, 'Dhuʻl-Qiʻdah': 11, 'Dhuʻl-Hijjah': 12
+      };
+      return months[monthName] || 1;
     }
-  }
-});
 
+    function buildCalendarGrid(dateObj) {
+      const year = dateObj.getFullYear();
+      const month = dateObj.getMonth();
+      const todayDate = dateObj.getDate();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      let html = `<div class="calendar-grid">`;
+      dayNames.forEach(name => html += `<div class="calendar-day-name">${name}</div>`);
+      for (let i = 0; i < firstDay; i++) html += `<div class="calendar-day empty"></div>`;
+      for (let d = 1; d <= daysInMonth; d++) html += `<div class="calendar-day ${d === todayDate ? 'today' : ''}">${d}</div>`;
+      html += `</div>`;
+      return html;
+    }
+
+    function openCalendarModal() {
+      const now = new Date();
+      const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+      const fullDate = now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+      const eventKey = `${now.getMonth() + 1}-${now.getDate()}`;
+      const todayEvents = publicEvents[eventKey] || ['Today has no public event'];
+      const hijri = getIslamicDateParts(now);
+      const hijriMonthNo = getIslamicMonthNumber(hijri.month);
+      const islamicKey = `${hijriMonthNo}-${parseInt(hijri.day, 10)}`;
+      const todayIslamicEvent = islamicEvents[islamicKey] || 'Today has no Islamic event';
+
+      const bodyHtml = `
+        <div class="calendar-card" style="text-align:center">
+          <div style="font-size:22px;font-weight:800;color:var(--text-color)">${dayName}</div>
+          <div style="margin-top:6px;font-size:16px;color:var(--muted)">${fullDate}</div>
+          <div style="margin-top:6px;font-size:15px;color:var(--text-color)">Hijri: ${hijri.formatted}</div>
+        </div>
+
+        <div class="calendar-card">
+          <div style="font-weight:800;margin-bottom:6px">Today Events</div>
+          <div>${todayEvents.join('<br>')}</div>
+        </div>
+
+        <div class="calendar-card">
+          <div style="font-weight:800;margin-bottom:6px">Islamic Event</div>
+          <div>${todayIslamicEvent}</div>
+        </div>
+
+        <div class="calendar-card">
+          <div style="font-weight:800;margin-bottom:6px;text-align:center">${now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
+          ${buildCalendarGrid(now)}
+        </div>`;
+      showModal('Calendar', bodyHtml, 'Shows current date, day, events and Islamic event.');
+    }
+
+    openCalendarBtn.addEventListener('click', openCalendarModal);
   </script>
 </body>
 
-
 </html>
-
