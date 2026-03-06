@@ -9,35 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg1: #1d1025;
-      --bg2: #2b1638;
-      --bg3: #44204f;
-      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --text-color: #fff8fb;
-      --muted: rgba(255, 248, 251, 0.8);
+      --bg1: #0f172a;
+      --bg2: #07203b;
+      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+      --glass-border: rgba(255, 255, 255, 0.04);
+      --text-color: #e6eef8;
+      --muted: rgba(230, 238, 248, 0.9);
       --modal-title: #ffffff;
-      --modal-close: #ffffff;
-      --rps-bg: linear-gradient(160deg, #4d1f4d, #7a306c);
-      --nav-bg: rgba(29, 16, 37, 0.82);
-      --accent1: #ff7aa2;
-      --accent2: #ffb86b;
-      --accent3: #d946ef;
-      --accent4: #f59e0b;
-      --btn-main: linear-gradient(135deg, #ff7aa2, #ffb86b);
-      --btn-calc: linear-gradient(135deg, #d946ef, #a855f7);
-      --btn-cal: linear-gradient(135deg, #f59e0b, #fb7185);
-      --btn-nav: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-      --section-gap: 18px;
-      --shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+      --modal-close: #eaf6ff;
+      --rps-bg: linear-gradient(160deg, #1f1c2c, #928dab);
+      --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --memory-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      --snake-bg: #0d1b0d;
+      --ttt-bg: linear-gradient(135deg, #2c3e50, #4a6582);
+      --mole-bg: linear-gradient(180deg, #5d4037, #8d6e63);
+      --simon-bg: #1a1a2e;
+    }
+
+    .light {
+      --bg1: #f6f8fb;
+      --bg2: #e9eef6;
+      --card-bg: linear-gradient(180deg, rgba(8, 10, 20, 0.03), rgba(255, 255, 255, 0.6));
+      --glass-border: rgba(12, 18, 40, 0.06);
+      --text-color: #0b1220;
+      --muted: rgba(12, 18, 40, 0.85);
+      --modal-title: #0b1220;
+      --modal-close: #0b1220;
+      --rps-bg: linear-gradient(160deg, #e6eef6, #dbeaf8);
+      --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --memory-bg: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      --snake-bg: #e8f5e9;
+      --ttt-bg: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      --mole-bg: linear-gradient(180deg, #d7ccc8, #a1887f);
+      --simon-bg: #f5f5f5;
     }
 
     * {
       box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     html,
@@ -48,150 +56,84 @@
     }
 
     body {
-      background:
-        radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent1) 20%, transparent), transparent 24%),
-        radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent3) 18%, transparent), transparent 24%),
-        linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg3));
+      background: radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.12), transparent 10%),
+        radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.08), transparent 12%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
       color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px;
+      min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
-      transition: background 0.8s ease, color 0.8s ease;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
 
-    .page-wrap {
+    ::selection {
+      background: rgba(124, 58, 237, 0.3);
+      color: var(--text-color);
+    }
+
+    .card {
       width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-
-    .site-nav {
-      position: sticky;
-      top: 12px;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      margin-bottom: 18px;
+      max-width: 760px;
       border-radius: 18px;
-      background: var(--nav-bg);
+      padding: 22px;
+      background: var(--card-bg);
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
       border: 1px solid var(--glass-border);
-      backdrop-filter: blur(14px) saturate(130%);
-      box-shadow: var(--shadow);
-      transition: 0.8s ease;
+      backdrop-filter: blur(6px) saturate(120%);
+      transition: all .25s;
     }
 
-    .nav-brand {
-      font-weight: 800;
-      font-size: 18px;
-      min-width: 0;
-      word-break: break-word;
-    }
-
-    .nav-right {
+    .top-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .nav-links a,
     .theme-toggle button {
-      padding: 9px 13px;
-      border-radius: 12px;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: 1px solid var(--glass-border);
-      background: var(--btn-nav);
+      background: rgba(255, 255, 255, 0.05);
       color: inherit;
       cursor: pointer;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-      transition: 0.25s ease;
+      font-weight: 600;
+      transition: all 0.2s;
     }
 
-    .menu-toggle {
-      display: none;
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid var(--glass-border);
-      background: var(--btn-nav);
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--text-color);
-      margin: 3px 0;
-      border-radius: 999px;
-    }
-
-    .card,
-    .section-card {
-      width: 100%;
-      border-radius: 22px;
-      padding: 24px;
-      background: var(--card-bg);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(8px) saturate(130%);
-      transition: 0.8s ease;
-    }
-
-    .section-card {
-      margin-top: var(--section-gap);
-      scroll-margin-top: 90px;
-    }
-
-    .top-row,
-    .datetime,
-    .header,
-    .weather-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+    .theme-toggle button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .datetime {
-      margin-bottom: 12px;
-      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: 600;
       font-size: 14px;
       color: var(--muted);
     }
 
     .header {
+      display: flex;
+      gap: 14px;
       align-items: center;
     }
 
     .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 18px;
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--glass-border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+      display: inline-block;
+      position: relative;
       flex-shrink: 0;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
     }
 
     .avatar img {
@@ -201,193 +143,161 @@
       display: block;
       cursor: pointer;
       transition: transform 200ms ease;
+      transform-origin: center;
     }
 
     .avatar img:hover {
       transform: scale(1.06);
     }
 
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      word-break: break-word;
-    }
-
     h1 {
-      font-size: 26px;
-      margin-bottom: 4px;
-    }
-
-    h2.section-title {
-      font-size: 24px;
-      margin-bottom: 12px;
+      margin: 0;
+      font-size: 20px;
     }
 
     p.meta {
       margin: 6px 0 0 0;
-      font-size: 15px;
+      opacity: 0.85;
+      font-size: 14px;
       color: var(--muted);
-    }
-
-    .hero-badge {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: linear-gradient(135deg, color-mix(in srgb, var(--accent1) 22%, transparent), color-mix(in srgb, var(--accent3) 22%, transparent));
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-color);
     }
 
     .bismillah-container {
       margin-top: 5px;
-      margin-bottom: 12px;
       text-align: center;
       cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .bismillah-container:hover {
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .bismillah-text {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 600;
       color: transparent;
-      background: linear-gradient(90deg, var(--accent2), var(--accent1), var(--accent3));
+      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
       -webkit-background-clip: text;
       background-clip: text;
-      word-break: break-word;
+      margin: 0;
     }
 
     .greeting {
-      margin-top: 14px;
-      font-size: 21px;
-      font-weight: 700;
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 600;
       color: var(--muted);
       text-align: center;
+      opacity: 0.95;
     }
 
-    .hero-actions {
-      margin-top: 16px;
-      display: flex;
+    .birthday-text {
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 4px;
+      color: #ff69b4;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-top: 14px;
+    }
+
+    .item {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: all 0.2s;
+    }
+
+    .item:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .label {
+      opacity: 0.7;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .value {
+      margin-top: 6px;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cta {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .btn,
-    #openCalc,
-    #openCalendar {
-      padding: 11px 18px;
-      border-radius: 13px;
-      font-weight: 800;
+    .btn {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
       border: none;
       cursor: pointer;
+      background: var(--accent-gradient);
       color: white;
-      transition: 0.25s ease;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+      font-size: 13px;
     }
 
-    .btn {
-      background: var(--btn-main);
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    #openCalc {
-      background: var(--btn-calc);
+    .btn:active {
+      transform: translateY(0);
     }
 
-    #openCalendar {
-      background: var(--btn-cal);
-    }
+    .btn-snake { background: linear-gradient(135deg, #56ab2f, #a8e063); }
+    .btn-ttt { background: linear-gradient(135deg, #2980b9, #6dd5fa); }
+    .btn-mole { background: linear-gradient(135deg, #8e44ad, #c39bd3); }
+    .btn-simon { background: linear-gradient(135deg, #e74c3c, #f39c12); }
+    .btn-guess { background: linear-gradient(135deg, #16a085, #2ecc71); }
+    .btn-secondary { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
 
     .muted {
-      font-size: 14px;
+      opacity: 0.86;
+      font-size: 13px;
       color: var(--muted);
-      word-break: break-word;
-    }
-
-    .section-grid-2,
-    .weather-meta {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .mini-box,
-    .weather-box,
-    .counter-box,
-    .skill-box,
-    .info-card {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--glass-border);
-      color: var(--text-color);
-      transition: 0.8s ease;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 14px;
-    }
-
-    .about-list,
-    .skills-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .info-card .label {
-      opacity: 0.7;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .info-card .value {
-      margin-top: 6px;
-      font-weight: 800;
-      color: var(--text-color);
-      word-break: break-word;
-    }
-
-    .clickable-age {
-      cursor: pointer;
-    }
-
-    .skill-bar {
-      width: 100%;
-      height: 10px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.08);
-      margin-top: 8px;
-    }
-
-    .skill-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
-    }
-
-    .counter-wrap {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .weather-temp {
-      font-size: 30px;
-      font-weight: 900;
     }
 
     footer {
-      margin-top: 18px;
+      margin-top: 14px;
       text-align: center;
-      opacity: 0.78;
+      opacity: 0.65;
       font-size: 13px;
       color: var(--muted);
-      padding-bottom: 10px;
     }
 
     .modal-backdrop {
@@ -397,45 +307,68 @@
       align-items: center;
       justify-content: center;
       background: rgba(2, 6, 23, 0.9);
-      z-index: 60;
+      z-index: 50;
       padding: 20px;
+      backdrop-filter: blur(5px);
     }
 
     .modal {
       width: 100%;
-      max-width: 760px;
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;
+      max-width: 720px;
       background: var(--bg1);
-      border-radius: 18px;
+      border-radius: 14px;
       padding: 18px;
       color: var(--muted);
       border: 1px solid var(--glass-border);
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
       text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      color: var(--modal-title);
     }
 
     .modal .close {
       display: inline-block;
       margin-top: 12px;
-      padding: 9px 14px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--modal-close);
-      border: 1px solid var(--glass-border);
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
       cursor: pointer;
+      font-weight: 600;
+      transition: opacity 0.2s;
     }
 
+    .modal .close:hover {
+      opacity: 0.9;
+    }
+
+    .modal img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 8px;
+    }
+
+    /* RPS Styles */
     #rpsArena {
       background: var(--rps-bg);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 14px;
       margin-top: 12px;
       color: var(--text-color);
     }
 
     .rpsMoveBtn {
-      background: linear-gradient(145deg, color-mix(in srgb, var(--accent3) 70%, #111), color-mix(in srgb, var(--accent1) 70%, #111));
+      background: linear-gradient(145deg, #2c3e50, #34495e);
       color: #fff;
       border-radius: 12px;
       font-size: 15px;
@@ -445,6 +378,21 @@
       border: none;
       cursor: pointer;
       min-width: 95px;
+      transition: all 0.2s;
+    }
+
+    .rpsMoveBtn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .rpsMoveBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .rpsMoveBtn:active:not(:disabled) {
+      transform: scale(.98);
     }
 
     #rpsMessage {
@@ -452,12 +400,11 @@
       margin: 12px 0;
       padding: 10px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
 
     #rpsHistory {
@@ -467,54 +414,405 @@
       text-align: left;
     }
 
-    .calendar-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 12px;
+    /* Memory Game Styles */
+    #memoryArena {
+      background: var(--memory-bg);
+      border-radius: 16px;
+      padding: 20px;
       margin-top: 12px;
-      text-align: left;
       color: var(--text-color);
+      position: relative;
+      overflow: hidden;
     }
 
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .calendar-day-name,
-    .calendar-day {
-      text-align: center;
-      padding: 8px 4px;
-      border-radius: 10px;
-      font-size: 13px;
-    }
-
-    .calendar-day-name {
+    .memory-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 0 10px;
       font-weight: 700;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.02);
+      font-size: 14px;
     }
 
-    .calendar-day {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--glass-border);
-      min-height: 44px;
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card.matched {
+      animation: matchPulse 0.6s ease;
+    }
+
+    @keyframes matchPulse {
+      0%, 100% { transform: rotateY(180deg) scale(1); }
+      50% { transform: rotateY(180deg) scale(1.1); }
+    }
+
+    .memory-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
 
-    .calendar-day.empty {
-      opacity: 0.25;
+    .memory-front {
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      backdrop-filter: blur(10px);
+      transform: rotateY(0deg);
     }
 
-    .calendar-day.today {
-      background: linear-gradient(135deg, var(--accent1), var(--accent3));
-      color: #fff;
-      font-weight: 800;
+    .memory-front::after {
+      content: '?';
+      font-size: 1.5rem;
+      opacity: 0.5;
+      font-weight: 700;
+    }
+
+    .memory-back {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transform: rotateY(180deg);
+    }
+
+    .light .memory-back {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    #memoryMessage {
+      font-weight: 700;
+      margin: 16px 0;
+      min-height: 30px;
+      font-size: 16px;
+    }
+
+    /* Snake Game */
+    #snakeArena {
+      background: var(--snake-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    #snakeCanvas {
+      border: 2px solid var(--glass-border);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      max-width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .light #snakeCanvas {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .snake-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .snake-btn {
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-color);
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .snake-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    /* Tic Tac Toe */
+    #tttArena {
+      background: var(--ttt-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+
+    .ttt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .ttt-cell {
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: var(--text-color);
+    }
+
+    .ttt-cell:hover:not(.taken) {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+
+    .ttt-cell.taken {
+      cursor: not-allowed;
+    }
+
+    .ttt-cell.x { color: #e74c3c; }
+    .ttt-cell.o { color: #3498db; }
+
+    /* Whack-a-Mole */
+    #moleArena {
+      background: var(--mole-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mole-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 350px;
+      margin: 20px auto;
+    }
+
+    .mole-hole {
+      aspect-ratio: 1;
+      background: #3e2723;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 10px 20px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .mole {
+      width: 70%;
+      height: 70%;
+      background: linear-gradient(180deg, #8d6e63, #5d4037);
+      border-radius: 50% 50% 40% 40%;
+      position: absolute;
+      bottom: -100%;
+      left: 15%;
+      transition: bottom 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .mole.up {
+      bottom: 10%;
+    }
+
+    .mole:active {
+      transform: scale(0.9);
+    }
+
+    .mole::before {
+      content: '';
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      background: #333;
+      border-radius: 50%;
+      top: 30%;
+      left: 25%;
+      box-shadow: 25px 0 0 #333;
+    }
+
+    .mole::after {
+      content: '';
+      position: absolute;
+      width: 30%;
+      height: 15%;
+      background: #d7ccc8;
+      border-radius: 10px;
+      bottom: 25%;
+    }
+
+    /* Simon Says */
+    #simonArena {
+      background: var(--simon-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+
+    .simon-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      max-width: 300px;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .simon-btn {
+      aspect-ratio: 1;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.1s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .simon-btn:hover {
+      opacity: 0.9;
+    }
+
+    .simon-btn.active {
+      opacity: 1;
+      transform: scale(0.95);
+      filter: brightness(1.5);
+    }
+
+    .simon-btn:nth-child(1) { background: #e74c3c; border-top-left-radius: 100%; }
+    .simon-btn:nth-child(2) { background: #2ecc71; border-top-right-radius: 100%; }
+    .simon-btn:nth-child(3) { background: #f1c40f; border-bottom-left-radius: 100%; }
+    .simon-btn:nth-child(4) { background: #3498db; border-bottom-right-radius: 100%; }
+
+    .simon-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: var(--bg1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: 4px solid var(--glass-border);
+      z-index: 10;
+    }
+
+    /* Number Guess */
+    #guessArena {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .light #guessArena {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .guess-input {
+      padding: 15px;
+      font-size: 1.2rem;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      width: 200px;
+      text-align: center;
+      margin: 10px;
+    }
+
+    .guess-input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .guess-hint {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      min-height: 40px;
+      font-weight: 700;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #f0f;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .stat-pill {
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      font-weight: 700;
+    }
+
+    #openCalc {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      color: white;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+
+    #openCalc:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .calculator {
@@ -524,15 +822,14 @@
       transform: translate(-50%, -50%) scale(0.8);
       opacity: 0;
       visibility: hidden;
-      background: #171323;
+      background: var(--bg1);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      width: min(390px, calc(100vw - 24px));
-      max-width: calc(100vw - 24px);
-      border-radius: 22px;
+      border: 1px solid var(--glass-border);
+      width: 320px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-      color: #f8f1ff;
+      color: var(--text-color);
       transition: all 0.3s ease;
       z-index: 1000;
     }
@@ -547,542 +844,321 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 18px;
-      gap: 8px;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--glass-border);
     }
 
-    .calc-controls {
+    .calc-theme-toggle {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .calc-mode-btn {
-      padding: 8px 12px;
-      font-size: 0.85rem;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent3));
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
+      gap: 8px;
     }
 
     .close-btn {
       border: none;
       background: transparent;
-      color: #f8f1ff;
-      font-size: 1.3rem;
+      color: var(--text-color);
+      font-size: 1.5rem;
       cursor: pointer;
-    }
-
-    input[type="checkbox"] {
-      appearance: none;
-      width: 44px;
-      height: 22px;
-      background: #475569;
-      border-radius: 25px;
-      position: relative;
-      cursor: pointer;
-      outline: none;
       transition: 0.3s;
-    }
-
-    input[type="checkbox"]::before {
-      content: "";
-      width: 18px;
-      height: 18px;
-      background: #fff;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 50%;
-      position: absolute;
-      top: 2px;
-      left: 3px;
-      transition: 0.3s;
     }
 
-    input[type="checkbox"]:checked {
-      background: var(--accent2);
-    }
-
-    input[type="checkbox"]:checked::before {
-      transform: translateX(22px);
+    .close-btn:hover {
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.1);
     }
 
     .display {
       text-align: right;
-      padding: 18px;
+      padding: 20px;
       font-size: 1.8rem;
-      min-height: 82px;
-      word-break: break-all;
+      background: transparent;
+      min-height: 80px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      color: var(--text-color);
     }
 
-    .buttons,
-    .sci-buttons {
+    .buttons {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 10px;
       padding: 15px;
     }
 
-    .sci-buttons {
-      display: none;
-      padding-top: 0;
-    }
-
-    .sci-buttons.show {
-      display: grid;
-    }
-
-    button {
-      padding: 16px 8px;
-      font-size: 1rem;
+    .calc-btn {
+      padding: 18px;
+      font-size: 1.1rem;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      min-width: 0;
+      transition: all 0.2s;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-color);
+      font-weight: 600;
     }
 
-    .dark-theme button {
-      background: rgba(255, 255, 255, 0.07);
-      color: #f8f1ff;
+    .calc-btn:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .calc-btn:active {
+      transform: scale(0.95);
     }
 
     .equal {
-      background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
+      background: #f7b733 !important;
       color: #fff !important;
       font-weight: bold;
     }
 
-    @media (max-width: 900px) {
+    .equal:hover {
+      background: #e6a020 !important;
+    }
 
-      .section-grid-2,
-      .counter-wrap,
-      .about-grid,
-      .weather-meta {
-        grid-template-columns: 1fr;
-      }
+    .light .calculator {
+      background: #f6f8fb;
+      color: #0b1220;
+    }
+
+    .light .calc-btn {
+      background: #e9eef6;
+      color: #0b1220;
+    }
+
+    .light .calc-btn:hover {
+      background: #dce4f0;
     }
 
     @media (max-width: 768px) {
-      .page-wrap {
-        padding: 12px;
+      .info {
+        grid-template-columns: 1fr;
       }
 
-      .card,
-      .section-card {
-        padding: 18px;
+      .avatar {
+        width: 64px;
+        height: 64px;
       }
 
-      .hero-actions {
+      .cta {
         flex-direction: column;
-        align-items: stretch;
       }
 
-      .btn,
-      #openCalc,
-      #openCalendar {
+      .btn, #openCalc, .btn-secondary, .btn-snake, .btn-ttt, .btn-mole, .btn-simon, .btn-guess {
         width: 100%;
       }
-    }
 
-    @media (max-width: 640px) {
-      .menu-toggle {
-        display: inline-flex;
+      .modal img {
+        max-width: 90%;
       }
 
-      .nav-links {
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
+      .calculator {
+        width: 90%;
+        max-width: 320px;
+      }
+
+      .memory-grid {
         gap: 8px;
-        padding: 12px;
-        border-radius: 16px;
-        background: var(--nav-bg);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--shadow);
+        max-width: 100%;
       }
 
-      .nav-links.show {
-        display: flex;
+      .memory-face {
+        font-size: 1.5rem;
       }
 
-      .nav-links a,
-      .nav-links .theme-toggle,
-      .nav-links .theme-toggle button {
-        width: 100%;
-        text-align: center;
+      .mole-grid {
+        max-width: 280px;
       }
     }
 
     @media (max-width: 480px) {
-
-      .top-row,
-      .datetime,
-      .header,
-      .weather-head,
-      .calc-top {
-        flex-direction: column;
-        align-items: flex-start;
+      .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: space-between;
       }
 
-      .card,
-      .section-card {
-        padding: 14px;
-        border-radius: 16px;
+      .stat-pill {
+        flex: 0 0 calc(50% - 3px);
+        text-align: center;
+        font-size: 13px;
+        padding: 6px 0;
       }
 
-      .calculator {
-        width: calc(100vw - 16px);
-        max-width: calc(100vw - 16px);
-      }
-
-      .buttons,
-      .sci-buttons {
-        gap: 8px;
+      body {
         padding: 12px;
       }
 
-      button {
-        padding: 14px 8px;
-        font-size: 0.95rem;
+      .card {
+        padding: 16px;
       }
 
-      .calendar-day-name,
-      .calendar-day {
-        font-size: 11px;
-        min-height: 34px;
+      .memory-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+
+      .ttt-grid {
+        max-width: 250px;
+      }
+
+      .ttt-cell {
+        font-size: 2rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="page-wrap">
-    <nav class="site-nav">
-      <div class="nav-brand">Muzamil Wajid</div>
+  <main class="card" role="main" id="mainCard">
+    <div class="top-row">
+      <div style="font-weight:700">Muzamil Wajid<br>Introductive Site</div>
+      <div class="theme-toggle"><button id="themeToggleBtn">🌙 Dark</button></div>
+    </div>
 
-      <div class="nav-right">
-        <button class="menu-toggle" id="menuToggle" aria-label="Open Menu" aria-expanded="false">
-          <div>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+    <div class="bismillah-container" title="Click to read Surah Al-Fatiha">
+      <p class="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    </div>
+
+    <div class="datetime">
+      <div id="timeDisplay">--:--:--</div>
+      <div id="dateDisplay">-- -- ----</div>
+    </div>
+
+    <div class="header">
+      <div class="avatar"><img id="profileImage"
+          src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true" alt="Profile"></div>
+      <div>
+        <h1>Muzamil Wajid</h1>
+        <p class="meta">Just a Name, Many stories</p>
+        <div id="birthdayContainer"></div>
       </div>
+    </div>
 
-      <div class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#weather">Weather</a>
-        <a href="#views">Views</a>
-        <a href="#contact">Contact</a>
-        <div class="theme-toggle"><button id="themeToggleBtn">🎨 Auto Color</button></div>
+    <div class="greeting" id="greetingMessage"></div>
+
+    <div class="info">
+      <div class="item" data-item="name">
+        <div class="label">Name</div>
+        <div class="value">Muzamil Wajid</div>
       </div>
-    </nav>
-
-    <main class="card" role="main" id="home">
-      <div class="top-row">
-        <div style="font-weight:800;font-size:18px">Muzamil Wajid<br>Introductive Site</div>
+      <div class="item" data-item="age">
+        <div class="label">Age</div>
+        <div class="value" id="ageValue">— Years</div>
       </div>
-
-      <div class="bismillah-container" title="Click to read Surah Al-Fatiha">
-        <p class="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+      <div class="item" data-item="role">
+        <div class="label">Role</div>
+        <div class="value">Website Developer</div>
       </div>
-
-      <div class="datetime">
-        <div id="timeDisplay">--:--:--</div>
-        <div id="dateDisplay">-- -- ----</div>
+      <div class="item" data-item="location">
+        <div class="label">Location</div>
+        <div class="value">Lahore, Allama Iqbal Town</div>
       </div>
+    </div>
 
-      <div class="header">
-        <div class="avatar"><img id="profileImage"
-            src="https://github.com/muzamilwajid/muzamil-bio/blob/main/dp%20image.jpeg?raw=true" alt="Profile"></div>
-        <div>
-          <h1>Muzamil Wajid</h1>
-          <p class="meta">Just a Name, Many stories</p>
-          <div class="hero-badge">Website Developer • Odoo Developer • WordPress</div>
-        </div>
-      </div>
-
-      <div class="greeting" id="greetingMessage"></div>
-
-      <div class="hero-actions">
-        <button class="btn" id="rpsOpenBtn">Play R•P•S ✊✋✌️</button>
-        <button id="openCalc">🧮 Open Calculator</button>
-        <button id="openCalendar">📅 Open Calendar</button>
-      </div>
-    </main>
-
-    <section class="section-card" id="about">
-      <h2 class="section-title">About</h2>
-      <div class="about-grid">
-        <div>
-          <div class="mini-box">
-            <strong>About Me</strong>
-            <div class="muted">I am Muzamil Wajid, a website developer and Odoo developer who enjoys building clean, responsive and useful web experiences. I also work with WordPress and create smooth websites with modern layouts and user friendly designs.</div>
-          </div>
-
-          <div class="skills-grid">
-            <div class="skill-box">
-              <strong>HTML / CSS / JS</strong>
-              <div class="muted">Frontend development and responsive UI building.</div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:92%"></div>
-              </div>
-            </div>
-
-            <div class="skill-box">
-              <strong>WordPress</strong>
-              <div class="muted">Theme customization, page building and complete website setup.</div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:88%"></div>
-              </div>
-            </div>
-
-            <div class="skill-box">
-              <strong>Odoo Development</strong>
-              <div class="muted">Custom modules, workflows and business solutions.</div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:84%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-list">
-          <div class="info-card">
-            <div class="label">Name</div>
-            <div class="value">Muzamil Wajid</div>
-          </div>
-          <div class="info-card clickable-age" id="ageCard">
-            <div class="label">Age</div>
-            <div class="value" id="ageValue">— Years</div>
-          </div>
-          <div class="info-card">
-            <div class="label">Role</div>
-            <div class="value">Website Developer • Odoo Developer • WordPress Developer</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-card" id="weather">
-      <h2 class="section-title">Lahore Weather</h2>
-      <div class="weather-box">
-        <div class="weather-head">
-          <div>
-            <strong>Current Weather</strong>
-            <div class="muted" id="weatherStatus">Lahore weather</div>
-          </div>
-          <div class="weather-temp" id="weatherTemp">32°C</div>
-        </div>
-        <div class="weather-meta">
-          <div class="mini-box"><strong>Condition: </strong><span id="weatherCondition">Clear</span></div>
-          <div class="mini-box"><strong>Wind: </strong><span id="weatherWind">12 km/h</span></div>
-          <div class="mini-box"><strong>Humidity: </strong><span id="weatherHumidity">48%</span></div>
-          <div class="mini-box"><strong>Location: </strong><span id="weatherLocation">Lahore</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-card" id="views">
-      <h2 class="section-title">Visitor Counter</h2>
-      <div class="counter-wrap">
-        <div class="counter-box">
-          <strong>Total Profile Views</strong>
-          <div id="totalViews" style="font-size:28px;font-weight:900;color:var(--text-color)">1</div>
-        </div>
-        <div class="counter-box">
-          <strong>This Device Visits</strong>
-          <div id="deviceVisits" style="font-size:28px;font-weight:900;color:var(--text-color)">1</div>
-        </div>
-        <div class="counter-box">
-          <strong>Last Visit</strong>
-          <div id="lastVisit" class="muted">First time visit</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-card" id="contact">
-      <h2 class="section-title">Contact</h2>
-      <div class="section-grid-2">
-        <div class="mini-box">
-          <strong>Email</strong>
-          <div class="muted">muzammil.ibees@gmail.com</div>
-        </div>
-        <div class="mini-box">
-          <strong>Location</strong>
-          <div class="muted">Lahore, Allama Iqbal Town</div>
-        </div>
-      </div>
-    </section>
+    <div class="cta">
+      <button class="btn" id="rpsOpenBtn">R•P•S ✊</button>
+      <button class="btn btn-secondary" id="memoryOpenBtn">Memory 🧠</button>
+      <button class="btn btn-snake" id="snakeOpenBtn">Snake 🐍</button>
+      <button class="btn btn-ttt" id="tttOpenBtn">Tic-Tac-Toe ⭕</button>
+      <button class="btn btn-mole" id="moleOpenBtn">Whack-a-Mole 🔨</button>
+      <button class="btn btn-simon" id="simonOpenBtn">Simon Says 🎵</button>
+      <button class="btn btn-guess" id="guessOpenBtn">Guess # 🔢</button>
+      <button id="openCalc">Calc 🧮</button>
+    </div>
 
     <footer>Copyright © 2025 Muzamil Wajid.</footer>
+  </main>
+
+  <!-- Calculator -->
+  <div class="calculator" id="calc">
+    <div class="calc-top">
+      <div class="calc-theme-toggle">
+        <span style="font-size: 0.85rem; opacity: 0.8;">Calculator</span>
+      </div>
+      <button class="close-btn" id="closeCalc">&times;</button>
+    </div>
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="calc-btn">(</button>
+      <button class="calc-btn">)</button>
+      <button class="calc-btn" style="background: rgba(255, 100, 100, 0.2);">C</button>
+      <button class="calc-btn">/</button>
+      <button class="calc-btn">7</button>
+      <button class="calc-btn">8</button>
+      <button class="calc-btn">9</button>
+      <button class="calc-btn">*</button>
+      <button class="calc-btn">4</button>
+      <button class="calc-btn">5</button>
+      <button class="calc-btn">6</button>
+      <button class="calc-btn">-</button>
+      <button class="calc-btn">1</button>
+      <button class="calc-btn">2</button>
+      <button class="calc-btn">3</button>
+      <button class="calc-btn">+</button>
+      <button class="calc-btn">+/-</button>
+      <button class="calc-btn">0</button>
+      <button class="calc-btn">.</button>
+      <button class="calc-btn equal">=</button>
+    </div>
   </div>
 
+  <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h2 id="modalTitle">Title</h2>
       <div id="modalBody"></div>
-      <p id="modalExtra" style="font-size:13px;color:var(--muted);margin-top:8px;word-break:break-word"></p>
+      <p id="modalExtra" style="font-size:13px;color:var(--muted);margin-top:8px"></p>
       <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
         <button id="closeModal" class="close">Close</button>
       </div>
     </div>
   </div>
 
-  <div class="calculator dark-theme" id="calc">
-    <div class="calc-top">
-      <div class="calc-controls">
-        <div class="theme-toggle">
-          <label for="themeSwitch">Dark Mode</label>
-          <input type="checkbox" id="themeSwitch" />
-        </div>
-        <button class="calc-mode-btn" id="toggleScientific">Scientific</button>
-      </div>
-      <button class="close-btn" id="closeCalc">&times;</button>
-    </div>
-
-    <div class="display" id="display">0</div>
-
-    <div class="sci-buttons" id="sciButtons">
-      <button data-fn="sin(">sin</button>
-      <button data-fn="cos(">cos</button>
-      <button data-fn="tan(">tan</button>
-      <button data-fn="sqrt(">√</button>
-      <button data-fn="log10(">log</button>
-      <button data-fn="ln(">ln</button>
-      <button data-fn="pow(">xʸ</button>
-      <button data-fn="PI">π</button>
-      <button data-fn="E">e</button>
-      <button data-fn="fact(">n!</button>
-      <button data-fn="percent(">%</button>
-      <button data-fn="exp(">exp</button>
-    </div>
-
-    <div class="buttons">
-      <button>(</button>
-      <button>)</button>
-      <button>C</button>
-      <button>/</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button>*</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>-</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>+</button>
-      <button>+/-</button>
-      <button>0</button>
-      <button>.</button>
-      <button class="equal">=</button>
-    </div>
-  </div>
-
   <script>
-    const palettes = [
-      {
-        bg1: '#1d1025', bg2: '#2b1638', bg3: '#44204f',
-        text: '#fff8fb', muted: 'rgba(255,248,251,0.8)',
-        nav: 'rgba(29,16,37,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
-        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#4d1f4d,#7a306c)',
-        a1: '#ff7aa2', a2: '#ffb86b', a3: '#d946ef', a4: '#f59e0b'
+    // ================ Data ================
+    const data = {
+      age: { 
+        label: 'Age', 
+        dobIso: '2005-09-12', 
+        dobPretty: '12 September 2005', 
+        extra: "Exact current age (years, months, days)." 
       },
-      {
-        bg1: '#13261a', bg2: '#1b3a27', bg3: '#285238',
-        text: '#f7fff8', muted: 'rgba(247,255,248,0.8)',
-        nav: 'rgba(19,38,26,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03))',
-        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#264d36,#3f7a57)',
-        a1: '#34d399', a2: '#fbbf24', a3: '#10b981', a4: '#86efac'
+      role: { 
+        label: 'Role', 
+        value: 'Website Developer & Odoo Developer', 
+        extra: 'I build clean, responsive websites using HTML/CSS/JS, WordPress, and also develop custom modules in Odoo.' 
       },
-      {
-        bg1: '#2a140c', bg2: '#4a2412', bg3: '#6b3518',
-        text: '#fffaf5', muted: 'rgba(255,250,245,0.8)',
-        nav: 'rgba(42,20,12,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
-        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#5a2616,#914224)',
-        a1: '#fb923c', a2: '#facc15', a3: '#f97316', a4: '#fdba74'
-      },
-      {
-        bg1: '#101826', bg2: '#17233a', bg3: '#243a61',
-        text: '#f8fbff', muted: 'rgba(248,251,255,0.8)',
-        nav: 'rgba(16,24,38,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
-        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#22345a,#37578f)',
-        a1: '#60a5fa', a2: '#f472b6', a3: '#818cf8', a4: '#38bdf8'
-      },
-      {
-        bg1: '#24131f', bg2: '#3a1e31', bg3: '#5b2b4c',
-        text: '#fff7fb', muted: 'rgba(255,247,251,0.8)',
-        nav: 'rgba(36,19,31,0.82)', card: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
-        border: 'rgba(255,255,255,0.08)', rps: 'linear-gradient(160deg,#4d2740,#7b4163)',
-        a1: '#f472b6', a2: '#fb7185', a3: '#c084fc', a4: '#f9a8d4'
+      location: { 
+        label: 'Location', 
+        value: 'Lahore, Allama Iqbal Town', 
+        extra: 'Current city & neighbourhood.' 
       }
-    ];
+    };
 
-    let paletteIndex = 0;
-    function applyPalette(p) {
-      const root = document.documentElement;
-      root.style.setProperty('--bg1', p.bg1);
-      root.style.setProperty('--bg2', p.bg2);
-      root.style.setProperty('--bg3', p.bg3);
-      root.style.setProperty('--text-color', p.text);
-      root.style.setProperty('--muted', p.muted);
-      root.style.setProperty('--nav-bg', p.nav);
-      root.style.setProperty('--card-bg', p.card);
-      root.style.setProperty('--glass-border', p.border);
-      root.style.setProperty('--rps-bg', p.rps);
-      root.style.setProperty('--accent1', p.a1);
-      root.style.setProperty('--accent2', p.a2);
-      root.style.setProperty('--accent3', p.a3);
-      root.style.setProperty('--accent4', p.a4);
-      root.style.setProperty('--btn-main', `linear-gradient(135deg, ${p.a1}, ${p.a2})`);
-      root.style.setProperty('--btn-calc', `linear-gradient(135deg, ${p.a3}, ${p.a1})`);
-      root.style.setProperty('--btn-cal', `linear-gradient(135deg, ${p.a2}, ${p.a3})`);
-    }
-    applyPalette(palettes[0]);
-    setInterval(() => {
-      paletteIndex = (paletteIndex + 1) % palettes.length;
-      applyPalette(palettes[paletteIndex]);
-    }, 5000);
-
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.setAttribute('aria-expanded', navLinks.classList.contains('show') ? 'true' : 'false');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 640) {
-          navLinks.classList.remove('show');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-
+    // ================ Clock & Greeting ================
     function pad(n) { return String(n).padStart(2, '0'); }
-
+    
     function updateDateTime() {
       const now = new Date();
       let h = now.getHours(), m = pad(now.getMinutes()), s = pad(now.getSeconds());
       const ampm = h >= 12 ? 'PM' : 'AM';
       h = h % 12; h = h ? h : 12;
       document.getElementById('timeDisplay').textContent = `${pad(h)}:${m}:${s} ${ampm}`;
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], 
+            months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
       document.getElementById('dateDisplay').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     }
-    setInterval(updateDateTime, 1000);
+    setInterval(updateDateTime, 1000); 
     updateDateTime();
 
     function updateGreeting() {
@@ -1094,148 +1170,153 @@
       else msg = 'Good Night 🌙';
       document.getElementById('greetingMessage').textContent = msg;
     }
-    setInterval(updateGreeting, 1000);
+    setInterval(updateGreeting, 1000); 
     updateGreeting();
 
+    // ================ Modal System ================
     const modalBackdrop = document.getElementById('modalBackdrop');
+    
     function showModal(title, bodyHtml, extra) {
       document.getElementById('modalTitle').textContent = title || '';
       document.getElementById('modalBody').innerHTML = bodyHtml || '';
       document.getElementById('modalExtra').innerHTML = extra ? String(extra).replace(/\n/g, '<br>') : '';
-      modalBackdrop.style.display = 'flex';
+      modalBackdrop.style.display = 'flex'; 
       modalBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
+    
     function closeModal() {
       modalBackdrop.style.display = 'none';
       modalBackdrop.setAttribute('aria-hidden', 'true');
-      if (window.__rpsKeyHandler) {
-        document.removeEventListener('keydown', window.__rpsKeyHandler);
-        window.__rpsKeyHandler = null;
+      document.body.style.overflow = '';
+      if (window.__gameKeyHandler) {
+        document.removeEventListener('keydown', window.__gameKeyHandler);
+        window.__gameKeyHandler = null;
+      }
+      if (window.__gameLoop) {
+        cancelAnimationFrame(window.__gameLoop);
+        window.__gameLoop = null;
       }
     }
+
     document.getElementById('closeModal').addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e) => {
-      if (e.target === modalBackdrop) closeModal();
+    modalBackdrop.addEventListener('click', (e) => { 
+      if (e.target === modalBackdrop) closeModal(); 
     });
 
+    // ================ Profile & Bismillah ================
     document.getElementById('profileImage').addEventListener('click', () => {
       const src = document.getElementById('profileImage').src;
-      showModal('Profile Picture', `<img src="${src}" alt="Profile" style="max-width:320px;width:100%;height:auto;border-radius:12px;display:block;margin:0 auto">`, 'This is my profile picture.');
+      const imgHtml = `<img src="${src}" alt="Profile" style="max-width:320px;width:100%;height:auto;border-radius:8px;display:block;margin:0 auto">`;
+      showModal('Profile Picture', imgHtml, 'This is my profile picture.');
     });
 
     document.querySelector('.bismillah-container').addEventListener('click', () => {
-      showModal('Surah Al-Fatiha', `<p style="line-height:1.8;font-size:17px;color:var(--text-color)">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ</p>`, 'Surah Al-Fatiha');
+      showModal('Surah Al-Fatiha', 
+        `<p style="line-height:1.8;font-size:17px;color:var(--text-color);direction:rtl;">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+          الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>
+          الرَّحْمَٰنِ الرَّحِيمِ<br>
+          مَالِكِ يَوْمِ الدِّينِ<br>
+          إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>
+          اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+        </p>`, 
+        'Surah Al-Fatiha - The Opening');
     });
 
+    // ================ Age Calculation ================
     function calcAgeParts(dobIso) {
-      const dob = new Date(dobIso + 'T00:00:00');
+      const dob = new Date(dobIso + 'T00:00:00'); 
       const now = new Date();
       let years = now.getFullYear() - dob.getFullYear();
       let months = now.getMonth() - dob.getMonth();
       let days = now.getDate() - dob.getDate();
-      if (days < 0) {
-        months -= 1;
-        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      
+      if (days < 0) { 
+        months -= 1; 
+        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); 
       }
-      if (months < 0) {
-        years -= 1;
-        months += 12;
+      if (months < 0) { 
+        years -= 1; 
+        months += 12; 
       }
       return { years, months, days, now };
     }
 
-    function getNextBirthdayInfo() {
-      const today = new Date();
-      const currentYear = today.getFullYear();
-      let nextBirthday = new Date(currentYear, 8, 12);
-      if (today > nextBirthday) nextBirthday = new Date(currentYear + 1, 8, 12);
-      const oneDay = 1000 * 60 * 60 * 24;
-      const startToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const startBirthday = new Date(nextBirthday.getFullYear(), nextBirthday.getMonth(), nextBirthday.getDate());
-      const diffDays = Math.round((startBirthday - startToday) / oneDay);
-      return { nextBirthday, diffDays };
-    }
-
-    function updateAgeDisplay() {
-      const p = calcAgeParts('2005-09-12');
-      document.getElementById('ageValue').textContent = p.years + ' Years';
-    }
-    setInterval(updateAgeDisplay, 3600 * 1000);
-    updateAgeDisplay();
-
-    document.getElementById('ageCard').addEventListener('click', () => {
-      const age = calcAgeParts('2005-09-12');
-      const next = getNextBirthdayInfo();
-      showModal(
-        'Age Details',
-        `<div style="text-align:left;color:var(--text-color);line-height:1.8">
-          <strong>Date of Birth:</strong> 12 September 2005<br>
-          <strong>Current Age:</strong> ${age.years} years, ${age.months} months, ${age.days} days<br>
-          <strong>Next Birthday:</strong> ${next.nextBirthday.toDateString()}<br>
-          <strong>Days Remaining:</strong> ${next.diffDays} day${next.diffDays !== 1 ? 's' : ''}
-        </div>`,
-        'Birthday information'
-      );
+    document.querySelectorAll('.item').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.getAttribute('data-item');
+        if (!key) return;
+        
+        if (key === 'age') {
+          const p = calcAgeParts(data.age.dobIso);
+          const ageTxt = `${p.years} years, ${p.months} months, ${p.days} days`;
+          const extra = `DOB: ${data.age.dobPretty}\nToday: ${p.now.toDateString()}\nAge: ${ageTxt}`;
+          showModal('Age', `<p style="color:var(--text-color)">${data.age.extra}</p>`, extra);
+        } else if (key === 'name') {
+          showModal('Name', `<p style="color:var(--text-color);font-size:1.1rem;">Muzamil Wajid</p><p style="color:var(--muted);">Full: Wajid Ali</p>`, '');
+        } else if (key === 'role') {
+          showModal(data.role.label, `<p style="color:var(--text-color)">${data.role.value}</p>`, data.role.extra);
+        } else if (key === 'location') {
+          showModal(data.location.label, `<p style="color:var(--text-color)">${data.location.value}</p>`, data.location.extra);
+        }
+      });
     });
 
-    function initVisitorCounter() {
-      const totalKey = 'site_total_views_v1';
-      const deviceKey = 'site_device_visits_v1';
-      const lastVisitKey = 'site_last_visit_v1';
-      let totalViews = parseInt(localStorage.getItem(totalKey) || '0', 10);
-      let deviceVisits = parseInt(localStorage.getItem(deviceKey) || '0', 10);
-      const lastVisit = localStorage.getItem(lastVisitKey);
-      totalViews += 1;
-      deviceVisits += 1;
-      localStorage.setItem(totalKey, totalViews);
-      localStorage.setItem(deviceKey, deviceVisits);
-      localStorage.setItem(lastVisitKey, new Date().toLocaleString());
-      document.getElementById('totalViews').textContent = totalViews || 1;
-      document.getElementById('deviceVisits').textContent = deviceVisits || 1;
-      document.getElementById('lastVisit').textContent = lastVisit || 'First time visit';
+    function updateAgeDisplay() { 
+      const p = calcAgeParts(data.age.dobIso); 
+      document.getElementById('ageValue').textContent = p.years + ' Years'; 
     }
-    initVisitorCounter();
+    setInterval(updateAgeDisplay, 3600 * 1000); 
+    updateAgeDisplay();
 
-    async function loadWeather() {
-      const weatherStatus = document.getElementById('weatherStatus');
-      const fallbackWeather = { temp: '32', condition: 'Clear', wind: '12 km/h', humidity: '48%', location: 'Lahore' };
-
-      function applyWeather(data) {
-        document.getElementById('weatherTemp').textContent = `${data.temp}°C`;
-        document.getElementById('weatherCondition').textContent = data.condition;
-        document.getElementById('weatherWind').textContent = data.wind;
-        document.getElementById('weatherHumidity').textContent = data.humidity;
-        document.getElementById('weatherLocation').textContent = data.location;
-      }
-
-      try {
-        const res = await fetch('https://wttr.in/Lahore?format=j1');
-        const data = await res.json();
-        const current = data.current_condition && data.current_condition[0];
-        if (current) {
-          applyWeather({
-            temp: current.temp_C || fallbackWeather.temp,
-            condition: current.weatherDesc?.[0]?.value || fallbackWeather.condition,
-            wind: (current.windspeedKmph || '12') + ' km/h',
-            humidity: (current.humidity || '48') + '%',
-            location: 'Lahore'
-          });
-          weatherStatus.textContent = 'Live Lahore weather';
-        } else {
-          applyWeather(fallbackWeather);
-          weatherStatus.textContent = 'Lahore weather';
-        }
-      } catch {
-        applyWeather(fallbackWeather);
-        weatherStatus.textContent = 'Lahore weather';
-      }
+    // ================ Theme Toggle ================
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const calc = document.getElementById('calc');
+    
+    const savedTheme = localStorage.getItem('site_theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light'); 
+      themeBtn.textContent = '☀️ Light';
+    } else {
+      themeBtn.textContent = '🌙 Dark';
     }
-    loadWeather();
 
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.documentElement.classList.contains('light');
+      if (isLight) {
+        document.documentElement.classList.remove('light');
+        localStorage.setItem('site_theme', 'dark'); 
+        themeBtn.textContent = '🌙 Dark';
+      } else {
+        document.documentElement.classList.add('light');
+        localStorage.setItem('site_theme', 'light'); 
+        themeBtn.textContent = '☀️ Light';
+      }
+    });
+
+    // ================ Audio System ================
     let audioCtx = null;
     function ensureAudio() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
+
+    function playTone(freq, duration, type = 'sine') {
+      try {
+        ensureAudio();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.value = 0.1;
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        o.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
     function playMelody(arr, gainVal = 0.05) {
       try {
         ensureAudio();
@@ -1253,46 +1334,53 @@
         });
       } catch (e) { }
     }
-    function rightChoiceSound() { playMelody([{ freq: 880, dur: 0.1 }, { freq: 990, dur: 0.12, offset: 0.1 }], 0.05); }
-    function wrongChoiceSound() { playMelody([{ freq: 220, dur: 0.12 }, { freq: 180, dur: 0.12, offset: 0.12 }], 0.05); }
-    function drawChoiceSound() { playMelody([{ freq: 520, dur: 0.12 }], 0.035); }
-    function winGameSound() {
-      playMelody([
-        { freq: 440, dur: 0.25, offset: 0 }, { freq: 554, dur: 0.25, offset: 0.25 }, { freq: 659, dur: 0.25, offset: 0.5 },
-        { freq: 880, dur: 0.25, offset: 0.75 }, { freq: 988, dur: 0.25, offset: 1.0 }, { freq: 1047, dur: 0.3, offset: 1.25 }
-      ], 0.06);
-    }
-    function lostGameSound() {
-      playMelody([
-        { freq: 330, dur: 0.4, offset: 0 }, { freq: 294, dur: 0.4, offset: 0.4 }, { freq: 262, dur: 0.5, offset: 0.8 },
-        { freq: 220, dur: 0.5, offset: 1.3 }, { freq: 196, dur: 0.7, offset: 1.8 }
-      ], 0.05);
-    }
 
+    const Sounds = {
+      flip: () => playMelody([{ freq: 600, dur: 0.08 }], 0.03),
+      match: () => playMelody([{ freq: 880, dur: 0.1 }, { freq: 1100, dur: 0.15, offset: 0.1 }], 0.05),
+      win: () => playMelody([
+        { freq: 523, dur: 0.2 }, { freq: 659, dur: 0.2, offset: 0.2 },
+        { freq: 784, dur: 0.2, offset: 0.4 }, { freq: 1047, dur: 0.4, offset: 0.6 }
+      ], 0.06),
+      right: () => playMelody([{ freq: 880, dur: 0.1 }, { freq: 990, dur: 0.12, offset: 0.1 }], 0.05),
+      wrong: () => playMelody([{ freq: 220, dur: 0.12 }, { freq: 180, dur: 0.12, offset: 0.12 }], 0.05),
+      draw: () => playMelody([{ freq: 520, dur: 0.12 }], 0.035),
+      lose: () => playMelody([
+        { freq: 330, dur: 0.4 }, { freq: 294, dur: 0.4, offset: 0.4 },
+        { freq: 262, dur: 0.5, offset: 0.8 }
+      ], 0.05),
+      eat: () => playTone(800, 0.1),
+      gameOver: () => playTone(200, 0.5, 'sawtooth'),
+      click: () => playTone(400, 0.05)
+    };
+
+    // ================ RPS Game ================
     const LB_KEY = 'rps_lb_v1';
     const HS_KEY = 'rps_high_v1';
+
     function getLB() {
       try {
-        return JSON.parse(localStorage.getItem(LB_KEY) || '{"wins":0,"losses":0,"draws":0,"matches":0}');
-      } catch {
+        return JSON.parse(localStorage.getItem(LB_KEY)) || { wins: 0, losses: 0, draws: 0, matches: 0 };
+      } catch (e) {
         return { wins: 0, losses: 0, draws: 0, matches: 0 };
       }
     }
+
     function saveLB(o) { localStorage.setItem(LB_KEY, JSON.stringify(o)); }
 
-    (function () {
-      document.getElementById('rpsOpenBtn').addEventListener('click', openRPSModal);
+    document.getElementById('rpsOpenBtn').addEventListener('click', openRPSModal);
 
-      function openRPSModal() {
-        const lb = getLB();
-        const high = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
-        const html = `
-        <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center;width:100%">
+    function openRPSModal() {
+      const lb = getLB();
+      const high = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
+
+      const html = `
+        <div id="rpsGame" style="max-width:640px;margin:0 auto;text-align:center">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
-            <div style="text-align:left;flex:1 1 240px">
-              <div style="font-size:13px;opacity:0.85;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-                <span>Rounds:</span>
-                <select id="rpsBestOf">
+            <div style="text-align:left">
+              <div style="font-size:13px;opacity:0.85">
+                Rounds:
+                <select id="rpsBestOf" style="padding:4px 8px;border-radius:6px;border:1px solid var(--glass-border);background:transparent;color:inherit;">
                   <option value="3" selected>3</option>
                   <option value="5">5</option>
                   <option value="7">7</option>
@@ -1300,25 +1388,25 @@
                   <option value="19">19</option>
                   <option value="25">25</option>
                 </select>
-                <span>Mode:</span>
-                <select id="rpsMode">
+                Mode:
+                <select id="rpsMode" style="padding:4px 8px;border-radius:6px;border:1px solid var(--glass-border);background:transparent;color:inherit;">
                   <option value="easy">Easy</option>
                   <option value="normal" selected>Normal</option>
                   <option value="hard">Hard</option>
                 </select>
               </div>
             </div>
-            <div style="text-align:right;flex:1 1 140px">
+            <div style="text-align:right">
               <div style="font-weight:800">High Wins: <span id="rpsHighWins">${high}</span></div>
               <div style="font-size:12px;opacity:0.8" id="rpsStreak">Streak: 0</div>
             </div>
           </div>
 
           <div id="rpsArena">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
-              <div style="flex:1 1 80px"><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
-              <div style="text-align:center;flex:1 1 100px"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
-              <div style="text-align:right;flex:1 1 80px"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px">
+              <div><div style="opacity:0.8;font-size:13px">You</div><div id="rpsPlayerScore" style="font-weight:900;font-size:20px">0</div></div>
+              <div style="text-align:center"><div style="opacity:0.8;font-size:13px">Round</div><div id="rpsRound" style="font-weight:900">0 / 5</div></div>
+              <div style="text-align:right"><div style="opacity:0.8;font-size:13px">Muzamil</div><div id="rpsCpuScore" style="font-weight:900;font-size:20px">0</div></div>
             </div>
 
             <div id="rpsMessage">Choose your move</div>
@@ -1329,338 +1417,1203 @@
               <button class="rpsMoveBtn" data-move="scissor">✌️ Scissor</button>
             </div>
 
-            <div id="rpsHistory"></div>
+            <div id="rpsHistory" style="max-height:140px;overflow-y:auto;margin-top:8px;text-align:left"></div>
 
             <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
-              <button id="rpsResetBtn" class="btn">New Match</button>
+              <button id="rpsResetBtn" class="btn" style="background:linear-gradient(90deg,#ff7a7a,#ffbf7a)">New Match</button>
             </div>
 
-            <div style="display:flex;justify-content:center;align-items:center;margin-top:10px">
-              <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-                <div>Matches: <span id="statMatches">${lb.matches}</span></div>
-                <div>Wins: <span id="statWins">${lb.wins}</span></div>
-                <div>Losses: <span id="statLosses">${lb.losses}</span></div>
-                <div>Draws: <span id="statDraws">${lb.draws}</span></div>
+            <div style="display:flex;justify-content:center;align-items:center;margin-top:10px;gap:8px">
+              <div class="stat-row">
+                <div class="stat-pill">Matches: <span id="statMatches">${lb.matches}</span></div>
+                <div class="stat-pill">Wins: <span id="statWins">${lb.wins}</span></div>
+                <div class="stat-pill">Losses: <span id="statLosses">${lb.losses}</span></div>
+                <div class="stat-pill">Draws: <span id="statDraws">${lb.draws}</span></div>
               </div>
             </div>
           </div>
-        </div>`;
-        showModal('Rock • Paper • Scissor', html, 'Keyboard: 1=Rock, 2=Paper, 3=Scissor, R=Reset, Esc=Close');
-        setTimeout(initRPS, 100);
+        </div>
+      `;
+      showModal('Rock • Paper • Scissor', html, 'Keyboard: 1=Rock, 2=Paper, 3=Scissor, R=Reset, Esc=Close');
+      setTimeout(initRPS, 100);
+    }
+
+    function initRPS() {
+      const bestOf = document.getElementById('rpsBestOf');
+      const modeEl = document.getElementById('rpsMode');
+      const playerScoreEl = document.getElementById('rpsPlayerScore');
+      const cpuScoreEl = document.getElementById('rpsCpuScore');
+      const roundEl = document.getElementById('rpsRound');
+      const msgEl = document.getElementById('rpsMessage');
+      const historyEl = document.getElementById('rpsHistory');
+      const highWinsEl = document.getElementById('rpsHighWins');
+      const streakEl = document.getElementById('rpsStreak');
+      const resetBtn = document.getElementById('rpsResetBtn');
+      const moveBtns = Array.from(document.querySelectorAll('.rpsMoveBtn'));
+
+      let playerScore = 0, cpuScore = 0, round = 0, max = parseInt(bestOf.value);
+      let history = [], streak = 0;
+      let highWins = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
+
+      highWinsEl.textContent = highWins;
+      streakEl.textContent = 'Streak: ' + streak;
+
+      function resetMatch() {
+        playerScore = 0; cpuScore = 0; round = 0; max = parseInt(bestOf.value); history = [];
+        playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
+        roundEl.textContent = `${round} / ${max}`; msgEl.textContent = 'Make your move';
+        historyEl.innerHTML = ''; streak = 0; streakEl.textContent = 'Streak: ' + streak;
+        moveBtns.forEach(b => b.disabled = false);
+      }
+      resetMatch();
+
+      function pickRandom() { return ['rock', 'paper', 'scissor'][Math.floor(Math.random() * 3)]; }
+      function strongAgainst(m) { return { rock: 'paper', paper: 'scissor', scissor: 'rock' }[m]; }
+      function weakAgainst(m) { return { rock: 'scissor', paper: 'rock', scissor: 'paper' }[m]; }
+
+      function cpuMove(mode, prev) {
+        if (mode === 'easy') { 
+          return Math.random() < 0.6 ? pickRandom() : (prev.length ? weakAgainst(prev[prev.length - 1].p) : pickRandom()); 
+        }
+        if (mode === 'normal') { 
+          return Math.random() < 0.85 ? pickRandom() : (prev.length ? strongAgainst(prev[prev.length - 1].p) : pickRandom()); 
+        }
+        if (prev.length >= 3 && Math.random() < 0.92) {
+          const freq = { rock: 0, paper: 0, scissor: 0 }; 
+          prev.forEach(h => freq[h.p]++);
+          const most = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
+          return strongAgainst(most);
+        }
+        return pickRandom();
       }
 
-      function initRPS() {
-        const bestOf = document.getElementById('rpsBestOf');
-        const modeEl = document.getElementById('rpsMode');
-        const playerScoreEl = document.getElementById('rpsPlayerScore');
-        const cpuScoreEl = document.getElementById('rpsCpuScore');
-        const roundEl = document.getElementById('rpsRound');
-        const msgEl = document.getElementById('rpsMessage');
-        const historyEl = document.getElementById('rpsHistory');
-        const highWinsEl = document.getElementById('rpsHighWins');
-        const streakEl = document.getElementById('rpsStreak');
-        const resetBtn = document.getElementById('rpsResetBtn');
-        const moveBtns = Array.from(document.querySelectorAll('.rpsMoveBtn'));
+      function decide(p, c) {
+        if (p === c) return 'draw';
+        if ((p === 'rock' && c === 'scissor') || (p === 'paper' && c === 'rock') || (p === 'scissor' && c === 'paper')) return 'win';
+        return 'lose';
+      }
 
-        let playerScore = 0, cpuScore = 0, round = 0, max = parseInt(bestOf.value);
-        let history = [], streak = 0;
-        let highWins = parseInt(localStorage.getItem(HS_KEY) || '0', 10);
+      function emoji(m) { return { rock: '✊', paper: '✋', scissor: '✌️' }[m]; }
 
-        highWinsEl.textContent = highWins;
-
-        function resetMatch() {
-          playerScore = 0; cpuScore = 0; round = 0; max = parseInt(bestOf.value); history = []; streak = 0;
-          playerScoreEl.textContent = playerScore; cpuScoreEl.textContent = cpuScore;
-          roundEl.textContent = `${round} / ${max}`; msgEl.textContent = 'Make your move';
-          historyEl.innerHTML = ''; streakEl.textContent = 'Streak: ' + streak;
-          moveBtns.forEach(b => b.disabled = false);
-        }
-        resetMatch();
-
-        function pickRandom() { return ['rock', 'paper', 'scissor'][Math.floor(Math.random() * 3)]; }
-        function strongAgainst(m) { if (m === 'rock') return 'paper'; if (m === 'paper') return 'scissor'; return 'rock'; }
-        function weakAgainst(m) { if (m === 'rock') return 'scissor'; if (m === 'paper') return 'rock'; return 'paper'; }
-        function cpuMove(mode, prev) {
-          if (mode === 'easy') return Math.random() < 0.6 ? pickRandom() : (prev.length ? weakAgainst(prev[prev.length - 1].p) : pickRandom());
-          if (mode === 'normal') return Math.random() < 0.85 ? pickRandom() : (prev.length ? strongAgainst(prev[prev.length - 1].p) : pickRandom());
-          if (prev.length >= 3 && Math.random() < 0.92) {
-            const freq = { rock: 0, paper: 0, scissor: 0 };
-            prev.forEach(h => freq[h.p]++);
-            const most = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
-            return strongAgainst(most);
+      function revealCpu(cpu, cb) {
+        msgEl.textContent = 'Muzamil thinking...';
+        let i = 0;
+        const t = setInterval(() => {
+          msgEl.textContent = ['✊', '✋', '✌️'][i % 3];
+          i++;
+          if (i > 6) { 
+            clearInterval(t); 
+            msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`; 
+            cb(); 
           }
-          return pickRandom();
-        }
-        function decide(p, c) {
-          if (p === c) return 'draw';
-          if ((p === 'rock' && c === 'scissor') || (p === 'paper' && c === 'rock') || (p === 'scissor' && c === 'paper')) return 'win';
-          return 'lose';
-        }
-        function emoji(m) { return m === 'rock' ? '✊' : m === 'paper' ? '✋' : '✌️'; }
+        }, 80);
+      }
 
-        function revealCpu(cpu, cb) {
-          msgEl.textContent = 'Muzamil thinking...';
-          let i = 0;
-          const t = setInterval(() => {
-            msgEl.textContent = ['✊', '✋', '✌️'][i % 3];
-            i++;
-            if (i > 6) {
-              clearInterval(t);
-              msgEl.innerHTML = `Muzamil chose <strong>${emoji(cpu)} ${cpu.charAt(0).toUpperCase() + cpu.slice(1)}</strong>`;
-              cb();
-            }
-          }, 80);
-        }
-
-        function renderHist() {
-          historyEl.innerHTML = history.map(h => `<div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.03);margin-bottom:6px">${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}</div>`).join('');
-          const s = getLB();
-          document.getElementById('statWins').textContent = s.wins;
-          document.getElementById('statLosses').textContent = s.losses;
-          document.getElementById('statDraws').textContent = s.draws;
-          document.getElementById('statMatches').textContent = s.matches;
-        }
-
-        function finalize() {
-          const lb = getLB();
-          let msg = '';
-          if (playerScore > cpuScore) {
-            msg = '🎉 You won the match!';
-            lb.wins++;
-            if (playerScore > highWins) {
-              localStorage.setItem(HS_KEY, playerScore);
-              highWinsEl.textContent = playerScore;
-            }
-            winGameSound();
-          } else if (cpuScore > playerScore) {
-            msg = '💀 You lost the match!';
-            lb.losses++;
-            lostGameSound();
-          } else {
-            msg = '🤝 Draw match!';
-            lb.draws++;
-            drawChoiceSound();
+      function playRound(playerMove) {
+        const mode = modeEl.value; 
+        const cpu = cpuMove(mode, history);
+        moveBtns.forEach(b => b.disabled = true);
+        
+        revealCpu(cpu, () => {
+          const res = decide(playerMove, cpu);
+          round++; 
+          roundEl.textContent = `${round} / ${max}`;
+          
+          if (res === 'win') { 
+            playerScore++; 
+            streak++; 
+            msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; 
+            Sounds.right(); 
+          } else if (res === 'lose') { 
+            cpuScore++; 
+            streak = 0; 
+            msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; 
+            Sounds.wrong(); 
+          } else { 
+            msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; 
+            Sounds.draw(); 
           }
-          lb.matches++;
-          saveLB(lb);
+
+          playerScoreEl.textContent = playerScore; 
+          cpuScoreEl.textContent = cpuScore;
+          history.unshift({ p: playerMove, c: cpu, result: res, round: round }); 
+          if (history.length > 8) history.pop();
           renderHist();
-          msgEl.textContent = msg;
-          streakEl.textContent = 'Streak: ' + streak;
-          moveBtns.forEach(b => b.disabled = true);
-        }
 
-        function playRound(playerMove) {
-          const cpu = cpuMove(modeEl.value, history);
-          moveBtns.forEach(b => b.disabled = true);
-          revealCpu(cpu, () => {
-            const res = decide(playerMove, cpu);
-            round++;
-            roundEl.textContent = `${round} / ${max}`;
-            if (res === 'win') {
-              playerScore++; streak++; msgEl.innerHTML = `You Win! ${emoji(playerMove)} beats ${emoji(cpu)}`; rightChoiceSound();
-            } else if (res === 'lose') {
-              cpuScore++; streak = 0; msgEl.innerHTML = `You Lose! ${emoji(cpu)} beats ${emoji(playerMove)}`; wrongChoiceSound();
-            } else {
-              msgEl.innerHTML = `Draw — both chose ${emoji(playerMove)}`; drawChoiceSound();
-            }
-            playerScoreEl.textContent = playerScore;
-            cpuScoreEl.textContent = cpuScore;
-            history.unshift({ p: playerMove, c: cpu, result: res, round: round });
-            if (history.length > 8) history.pop();
-            renderHist();
-            const need = Math.floor(max / 2) + 1;
-            if (playerScore >= need || cpuScore >= need || round >= max) setTimeout(finalize, 420);
-            else setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420);
-          });
-        }
-
-        resetBtn.addEventListener('click', resetMatch);
-        moveBtns.forEach(b => b.addEventListener('click', () => playRound(b.dataset.move)));
+          const need = Math.floor(max / 2) + 1;
+          if (playerScore >= need || cpuScore >= need || round >= max) setTimeout(finalize, 420);
+          else setTimeout(() => moveBtns.forEach(b => b.disabled = false), 420);
+        });
       }
-    })();
 
-    const openBtn = document.getElementById("openCalc");
-    const calc = document.getElementById("calc");
-    const closeBtn = document.getElementById("closeCalc");
-    const display = document.getElementById("display");
-    const buttons = calc.querySelectorAll(".buttons button");
-    const sciButtons = document.getElementById("sciButtons");
-    const sciBtnList = sciButtons.querySelectorAll("button");
-    const themeSwitch = document.getElementById("themeSwitch");
-    const label = document.querySelector(".calculator .theme-toggle label");
-    const toggleScientific = document.getElementById("toggleScientific");
+      function renderHist() {
+        historyEl.innerHTML = history.map(h => 
+          `<div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:6px">${emoji(h.p)} vs ${emoji(h.c)} — ${h.result.toUpperCase()}</div>`
+        ).join('');
+        const s = getLB();
+        document.getElementById('statWins').textContent = s.wins;
+        document.getElementById('statLosses').textContent = s.losses;
+        document.getElementById('statDraws').textContent = s.draws;
+        document.getElementById('statMatches').textContent = s.matches;
+      }
+
+      function finalize() {
+        const lb = getLB();
+        let msg = '';
+        if (playerScore > cpuScore) { 
+          msg = '🎉 You won the match!'; 
+          lb.wins++; 
+          if (playerScore > highWins) { 
+            localStorage.setItem(HS_KEY, playerScore); 
+            highWinsEl.textContent = playerScore; 
+          } 
+          Sounds.win(); 
+        } else if (cpuScore > playerScore) { 
+          msg = '💀 You lost the match!'; 
+          lb.losses++; 
+          Sounds.lose(); 
+        } else { 
+          msg = '🤝 Draw match!'; 
+          lb.draws++; 
+          Sounds.draw(); 
+        }
+        lb.matches++; 
+        saveLB(lb); 
+        renderHist(); 
+        msgEl.textContent = msg; 
+        streakEl.textContent = 'Streak: ' + streak; 
+        moveBtns.forEach(b => b.disabled = true);
+      }
+
+      resetBtn.addEventListener('click', resetMatch);
+      moveBtns.forEach(b => b.addEventListener('click', () => playRound(b.dataset.move)));
+
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function (e) {
+        if (e.key === '1') playRound('rock');
+        if (e.key === '2') playRound('paper');
+        if (e.key === '3') playRound('scissor');
+        if (e.key.toLowerCase() === 'r') resetMatch();
+        if (e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+    }
+
+    // ================ Memory Card Game ================
+    const MEM_KEY = 'memory_best_v1';
+    
+    document.getElementById('memoryOpenBtn').addEventListener('click', openMemoryModal);
+
+    function openMemoryModal() {
+      const bestTime = localStorage.getItem(MEM_KEY) || '--';
+      const html = `
+        <div id="memoryGame" style="max-width:500px;margin:0 auto;text-align:center">
+          <div class="memory-stats">
+            <div>⏱️ Time: <span id="memTime">0:00</span></div>
+            <div>🎯 Moves: <span id="memMoves">0</span></div>
+            <div>🏆 Best: <span id="memBest">${bestTime}</span></div>
+          </div>
+          
+          <div id="memoryArena">
+            <div class="memory-grid" id="memoryGrid"></div>
+            <div id="memoryMessage">Find all matching pairs!</div>
+          </div>
+          
+          <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button id="memResetBtn" class="btn" style="background:linear-gradient(135deg, #667eea, #764ba2)">New Game</button>
+          </div>
+        </div>
+      `;
+      showModal('Memory Challenge 🧠', html, 'Match all pairs in minimum moves! Click cards to flip.');
+      setTimeout(initMemory, 100);
+    }
+
+    function initMemory() {
+      const grid = document.getElementById('memoryGrid');
+      const timeEl = document.getElementById('memTime');
+      const movesEl = document.getElementById('memMoves');
+      const msgEl = document.getElementById('memoryMessage');
+      const resetBtn = document.getElementById('memResetBtn');
+      
+      const emojis = ['💻', '🚀', '⚡', '🎮', '🎯', '🎨', '🔥', '🌟'];
+      let cards = [...emojis, ...emojis];
+      let flipped = [];
+      let matched = 0;
+      let moves = 0;
+      let time = 0;
+      let timerInterval = null;
+      let locked = false;
+      
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+      
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+      
+      function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          time++;
+          timeEl.textContent = formatTime(time);
+        }, 1000);
+      }
+      
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+      
+      function createConfetti() {
+        const arena = document.getElementById('memoryArena');
+        for (let i = 0; i < 20; i++) {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          arena.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }
+      }
+      
+      function init() {
+        grid.innerHTML = '';
+        cards = shuffle(cards);
+        flipped = [];
+        matched = 0;
+        moves = 0;
+        time = 0;
+        locked = false;
+        movesEl.textContent = '0';
+        timeEl.textContent = '0:00';
+        msgEl.textContent = 'Find all matching pairs!';
+        stopTimer();
+        
+        cards.forEach((emoji, index) => {
+          const card = document.createElement('div');
+          card.className = 'memory-card';
+          card.dataset.index = index;
+          card.dataset.emoji = emoji;
+          
+          const front = document.createElement('div');
+          front.className = 'memory-face memory-front';
+          
+          const back = document.createElement('div');
+          back.className = 'memory-face memory-back';
+          back.textContent = emoji;
+          
+          card.appendChild(front);
+          card.appendChild(back);
+          
+          card.addEventListener('click', () => flipCard(card));
+          grid.appendChild(card);
+        });
+      }
+      
+      function flipCard(card) {
+        if (locked) return;
+        if (card.classList.contains('flipped')) return;
+        if (card.classList.contains('matched')) return;
+        if (flipped.includes(card)) return;
+        
+        if (moves === 0 && time === 0) startTimer();
+        
+        Sounds.flip();
+        card.classList.add('flipped');
+        flipped.push(card);
+        
+        if (flipped.length === 2) {
+          moves++;
+          movesEl.textContent = moves;
+          checkMatch();
+        }
+      }
+      
+      function checkMatch() {
+        locked = true;
+        const [card1, card2] = flipped;
+        const match = card1.dataset.emoji === card2.dataset.emoji;
+        
+        if (match) {
+          Sounds.match();
+          card1.classList.add('matched');
+          card2.classList.add('matched');
+          matched += 2;
+          flipped = [];
+          locked = false;
+          
+          if (matched === cards.length) {
+            stopTimer();
+            setTimeout(() => {
+              Sounds.win();
+              createConfetti();
+              msgEl.innerHTML = `🎉 Congratulations! Completed in ${moves} moves and ${formatTime(time)}!`;
+              
+              const best = localStorage.getItem(MEM_KEY);
+              if (!best || moves < parseInt(best)) {
+                localStorage.setItem(MEM_KEY, moves);
+                document.getElementById('memBest').textContent = moves;
+                msgEl.innerHTML += '<br>🏆 New Best Score!';
+              }
+            }, 500);
+          }
+        } else {
+          setTimeout(() => {
+            card1.classList.remove('flipped');
+            card2.classList.remove('flipped');
+            flipped = [];
+            locked = false;
+          }, 1000);
+        }
+      }
+      
+      resetBtn.addEventListener('click', init);
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if (e.key.toLowerCase() === 'r') init();
+        if (e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+      
+      init();
+    }
+
+    // ================ Snake Game ================
+    document.getElementById('snakeOpenBtn').addEventListener('click', openSnakeModal);
+
+    function openSnakeModal() {
+      const html = `
+        <div id="snakeGame" style="max-width:500px;margin:0 auto;text-align:center">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700;">
+            <div>🍎 Score: <span id="snakeScore">0</span></div>
+            <div>🏆 High: <span id="snakeHigh">0</span></div>
+          </div>
+          <div id="snakeArena">
+            <canvas id="snakeCanvas" width="400" height="400"></canvas>
+            <div class="snake-controls">
+              <button class="snake-btn" data-dir="up">⬆️</button>
+            </div>
+            <div class="snake-controls" style="margin-top:5px;">
+              <button class="snake-btn" data-dir="left">⬅️</button>
+              <button class="snake-btn" data-dir="down">⬇️</button>
+              <button class="snake-btn" data-dir="right">➡️</button>
+            </div>
+            <div style="margin-top:15px;">
+              <button id="snakeStartBtn" class="btn btn-snake" style="padding:10px 30px;">Start Game</button>
+            </div>
+            <div id="snakeMsg" style="margin-top:10px;font-weight:600;min-height:24px;"></div>
+          </div>
+        </div>
+      `;
+      showModal('Snake Game 🐍', html, 'Use arrow keys or buttons to control. Eat red apples, avoid walls!');
+      setTimeout(initSnake, 100);
+    }
+
+    function initSnake() {
+      const canvas = document.getElementById('snakeCanvas');
+      const ctx = canvas.getContext('2d');
+      const scoreEl = document.getElementById('snakeScore');
+      const highEl = document.getElementById('snakeHigh');
+      const startBtn = document.getElementById('snakeStartBtn');
+      const msgEl = document.getElementById('snakeMsg');
+      
+      const gridSize = 20;
+      const tileCount = canvas.width / gridSize;
+      
+      let snake = [{x: 10, y: 10}];
+      let food = {x: 15, y: 15};
+      let dx = 0;
+      let dy = 0;
+      let score = 0;
+      let highScore = localStorage.getItem('snake_high') || 0;
+      let gameLoop = null;
+      let gameRunning = false;
+      
+      highEl.textContent = highScore;
+      
+      function draw() {
+        ctx.fillStyle = document.documentElement.classList.contains('light') ? '#f5f5f5' : '#0d1b0d';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw grid
+        ctx.strokeStyle = document.documentElement.classList.contains('light') ? '#ddd' : '#1a3a1a';
+        ctx.lineWidth = 0.5;
+        for(let i=0; i<tileCount; i++) {
+          ctx.beginPath();
+          ctx.moveTo(i*gridSize, 0);
+          ctx.lineTo(i*gridSize, canvas.height);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, i*gridSize);
+          ctx.lineTo(canvas.width, i*gridSize);
+          ctx.stroke();
+        }
+        
+        // Draw snake
+        ctx.fillStyle = '#4caf50';
+        snake.forEach((segment, index) => {
+          ctx.fillRect(segment.x*gridSize+1, segment.y*gridSize+1, gridSize-2, gridSize-2);
+          if(index === 0) {
+            ctx.fillStyle = '#81c784';
+            ctx.fillRect(segment.x*gridSize+6, segment.y*gridSize+6, 4, 4);
+            ctx.fillRect(segment.x*gridSize+12, segment.y*gridSize+6, 4, 4);
+          }
+          ctx.fillStyle = '#4caf50';
+        });
+        
+        // Draw food
+        ctx.fillStyle = '#f44336';
+        ctx.beginPath();
+        ctx.arc(food.x*gridSize+10, food.y*gridSize+10, 8, 0, Math.PI*2);
+        ctx.fill();
+        ctx.fillStyle = '#4caf50';
+        ctx.fillRect(food.x*gridSize+6, food.y*gridSize+2, 8, 4);
+      }
+      
+      function update() {
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        
+        if(head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+          gameOver();
+          return;
+        }
+        
+        if(snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+          gameOver();
+          return;
+        }
+        
+        snake.unshift(head);
+        
+        if(head.x === food.x && head.y === food.y) {
+          score += 10;
+          scoreEl.textContent = score;
+          Sounds.eat();
+          placeFood();
+        } else {
+          snake.pop();
+        }
+        
+        draw();
+      }
+      
+      function placeFood() {
+        do {
+          food = {
+            x: Math.floor(Math.random() * tileCount),
+            y: Math.floor(Math.random() * tileCount)
+          };
+        } while(snake.some(segment => segment.x === food.x && segment.y === food.y));
+      }
+      
+      function gameOver() {
+        gameRunning = false;
+        cancelAnimationFrame(window.__gameLoop);
+        clearInterval(gameLoop);
+        Sounds.gameOver();
+        msgEl.textContent = 'Game Over! Press Start to play again';
+        if(score > highScore) {
+          highScore = score;
+          localStorage.setItem('snake_high', highScore);
+          highEl.textContent = highScore;
+          msgEl.textContent += ' 🎉 New High Score!';
+        }
+      }
+      
+      function startGame() {
+        if(gameRunning) return;
+        snake = [{x: 10, y: 10}];
+        dx = 1;
+        dy = 0;
+        score = 0;
+        scoreEl.textContent = score;
+        gameRunning = true;
+        msgEl.textContent = 'Use arrow keys or buttons!';
+        placeFood();
+        gameLoop = setInterval(update, 100);
+      }
+      
+      function changeDirection(newDx, newDy) {
+        if(!gameRunning) return;
+        if((dx !== 0 && newDx !== 0) || (dy !== 0 && newDy !== 0)) return;
+        dx = newDx;
+        dy = newDy;
+      }
+      
+      startBtn.addEventListener('click', startGame);
+      
+      document.querySelectorAll('.snake-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dir = btn.dataset.dir;
+          if(dir === 'up') changeDirection(0, -1);
+          if(dir === 'down') changeDirection(0, 1);
+          if(dir === 'left') changeDirection(-1, 0);
+          if(dir === 'right') changeDirection(1, 0);
+        });
+      });
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if(e.key === 'ArrowUp') changeDirection(0, -1);
+        if(e.key === 'ArrowDown') changeDirection(0, 1);
+        if(e.key === 'ArrowLeft') changeDirection(-1, 0);
+        if(e.key === 'ArrowRight') changeDirection(1, 0);
+        if(e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+      
+      draw();
+    }
+
+    // ================ Tic Tac Toe ================
+    document.getElementById('tttOpenBtn').addEventListener('click', openTTTModal);
+
+    function openTTTModal() {
+      const html = `
+        <div id="tttGame" style="max-width:400px;margin:0 auto;text-align:center">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <div style="font-weight:700;">You: ❌ | Muzamil: ⭕</div>
+            <div style="font-weight:700;">Wins: <span id="tttWins">0</span> - Losses: <span id="tttLosses">0</span></div>
+          </div>
+          <div id="tttArena">
+            <div class="ttt-grid" id="tttGrid"></div>
+            <div id="tttMsg" style="margin-top:15px;font-weight:700;min-height:24px;font-size:1.1rem;"></div>
+            <div style="margin-top:15px;">
+              <button id="tttResetBtn" class="btn btn-ttt">New Game</button>
+            </div>
+          </div>
+        </div>
+      `;
+      showModal('Tic Tac Toe ⭕', html, 'Get 3 in a row to win! You go first.');
+      setTimeout(initTTT, 100);
+    }
+
+    function initTTT() {
+      const grid = document.getElementById('tttGrid');
+      const msgEl = document.getElementById('tttMsg');
+      const resetBtn = document.getElementById('tttResetBtn');
+      const winsEl = document.getElementById('tttWins');
+      const lossesEl = document.getElementById('tttLosses');
+      
+      let board = Array(9).fill('');
+      let currentPlayer = 'X';
+      let gameActive = true;
+      let wins = parseInt(localStorage.getItem('ttt_wins') || 0);
+      let losses = parseInt(localStorage.getItem('ttt_losses') || 0);
+      
+      winsEl.textContent = wins;
+      lossesEl.textContent = losses;
+      
+      const winningCombos = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      
+      function init() {
+        grid.innerHTML = '';
+        board = Array(9).fill('');
+        currentPlayer = 'X';
+        gameActive = true;
+        msgEl.textContent = 'Your turn! (❌)';
+        
+        for(let i=0; i<9; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'ttt-cell';
+          cell.dataset.index = i;
+          cell.addEventListener('click', () => handleCellClick(i));
+          grid.appendChild(cell);
+        }
+      }
+      
+      function handleCellClick(index) {
+        if(!gameActive || board[index] !== '') return;
+        
+        board[index] = currentPlayer;
+        const cell = grid.children[index];
+        cell.textContent = currentPlayer === 'X' ? '❌' : '⭕';
+        cell.classList.add('taken', currentPlayer.toLowerCase());
+        Sounds.click();
+        
+        if(checkWin()) {
+          gameActive = false;
+          if(currentPlayer === 'X') {
+            msgEl.textContent = '🎉 You Win!';
+            wins++;
+            localStorage.setItem('ttt_wins', wins);
+            winsEl.textContent = wins;
+            Sounds.win();
+          } else {
+            msgEl.textContent = '💀 Muzamil Wins!';
+            losses++;
+            localStorage.setItem('ttt_losses', losses);
+            lossesEl.textContent = losses;
+            Sounds.lose();
+          }
+          return;
+        }
+        
+        if(board.every(cell => cell !== '')) {
+          gameActive = false;
+          msgEl.textContent = '🤝 Draw!';
+          Sounds.draw();
+          return;
+        }
+        
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        msgEl.textContent = currentPlayer === 'X' ? 'Your turn!' : 'Muzamil is thinking...';
+        
+        if(currentPlayer === 'O') {
+          setTimeout(computerMove, 500);
+        }
+      }
+      
+      function computerMove() {
+        if(!gameActive) return;
+        
+        // Try to win
+        let move = findBestMove('O');
+        // Block player
+        if(move === -1) move = findBestMove('X');
+        // Take center
+        if(move === -1 && board[4] === '') move = 4;
+        // Take corner
+        if(move === -1) {
+          const corners = [0,2,6,8].filter(i => board[i] === '');
+          if(corners.length) move = corners[Math.floor(Math.random() * corners.length)];
+        }
+        // Take any
+        if(move === -1) {
+          const available = board.map((v,i) => v === '' ? i : -1).filter(v => v !== -1);
+          move = available[Math.floor(Math.random() * available.length)];
+        }
+        
+        handleCellClick(move);
+      }
+      
+      function findBestMove(player) {
+        for(let combo of winningCombos) {
+          const [a,b,c] = combo;
+          const values = [board[a], board[b], board[c]];
+          if(values.filter(v => v === player).length === 2 && values.filter(v => v === '').length === 1) {
+            return combo[values.indexOf('')];
+          }
+        }
+        return -1;
+      }
+      
+      function checkWin() {
+        return winningCombos.some(combo => {
+          const [a,b,c] = combo;
+          return board[a] && board[a] === board[b] && board[a] === board[c];
+        });
+      }
+      
+      resetBtn.addEventListener('click', init);
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if(e.key.toLowerCase() === 'r') init();
+        if(e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+      
+      init();
+    }
+
+    // ================ Whack-a-Mole ================
+    document.getElementById('moleOpenBtn').addEventListener('click', openMoleModal);
+
+    function openMoleModal() {
+      const html = `
+        <div id="moleGame" style="max-width:400px;margin:0 auto;text-align:center">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700;">
+            <div>🔨 Score: <span id="moleScore">0</span></div>
+            <div>⏱️ Time: <span id="moleTime">30</span>s</div>
+          </div>
+          <div id="moleArena">
+            <div class="mole-grid" id="moleGrid"></div>
+            <div id="moleMsg" style="margin-top:15px;font-weight:700;min-height:24px;"></div>
+            <div style="margin-top:15px;">
+              <button id="moleStartBtn" class="btn btn-mole">Start Game</button>
+            </div>
+          </div>
+        </div>
+      `;
+      showModal('Whack-a-Mole 🔨', html, 'Click the moles as they appear! You have 30 seconds.');
+      setTimeout(initMole, 100);
+    }
+
+    function initMole() {
+      const grid = document.getElementById('moleGrid');
+      const scoreEl = document.getElementById('moleScore');
+      const timeEl = document.getElementById('moleTime');
+      const startBtn = document.getElementById('moleStartBtn');
+      const msgEl = document.getElementById('moleMsg');
+      
+      let score = 0;
+      let timeLeft = 30;
+      let gameActive = false;
+      let lastHole;
+      let timeUp = false;
+      let countdown;
+      let peepTimer;
+      
+      // Create holes
+      grid.innerHTML = '';
+      for(let i=0; i<9; i++) {
+        const hole = document.createElement('div');
+        hole.className = 'mole-hole';
+        const mole = document.createElement('div');
+        mole.className = 'mole';
+        mole.textContent = '🐹';
+        mole.addEventListener('click', () => bonk(mole));
+        hole.appendChild(mole);
+        grid.appendChild(hole);
+      }
+      
+      const holes = document.querySelectorAll('.mole-hole');
+      const moles = document.querySelectorAll('.mole');
+      
+      function randomTime(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+      }
+      
+      function randomHole(holes) {
+        const idx = Math.floor(Math.random() * holes.length);
+        const hole = holes[idx];
+        if(hole === lastHole) return randomHole(holes);
+        lastHole = hole;
+        return hole;
+      }
+      
+      function peep() {
+        const time = randomTime(600, 1200);
+        const hole = randomHole(holes);
+        const mole = hole.querySelector('.mole');
+        mole.classList.add('up');
+        Sounds.click();
+        
+        peepTimer = setTimeout(() => {
+          mole.classList.remove('up');
+          if(!timeUp) peep();
+        }, time);
+      }
+      
+      function startGame() {
+        score = 0;
+        timeLeft = 30;
+        scoreEl.textContent = score;
+        timeEl.textContent = timeLeft;
+        timeUp = false;
+        gameActive = true;
+        msgEl.textContent = 'Whack those moles!';
+        startBtn.style.display = 'none';
+        
+        peep();
+        
+        countdown = setInterval(() => {
+          timeLeft--;
+          timeEl.textContent = timeLeft;
+          if(timeLeft <= 0) {
+            clearInterval(countdown);
+            timeUp = true;
+            gameActive = false;
+            clearTimeout(peepTimer);
+            moles.forEach(mole => mole.classList.remove('up'));
+            msgEl.textContent = `Time's up! Final Score: ${score}`;
+            startBtn.style.display = 'inline-block';
+            startBtn.textContent = 'Play Again';
+            Sounds.lose();
+          }
+        }, 1000);
+      }
+      
+      function bonk(mole) {
+        if(!gameActive || !mole.classList.contains('up')) return;
+        score += 10;
+        mole.classList.remove('up');
+        scoreEl.textContent = score;
+        Sounds.eat();
+      }
+      
+      startBtn.addEventListener('click', startGame);
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if(e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+    }
+
+    // ================ Simon Says ================
+    document.getElementById('simonOpenBtn').addEventListener('click', openSimonModal);
+
+    function openSimonModal() {
+      const html = `
+        <div id="simonGame" style="max-width:400px;margin:0 auto;text-align:center">
+          <div style="font-weight:700;margin-bottom:15px;">Level: <span id="simonLevel">0</span> | High: <span id="simonHigh">0</span></div>
+          <div id="simonArena">
+            <div class="simon-container" id="simonContainer">
+              <button class="simon-btn" data-color="0"></button>
+              <button class="simon-btn" data-color="1"></button>
+              <button class="simon-btn" data-color="2"></button>
+              <button class="simon-btn" data-color="3"></button>
+              <div class="simon-center" id="simonCenter">Start</div>
+            </div>
+            <div id="simonMsg" style="margin-top:15px;font-weight:700;min-height:24px;"></div>
+          </div>
+        </div>
+      `;
+      showModal('Simon Says 🎵', html, 'Watch the pattern, then repeat it. Gets harder each level!');
+      setTimeout(initSimon, 100);
+    }
+
+    function initSimon() {
+      const buttons = document.querySelectorAll('.simon-btn');
+      const center = document.getElementById('simonCenter');
+      const levelEl = document.getElementById('simonLevel');
+      const highEl = document.getElementById('simonHigh');
+      const msgEl = document.getElementById('simonMsg');
+      
+      let sequence = [];
+      let playerSequence = [];
+      let level = 0;
+      let highScore = localStorage.getItem('simon_high') || 0;
+      let gameActive = false;
+      let acceptingInput = false;
+      
+      const colors = ['#e74c3c', '#2ecc71', '#f1c40f', '#3498db'];
+      const frequencies = [261.63, 329.63, 392.00, 523.25]; // C4, E4, G4, C5
+      
+      highEl.textContent = highScore;
+      
+      function flashButton(index) {
+        const btn = buttons[index];
+        btn.classList.add('active');
+        playTone(frequencies[index], 0.3);
+        setTimeout(() => btn.classList.remove('active'), 300);
+      }
+      
+      function playSequence() {
+        acceptingInput = false;
+        msgEl.textContent = 'Watch...';
+        let i = 0;
+        const interval = setInterval(() => {
+          flashButton(sequence[i]);
+          i++;
+          if(i >= sequence.length) {
+            clearInterval(interval);
+            acceptingInput = true;
+            msgEl.textContent = 'Your turn!';
+          }
+        }, 600);
+      }
+      
+      function nextLevel() {
+        level++;
+        levelEl.textContent = level;
+        playerSequence = [];
+        sequence.push(Math.floor(Math.random() * 4));
+        setTimeout(playSequence, 800);
+      }
+      
+      function gameOver() {
+        gameActive = false;
+        acceptingInput = false;
+        msgEl.textContent = `Game Over! Reached level ${level}`;
+        center.textContent = 'Start';
+        if(level > highScore) {
+          highScore = level;
+          localStorage.setItem('simon_high', highScore);
+          highEl.textContent = highScore;
+          msgEl.textContent += ' 🎉 New Record!';
+        }
+        Sounds.gameOver();
+      }
+      
+      function handleInput(index) {
+        if(!acceptingInput || !gameActive) return;
+        
+        flashButton(index);
+        playerSequence.push(index);
+        
+        if(playerSequence[playerSequence.length - 1] !== sequence[playerSequence.length - 1]) {
+          gameOver();
+          return;
+        }
+        
+        if(playerSequence.length === sequence.length) {
+          acceptingInput = false;
+          Sounds.win();
+          msgEl.textContent = 'Correct! Next level...';
+          setTimeout(nextLevel, 1000);
+        }
+      }
+      
+      center.addEventListener('click', () => {
+        if(!gameActive) {
+          gameActive = true;
+          sequence = [];
+          level = 0;
+          levelEl.textContent = level;
+          center.textContent = '•';
+          nextLevel();
+        }
+      });
+      
+      buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => handleInput(index));
+      });
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if(e.key === '1') handleInput(0);
+        if(e.key === '2') handleInput(1);
+        if(e.key === '3') handleInput(2);
+        if(e.key === '4') handleInput(3);
+        if(e.key === ' ') center.click();
+        if(e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+    }
+
+    // ================ Number Guessing ================
+    document.getElementById('guessOpenBtn').addEventListener('click', openGuessModal);
+
+    function openGuessModal() {
+      const html = `
+        <div id="guessGame" style="max-width:400px;margin:0 auto;text-align:center">
+          <div id="guessArena">
+            <div style="font-size:1.1rem;margin-bottom:10px;">I'm thinking of a number between 1 and 100...</div>
+            <div class="guess-hint" id="guessHint">Take a guess!</div>
+            <div>
+              <input type="number" id="guessInput" class="guess-input" placeholder="Enter number (1-100)" min="1" max="100">
+            </div>
+            <div style="margin:15px 0;">
+              <button id="guessSubmitBtn" class="btn btn-guess">Guess</button>
+              <button id="guessResetBtn" class="btn" style="background:linear-gradient(135deg, #95a5a6, #7f8c8d);margin-left:10px;">New Game</button>
+            </div>
+            <div style="font-weight:700;">Attempts: <span id="guessAttempts">0</span> | Best: <span id="guessBest">--</span></div>
+            <div id="guessHistory" style="margin-top:15px;font-size:0.9rem;opacity:0.8;"></div>
+          </div>
+        </div>
+      `;
+      showModal('Guess the Number 🔢', html, 'Try to guess the number in minimum attempts. Hot/Cold hints included!');
+      setTimeout(initGuess, 100);
+    }
+
+    function initGuess() {
+      const input = document.getElementById('guessInput');
+      const submitBtn = document.getElementById('guessSubmitBtn');
+      const resetBtn = document.getElementById('guessResetBtn');
+      const hintEl = document.getElementById('guessHint');
+      const attemptsEl = document.getElementById('guessAttempts');
+      const bestEl = document.getElementById('guessBest');
+      const historyEl = document.getElementById('guessHistory');
+      
+      let target = Math.floor(Math.random() * 100) + 1;
+      let attempts = 0;
+      let best = localStorage.getItem('guess_best') || '--';
+      let history = [];
+      let gameWon = false;
+      
+      bestEl.textContent = best;
+      
+      function getHint(guess, target) {
+        const diff = Math.abs(guess - target);
+        if(diff === 0) return 'correct';
+        if(diff <= 5) return '🔥 Burning hot!';
+        if(diff <= 10) return '🌡️ Hot';
+        if(diff <= 20) return '😊 Warm';
+        if(diff <= 30) return '❄️ Cold';
+        return '🥶 Freezing cold!';
+      }
+      
+      function handleGuess() {
+        if(gameWon) return;
+        
+        const val = parseInt(input.value);
+        if(isNaN(val) || val < 1 || val > 100) {
+          hintEl.textContent = 'Please enter a number between 1-100';
+          return;
+        }
+        
+        attempts++;
+        attemptsEl.textContent = attempts;
+        
+        const hint = getHint(val, target);
+        history.push(`${val}: ${hint}`);
+        historyEl.innerHTML = history.slice(-5).join('<br>');
+        
+        if(val === target) {
+          gameWon = true;
+          hintEl.innerHTML = `🎉 Correct! The number was ${target}<br>You guessed it in ${attempts} attempts!`;
+          Sounds.win();
+          if(best === '--' || attempts < parseInt(best)) {
+            best = attempts;
+            localStorage.setItem('guess_best', best);
+            bestEl.textContent = best;
+            hintEl.innerHTML += '<br>🏆 New Best Score!';
+          }
+          input.disabled = true;
+        } else {
+          hintEl.textContent = hint;
+          Sounds.click();
+          if(val < target) hintEl.textContent += ' (Try higher ↑)';
+          else hintEl.textContent += ' (Try lower ↓)';
+        }
+        
+        input.value = '';
+        input.focus();
+      }
+      
+      function reset() {
+        target = Math.floor(Math.random() * 100) + 1;
+        attempts = 0;
+        attemptsEl.textContent = attempts;
+        history = [];
+        historyEl.innerHTML = '';
+        hintEl.textContent = 'Take a guess!';
+        input.disabled = false;
+        input.value = '';
+        gameWon = false;
+      }
+      
+      submitBtn.addEventListener('click', handleGuess);
+      resetBtn.addEventListener('click', reset);
+      input.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') handleGuess();
+      });
+      
+      if (window.__gameKeyHandler) document.removeEventListener('keydown', window.__gameKeyHandler);
+      window.__gameKeyHandler = function(e) {
+        if(e.key === 'Escape') closeModal();
+      };
+      document.addEventListener('keydown', window.__gameKeyHandler);
+      
+      input.focus();
+    }
+
+    // ================ Calculator ================
+    const openCalcBtn = document.getElementById("openCalc");
+    const closeCalcBtn = document.getElementById("closeCalc");
+    const calcDisplay = document.getElementById("display");
+    const calcButtons = document.querySelectorAll(".calc-btn");
 
     let currentInput = "";
-    let scientificVisible = false;
 
-    openBtn.addEventListener("click", () => calc.classList.add("show"));
-    closeBtn.addEventListener("click", () => calc.classList.remove("show"));
-
-    toggleScientific.addEventListener("click", () => {
-      scientificVisible = !scientificVisible;
-      sciButtons.classList.toggle("show", scientificVisible);
-      toggleScientific.textContent = scientificVisible ? "Basic" : "Scientific";
+    openCalcBtn.addEventListener("click", () => {
+      calc.classList.add("show");
+      if (document.documentElement.classList.contains('light')) {
+        calc.classList.add('light');
+      } else {
+        calc.classList.remove('light');
+      }
     });
 
-    function fact(n) {
-      n = Math.floor(n);
-      if (n < 0) throw new Error("Invalid factorial");
-      if (n === 0 || n === 1) return 1;
-      let result = 1;
-      for (let i = 2; i <= n; i++) result *= i;
-      return result;
-    }
-    function log10(x) { return Math.log10(x); }
-    function ln(x) { return Math.log(x); }
-    function sqrt(x) { return Math.sqrt(x); }
-    function sin(x) { return Math.sin(x * Math.PI / 180); }
-    function cos(x) { return Math.cos(x * Math.PI / 180); }
-    function tan(x) { return Math.tan(x * Math.PI / 180); }
-    function pow(a, b) { return Math.pow(a, b); }
-    function exp(x) { return Math.exp(x); }
-    function percent(x) { return x / 100; }
+    closeCalcBtn.addEventListener("click", () => {
+      calc.classList.remove("show");
+    });
 
-    function safeEvaluate(expression) {
-      const sanitized = expression.replace(/÷/g, '/').replace(/×/g, '*');
-      return Function("fact", "log10", "ln", "sqrt", "sin", "cos", "tan", "pow", "exp", "percent", "PI", "E", `return ${sanitized}`)(
-        fact, log10, ln, sqrt, sin, cos, tan, pow, exp, percent, Math.PI, Math.E
-      );
+    function safeCalculate(expr) {
+      try {
+        const sanitized = expr.replace(/[^0-9+\-*/.()]/g, '');
+        if (!sanitized) return '0';
+        const result = new Function('use strict; return (' + sanitized + ')')();
+        if (!isFinite(result) || isNaN(result)) return 'Error';
+        return parseFloat(result.toFixed(8)).toString();
+      } catch (e) {
+        return 'Error';
+      }
     }
 
-    buttons.forEach(btn => {
+    calcButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         const val = btn.textContent;
         if (val === "C") {
           currentInput = "";
-          display.textContent = "0";
+          calcDisplay.textContent = "0";
         } else if (val === "=") {
-          try {
-            currentInput = String(safeEvaluate(currentInput));
-            display.textContent = currentInput;
-          } catch {
-            currentInput = "";
-            display.textContent = "Error";
-          }
+          currentInput = safeCalculate(currentInput);
+          calcDisplay.textContent = currentInput || "0";
         } else if (val === "+/-") {
-          if (currentInput) {
+          if (currentInput && currentInput !== '0') {
             currentInput = currentInput.startsWith("-") ? currentInput.slice(1) : "-" + currentInput;
-            display.textContent = currentInput;
+            calcDisplay.textContent = currentInput;
           }
         } else {
-          currentInput += val;
-          display.textContent = currentInput;
+          const lastChar = currentInput.slice(-1);
+          const operators = ['+', '-', '*', '/'];
+          if (operators.includes(val) && operators.includes(lastChar)) {
+            currentInput = currentInput.slice(0, -1) + val;
+          } else {
+            currentInput += val;
+          }
+          calcDisplay.textContent = currentInput || "0";
         }
       });
     });
 
-    sciBtnList.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const fn = btn.getAttribute("data-fn");
-        currentInput += fn;
-        display.textContent = currentInput || "0";
-      });
-    });
-
-    themeSwitch.addEventListener("change", () => {
-      calc.classList.toggle("dark-theme");
-      label.textContent = calc.classList.contains("dark-theme") ? "Dark Mode" : "Light Mode";
-    });
-
-    const openCalendarBtn = document.getElementById('openCalendar');
-    const publicEvents = {
-      '1-1': ['New Year\'s Day'],
-      '2-5': ['Kashmir Day'],
-      '3-23': ['Pakistan Day'],
-      '5-1': ['Labour Day'],
-      '8-14': ['Independence Day'],
-      '9-6': ['Defence Day'],
-      '12-25': ['Quaid-e-Azam Day', 'Christmas Day']
-    };
-    const islamicEvents = {
-      '1-1': 'Islamic New Year',
-      '1-10': 'Ashura',
-      '3-12': 'Eid Milad-un-Nabi',
-      '7-27': 'Shab-e-Miraj',
-      '8-15': 'Shab-e-Barat',
-      '9-1': 'Start of Ramadan',
-      '9-27': 'Laylat al-Qadr',
-      '10-1': 'Eid ul-Fitr',
-      '12-9': 'Day of Arafah',
-      '12-10': 'Eid ul-Adha'
-    };
-
-    function getIslamicDateParts(dateObj) {
-      try {
-        const formatter = new Intl.DateTimeFormat('en-TN-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
-        const parts = formatter.formatToParts(dateObj);
-        const day = parts.find(p => p.type === 'day')?.value || '1';
-        const month = parts.find(p => p.type === 'month')?.value || 'Muharram';
-        const year = parts.find(p => p.type === 'year')?.value || '1447';
-        return { day, month, year, formatted: `${day} ${month} ${year} AH` };
-      } catch {
-        return { day: '1', month: 'Muharram', year: '1447', formatted: '1 Muharram 1447 AH' };
+    document.addEventListener('click', (e) => {
+      if (calc.classList.contains('show') && 
+          !calc.contains(e.target) && 
+          e.target !== openCalcBtn) {
+        calc.classList.remove('show');
       }
-    }
+    });
 
-    function getIslamicMonthNumber(monthName) {
-      const months = {
-        'Muharram': 1, 'Safar': 2, 'Rabiʻ I': 3, 'Rabiʻ II': 4, 'Jumada I': 5, 'Jumada II': 6,
-        'Rajab': 7, 'Shaʻban': 8, 'Ramadan': 9, 'Shawwal': 10, 'Dhuʻl-Qiʻdah': 11, 'Dhuʻl-Hijjah': 12
-      };
-      return months[monthName] || 1;
-    }
-
-    function buildCalendarGrid(dateObj) {
-      const year = dateObj.getFullYear();
-      const month = dateObj.getMonth();
-      const todayDate = dateObj.getDate();
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let html = `<div class="calendar-grid">`;
-      dayNames.forEach(name => html += `<div class="calendar-day-name">${name}</div>`);
-      for (let i = 0; i < firstDay; i++) html += `<div class="calendar-day empty"></div>`;
-      for (let d = 1; d <= daysInMonth; d++) html += `<div class="calendar-day ${d === todayDate ? 'today' : ''}">${d}</div>`;
-      html += `</div>`;
-      return html;
-    }
-
-    function openCalendarModal() {
+    // ================ Birthday Check ================
+    document.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
-      const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
-      const fullDate = now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
-      const eventKey = `${now.getMonth() + 1}-${now.getDate()}`;
-      const todayEvents = publicEvents[eventKey] || ['Today has no public event'];
-      const hijri = getIslamicDateParts(now);
-      const hijriMonthNo = getIslamicMonthNumber(hijri.month);
-      const islamicKey = `${hijriMonthNo}-${parseInt(hijri.day, 10)}`;
-      const todayIslamicEvent = islamicEvents[islamicKey] || 'Today has no Islamic event';
+      const isBirthday = (now.getMonth() === 8 && now.getDate() === 12);
 
-      const bodyHtml = `
-        <div class="calendar-card" style="text-align:center">
-          <div style="font-size:22px;font-weight:800;color:var(--text-color)">${dayName}</div>
-          <div style="margin-top:6px;font-size:16px;color:var(--muted)">${fullDate}</div>
-          <div style="margin-top:6px;font-size:15px;color:var(--text-color)">Hijri: ${hijri.formatted}</div>
-        </div>
+      if (isBirthday) {
+        const headerDiv = document.querySelector('.header div:nth-child(2)');
+        if (headerDiv) {
+          const bdayText = document.createElement('p');
+          bdayText.textContent = '🎂 It\'s my birthday!';
+          bdayText.className = 'birthday-text';
+          headerDiv.appendChild(bdayText);
+        }
 
-        <div class="calendar-card">
-          <div style="font-weight:800;margin-bottom:6px">Today Events</div>
-          <div>${todayEvents.join('<br>')}</div>
-        </div>
+        setTimeout(() => {
+          showModal(
+            '🎉 Today is my Birthday! 🎉',
+            `<p style="color:var(--text-color);font-weight:600;line-height:1.5;font-size:1.1rem;">
+               Hey everyone! 🥳<br>
+               Wishing myself a fantastic day full of joy, cake 🍰, and smiles!<br>
+               Let's celebrate 🎈
+            </p>`,
+            'September 12'
+          );
+        }, 1000);
+      }
+    });
 
-        <div class="calendar-card">
-          <div style="font-weight:800;margin-bottom:6px">Islamic Event</div>
-          <div>${todayIslamicEvent}</div>
-        </div>
-
-        <div class="calendar-card">
-          <div style="font-weight:800;margin-bottom:6px;text-align:center">${now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
-          ${buildCalendarGrid(now)}
-        </div>`;
-      showModal('Calendar', bodyHtml, 'Shows current date, day, events and Islamic event.');
-    }
-
-    openCalendarBtn.addEventListener('click', openCalendarModal);
+    // Global helpers
+    window.resetAllStats = function() {
+      localStorage.removeItem(LB_KEY);
+      localStorage.removeItem(HS_KEY);
+      localStorage.removeItem(MEM_KEY);
+      localStorage.removeItem('snake_high');
+      localStorage.removeItem('ttt_wins');
+      localStorage.removeItem('ttt_losses');
+      localStorage.removeItem('simon_high');
+      localStorage.removeItem('guess_best');
+      alert('All game stats reset!');
+    };
   </script>
 </body>
 
